@@ -1,0 +1,40 @@
+﻿{
+  "webSettings": {
+    "baseUrl": "http://local.bellatrix.solutions/",
+    "elementWaitTimeout": "30",
+    "chrome": {
+      "pageLoadTimeout": "120",
+      "scriptTimeout": "5",
+      "artificialDelayBeforeAction": "0"
+    },
+    "fireFox": {
+      "pageLoadTimeout": "30",
+      "scriptTimeout": "1",
+      "artificialDelayBeforeAction": "0"
+    },
+    "edge": {
+      "pageLoadTimeout": "30",
+      "scriptTimeout": "1",
+      "artificialDelayBeforeAction": "0"
+    },
+    "internetExplorer": {
+      "pageLoadTimeout": "30",
+      "scriptTimeout": "1",
+      "artificialDelayBeforeAction": "0"
+    },
+    "opera": {
+      "pageLoadTimeout": "30",
+      "scriptTimeout": "1",
+      "artificialDelayBeforeAction": "0"
+    },
+    "safari": {
+      "pageLoadTimeout": "30",
+      "scriptTimeout": "1",
+      "artificialDelayBeforeAction": "0"
+    }
+  },
+  "urlSettings": {
+    "shopUrl": "http://local.bellatrix.solutions/cart/",
+    "accountUrl": "http://local.bellatrix.solutions/account/"
+  }
+}
