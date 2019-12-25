@@ -39,7 +39,8 @@ namespace StabilizeTestsDemos.FifthVersion
 
         public override void PostTestCleanup(TestContext context, MemberInfo memberInfo)
         {
-            if (_currentBrowserConfiguration.BrowserBehavior == BrowserBehavior.RestartOnFail && context.CurrentTestOutcome.Equals(TestOutcome.Failed))
+            if (_currentBrowserConfiguration.BrowserBehavior == 
+                BrowserBehavior.RestartOnFail && context.CurrentTestOutcome.Equals(TestOutcome.Failed))
             {
                 RestartBrowser();
             }

@@ -11,7 +11,7 @@ namespace TestDataPreparationDemos.Tenth
             _mainPageElements = new MainPageElements(driver);
         }
 
-        protected override string Url => "http://demos.bellatrix.solutions/";
+        protected override string Url => ConfigurationService.Instance.GetWebSettings().BaseUrl;
 
         public MainPage AddRocketToShoppingCart()
         {

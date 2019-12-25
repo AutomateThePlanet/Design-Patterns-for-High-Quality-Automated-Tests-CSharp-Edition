@@ -36,5 +36,17 @@
   "urlSettings": {
     "shopUrl": "http://local.bellatrix.solutions/cart/",
     "accountUrl": "http://local.bellatrix.solutions/account/"
+  },
+  "billingInfoDefaultValues": {
+    "email": "angelov@spaceFlowers.com",
+    "company": "Space Flowers",
+    "country": "Germany",
+    "firstName": "Anton",
+    "lastName": "Angelov",
+    "phone": "+00498888999281",
+    "zip": "10115",
+    "city": "Berlin",
+    "address1": "1 Willi Brandt Avenue Tiergarten",
+    "address2": "2 Willi Brandt Avenue Tiergarten"
   }
 }

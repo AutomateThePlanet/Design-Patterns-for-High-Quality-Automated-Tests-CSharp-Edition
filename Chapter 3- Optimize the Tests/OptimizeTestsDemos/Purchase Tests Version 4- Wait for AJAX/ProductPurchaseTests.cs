@@ -121,13 +121,11 @@ namespace StabilizeTestsDemos.FourthVersion
             var quantityBox = _driver.FindElement(By.CssSelector("[class*='input-text qty text']"));
             quantityBox.TypeText("2");
 
-            ////Thread.Sleep(2000);
             _driver.WaitForAjax();
            
             var updateCart = _driver.FindElement(By.CssSelector("[value*='Update cart']"));
             updateCart.Click();
 
-            ////Thread.Sleep(4000);
             _driver.WaitForAjax();
 
             var totalSpan = _driver.FindElement(By.XPath("//*[@class='order-total']//span"));
@@ -142,7 +140,6 @@ namespace StabilizeTestsDemos.FourthVersion
             var applyCouponButton = _driver.FindElement(By.CssSelector("[value*='Apply coupon']"));
             applyCouponButton.Click();
 
-            ////Thread.Sleep(2000);
             _driver.WaitForAjax();
 
             var messageAlert = _driver.FindElement(By.CssSelector("[class*='woocommerce-message']"));

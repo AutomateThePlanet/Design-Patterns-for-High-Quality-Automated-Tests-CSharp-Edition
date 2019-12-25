@@ -90,6 +90,6 @@ namespace TestDataPreparationDemos.DataStubs
                         }
                     }
                 }
-            });
+            }).ConfigureAwait(false);
     }
 }

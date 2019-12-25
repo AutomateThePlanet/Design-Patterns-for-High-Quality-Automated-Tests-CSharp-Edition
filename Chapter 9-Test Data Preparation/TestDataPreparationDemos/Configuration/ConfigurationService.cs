@@ -39,6 +39,13 @@ namespace TestDataPreparationDemos
             return result;
         }
 
+        public BillingInfoDefaultValues GetBillingInfoDefaultValues()
+        {
+            var result = ConfigurationService.Instance.Root.GetSection("billingInfoDefaultValues").Get<BillingInfoDefaultValues>();
+            return result;
+        }
+
+
         public WebSettings GetWebSettings()
          => ConfigurationService.Instance.Root.GetSection("webSettings").Get<WebSettings>();
 

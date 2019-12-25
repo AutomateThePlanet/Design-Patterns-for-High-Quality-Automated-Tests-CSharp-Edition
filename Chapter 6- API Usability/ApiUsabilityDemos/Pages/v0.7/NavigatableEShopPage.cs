@@ -3,10 +3,12 @@
     public abstract class NavigatableEShopPage
     {
         protected readonly INavigationService _navigationService;
+        protected readonly IElementFindService _findService;
 
         protected NavigatableEShopPage(IElementFindService findService, INavigationService navigationService)
         {
             _navigationService = navigationService;
+            _findService = findService;
             SearchSection = new SearchSection(findService);
             MainMenuSection = new MainMenuSection(findService);
             CartInfoSection = new CartInfoSection(findService);
