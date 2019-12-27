@@ -45,6 +45,15 @@ namespace BenchmarkingDemos
             }
         }
 
+        public override IWebElement WrappedElement
+        {
+            get
+            {
+                Console.WriteLine($"Calling Wrapped Element");
+                return element?.WrappedElement;
+            }
+        }
+
         public override void Click()
         {
             Console.WriteLine($"Element Clicked");

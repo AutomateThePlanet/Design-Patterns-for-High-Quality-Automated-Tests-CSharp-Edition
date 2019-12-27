@@ -18,6 +18,14 @@ namespace BenchmarkingDemos
             _by = by;
         }
 
+        public override IWebElement WrappedElement
+        {
+            get
+            {
+                return _webElement;
+            }
+        }
+
         public override By By
         {
             get

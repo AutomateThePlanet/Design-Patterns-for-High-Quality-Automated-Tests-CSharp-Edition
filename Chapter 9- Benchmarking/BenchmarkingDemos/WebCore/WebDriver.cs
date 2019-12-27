@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using BenchmarkingDemos.BenchmarkCore;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
@@ -21,25 +22,26 @@ namespace BenchmarkingDemos
 
         public override void Start(Browser browser)
         {
+            string executionFolder = DriverExecutablePathResolver.GetDriverExecutablePath();
             switch (browser)
             {
                 case Browser.Chrome:
-                    _webDriver = new ChromeDriver(Environment.CurrentDirectory);
+                    _webDriver = new ChromeDriver(executionFolder);
                     break;
                 case Browser.Firefox:
-                    _webDriver = new FirefoxDriver(Environment.CurrentDirectory);
+                    _webDriver = new FirefoxDriver(executionFolder);
                     break;
                 case Browser.Edge:
-                    _webDriver = new EdgeDriver(Environment.CurrentDirectory);
+                    _webDriver = new EdgeDriver(executionFolder);
                     break;
                 case Browser.Opera:
-                    _webDriver = new OperaDriver(Environment.CurrentDirectory);
+                    _webDriver = new OperaDriver(executionFolder);
                     break;
                 case Browser.Safari:
-                    _webDriver = new SafariDriver(Environment.CurrentDirectory);
+                    _webDriver = new SafariDriver(executionFolder);
                     break;
                 case Browser.InternetExplorer:
-                    _webDriver = new InternetExplorerDriver(Environment.CurrentDirectory);
+                    _webDriver = new InternetExplorerDriver(executionFolder);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(browser), browser, null);

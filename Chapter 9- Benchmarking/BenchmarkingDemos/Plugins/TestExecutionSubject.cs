@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BenchmarkingDemos
 {
-    public class MsTestExecutionSubject : ITestExecutionSubject
+    public class TestExecutionSubject : ITestExecutionSubject
     {
         private readonly List<ITestBehaviorObserver> _testBehaviorObservers;
 
-        public MsTestExecutionSubject()
+        public TestExecutionSubject()
         {
             _testBehaviorObservers = new List<ITestBehaviorObserver>();
         }

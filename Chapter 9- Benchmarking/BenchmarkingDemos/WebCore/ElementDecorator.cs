@@ -43,6 +43,14 @@ namespace BenchmarkingDemos
             }
         }
 
+        public override IWebElement WrappedElement
+        {
+            get
+            {
+                return element?.WrappedElement;
+            }
+        }
+
         public override void Click()
         {
             element?.Click();

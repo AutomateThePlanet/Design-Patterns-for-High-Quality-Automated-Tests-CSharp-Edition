@@ -11,7 +11,7 @@ namespace BenchmarkingDemos
 
         static BaseTest()
         {
-            _currentTestExecutionSubject = new MsTestExecutionSubject();
+            _currentTestExecutionSubject = new TestExecutionSubject();
             InitializeTestExecutionBehaviorObservers(_currentTestExecutionSubject);
             var memberInfo = MethodBase.GetCurrentMethod();
             _currentTestExecutionSubject.MemberInstantiated(memberInfo);

@@ -7,15 +7,16 @@ namespace BenchmarkingDemos.BenchmarkCore
     public abstract class BaseBenchmark
     {
         private static readonly ITestExecutionSubject _currentTestExecutionSubject;
-        private static Driver _driver;
 
         static BaseBenchmark()
         {
-            _currentTestExecutionSubject = new MsTestExecutionSubject();
+            _currentTestExecutionSubject = new TestExecutionSubject();
             InitializeTestExecutionBehaviorObservers(_currentTestExecutionSubject);
             var memberInfo = MethodBase.GetCurrentMethod();
             _currentTestExecutionSubject.MemberInstantiated(memberInfo);
         }
+
+        protected static Driver Driver { get; set; }
 
         public void BenchmarkInitialize(Action benchmarkInitializeAction = null)
         {
@@ -25,7 +26,7 @@ namespace BenchmarkingDemos.BenchmarkCore
             _currentTestExecutionSubject.PostInitialize(benchmarkMethodMemberInfo);
         }
 
-        public void BenchmarkCleanup(string testName, Action benchmarkCleanupAction = null)
+        public void BenchmarkCleanup(Action benchmarkCleanupAction = null)
         {
             var benchmarkMethodMemberInfo = GetCurrentExecutionMethodInfo();
             _currentTestExecutionSubject.PreCleanup(benchmarkMethodMemberInfo);
@@ -35,8 +36,8 @@ namespace BenchmarkingDemos.BenchmarkCore
 
         private static void InitializeTestExecutionBehaviorObservers(ITestExecutionSubject currentTestExecutionSubject)
         {
-            _driver = new LoggingDriver(new WebDriver());
-            new BrowserLaunchTestBehaviorObserver(currentTestExecutionSubject, _driver);
+            Driver = new LoggingDriver(new WebDriver());
+            new BrowserLaunchTestBehaviorObserver(currentTestExecutionSubject, Driver);
         }
 
         private MethodInfo GetCurrentExecutionMethodInfo()
