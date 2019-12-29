@@ -8,13 +8,13 @@ namespace BenchmarkingDemos.BenchmarkCore
         public static string GetDriverExecutablePath()
         {
             string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var di = new DirectoryInfo(assemblyFolder);
+            var directoryInfo = new DirectoryInfo(assemblyFolder);
             for (int i = 0; i < 4; i++)
             {
-                di = di.Parent;
+                directoryInfo = directoryInfo.Parent;
             }
 
-            return di.FullName;
+            return directoryInfo.FullName;
         }
     }
 }

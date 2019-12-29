@@ -19,26 +19,6 @@ namespace BenchRunner.First
             _driver.Navigate().GoToUrl(TestPage);
         }
 
-        [IterationSetup(Target = nameof(BenchmarkWebDriverClick))]
-        public void IterationSetupA()
-        {
-        }
-
-        [IterationSetup(Target = nameof(BenchmarkJavaScriptClick))]
-        public void IterationSetupB()
-        {
-        }
-
-        [IterationCleanup(Target = nameof(BenchmarkWebDriverClick))]
-        public void IterationCleanupA()
-        {
-        }
-
-        [IterationCleanup(Target = nameof(BenchmarkJavaScriptClick))]
-        public void IterationCleanupB()
-        {
-        }
-
         [GlobalCleanup]
         public void GlobalCleanup()
         {

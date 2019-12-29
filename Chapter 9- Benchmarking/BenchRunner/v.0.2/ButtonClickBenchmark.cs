@@ -7,7 +7,7 @@ using OpenQA.Selenium.Chrome;
 namespace BenchRunner.Second
 {
     [ExecutionBrowser(Browser.Chrome, BrowserBehavior.ReuseIfStarted)]
-    public class ButtonClickBenchmark : BaseBenchmark
+    public class ButtonClickBenchmark : BenchmarkingDemos.BenchmarkCore.BaseBenchmark
     {
         private const string TestPage = "http://htmlpreview.github.io/?https://github.com/angelovstanton/AutomateThePlanet/blob/master/WebDriver-Series/TestPage.html";
         private static IWebDriver _driver;
@@ -21,30 +21,22 @@ namespace BenchRunner.Second
             _driver.Navigate().GoToUrl(TestPage);
         }
 
-        [IterationSetup(Target = nameof(BenchmarkWebDriverClick))]
-        public void IterationSetupA()
-        {
-        }
-
-        [IterationSetup(Target = nameof(BenchmarkJavaScriptClick))]
-        public void IterationSetupB()
-        {
-        }
-
-        [IterationCleanup(Target = nameof(BenchmarkWebDriverClick))]
-        public void IterationCleanupA()
-        {
-        }
-
-        [IterationCleanup(Target = nameof(BenchmarkJavaScriptClick))]
-        public void IterationCleanupB()
-        {
-        }
-
         [GlobalCleanup]
         public void GlobalCleanup()
         {
             _driver?.Dispose();
+        }
+
+        [IterationSetup()]
+        public void IterationSetup()
+        {
+            BenchmarkInitialize();
+        }
+
+        [IterationCleanup()]
+        public void IterationCleanup()
+        {
+            BenchmarkCleanup();
         }
 
         [Benchmark(Baseline = true)]

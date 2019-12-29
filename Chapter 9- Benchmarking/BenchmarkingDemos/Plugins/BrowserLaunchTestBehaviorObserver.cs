@@ -38,7 +38,7 @@ namespace BenchmarkingDemos
 
         public override void PostCleanup(MemberInfo memberInfo)
         {
-            if (_currentBrowserConfiguration.BrowserBehavior == BrowserBehavior.RestartOnFail && BaseTest.TestContext.CurrentTestOutcome.Equals(TestOutcome.Failed))
+            if (_currentBrowserConfiguration.BrowserBehavior == BrowserBehavior.RestartOnFail && BaseBenchmark.TestContext.CurrentTestOutcome.Equals(TestOutcome.Failed))
             {
                 RestartBrowser();
             }

@@ -8,7 +8,7 @@ using OpenQA.Selenium.Support.UI;
 namespace BenchRunner.Second
 {
     [ExecutionBrowser(Browser.Chrome, BrowserBehavior.ReuseIfStarted)]
-    public class SelectBenchmark : BaseBenchmark
+    public class SelectBenchmark : BenchmarkingDemos.BenchmarkCore.BaseBenchmark
     {
         private const string TestPage = "http://htmlpreview.github.io/?https://github.com/angelovstanton/AutomateThePlanet/blob/master/WebDriver-Series/TestPage.html";
 
@@ -18,22 +18,22 @@ namespace BenchRunner.Second
             BenchmarkInitialize();
         }
 
-        [IterationSetup(Target = nameof(BenchmarkCustomSelect))]
-        public void IterationSetupBenchmarkCustomSelect()
+        [IterationSetup()]
+        public void IterationSetup()
         {
-            BenchmarkInitialize();
-        }
+            BenchmarkInitialize(() => 
+            { 
+                // execute custom setup code here 
+            });
+         }
 
-        [IterationCleanup(Target = nameof(BenchmarkSelectElementSelect))]
-        public void IterationCleanupBenchmarkSelectElementSelect()
+        [IterationCleanup()]
+        public void IterationCleanup()
         {
-            BenchmarkCleanup();
-        }
-
-        [IterationCleanup(Target = nameof(BenchmarkCustomSelect))]
-        public void IterationCleanupGetCellByRowAndColumn()
-        {
-            BenchmarkCleanup();
+            BenchmarkCleanup(() =>
+            {
+                // execute custom setup code here 
+            });
         }
 
         [Benchmark(Baseline = true)]

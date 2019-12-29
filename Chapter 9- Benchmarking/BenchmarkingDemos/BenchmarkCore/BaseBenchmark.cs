@@ -1,10 +1,11 @@
-﻿using System;
+﻿using BenchmarkDotNet.Attributes;
+using System;
 using System.Diagnostics;
 using System.Reflection;
 
 namespace BenchmarkingDemos.BenchmarkCore
 {
-    public abstract class BaseBenchmark
+    public class BaseBenchmark
     {
         private static readonly ITestExecutionSubject _currentTestExecutionSubject;
 
