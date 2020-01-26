@@ -12,7 +12,8 @@ namespace TestsMaintainabilityDemos.Fifth
         private Element _totalSpan => Driver.FindElement(By.XPath("//*[@class='order-total']//span"));
         private Element _proceedToCheckout => Driver.FindElement(By.CssSelector("[class*='checkout-button button alt wc-forward']"));
 
-        public CartPage(Driver driver) : base(driver)
+        public CartPage(Driver driver) 
+            : base(driver)
         {
             BreadcrumbSection = new BreadcrumbSection(Driver);
         }
@@ -52,7 +53,7 @@ namespace TestsMaintainabilityDemos.Fifth
             return _messageAlert.Text;
         }
 
-        protected override void WaitForElementToBeDisplayed()
+        protected override void WaitForPageLoad()
         {
             _couponCodeTextField.WaitToExists();
         }

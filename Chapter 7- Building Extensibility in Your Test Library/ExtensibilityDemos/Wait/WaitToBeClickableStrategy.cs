@@ -29,6 +29,10 @@ namespace ExtensibilityDemos
                 {
                     return false;
                 }
+                catch (NoSuchElementException)
+                {
+                    return false;
+                }
             };
         }
     }

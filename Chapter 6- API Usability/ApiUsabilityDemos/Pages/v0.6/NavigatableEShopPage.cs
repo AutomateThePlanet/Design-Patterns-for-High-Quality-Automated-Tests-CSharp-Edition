@@ -1,29 +1,20 @@
 ﻿namespace ApiUsabilityDemos.Sixth
 {
-    public abstract class NavigatableEShopPage
+    public abstract class NavigatableEShopPage : EShopPage
     {
-        protected readonly Driver Driver;
-
         protected NavigatableEShopPage(Driver driver)
+        : base(driver)
         {
-            Driver = driver;
-            SearchSection = new SearchSection(driver);
-            MainMenuSection = new MainMenuSection(driver);
-            CartInfoSection = new CartInfoSection(driver);
         }
-
-        public SearchSection SearchSection { get; set; }
-        public MainMenuSection MainMenuSection { get; set; }
-        public CartInfoSection CartInfoSection { get; set; }
 
         protected abstract string Url { get; }
 
         public void Open()
         {
             Driver.GoToUrl(Url);
-            WaitForElementToDisplay();
+            WaitForPageLoad();
         }
 
-        protected abstract void WaitForElementToDisplay();
+        protected abstract void WaitForPageLoad();
     }
 }

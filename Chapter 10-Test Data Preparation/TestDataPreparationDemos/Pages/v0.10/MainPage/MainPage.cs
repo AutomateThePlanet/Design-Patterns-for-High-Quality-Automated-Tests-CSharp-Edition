@@ -4,11 +4,12 @@ namespace TestDataPreparationDemos.Tenth
 {
     public class MainPage : NavigatableEShopPage
     {
-        private MainPageElements _mainPageElements;
+        private MainPageElements _elements;
 
-        private MainPage(Driver driver) : base(driver)
+        private MainPage(Driver driver) 
+            : base(driver)
         {
-            _mainPageElements = new MainPageElements(driver);
+            _elements = new MainPageElements(driver);
         }
 
         protected override string Url => ConfigurationService.Instance.GetWebSettings().BaseUrl;
@@ -16,24 +17,24 @@ namespace TestDataPreparationDemos.Tenth
         public MainPage AddRocketToShoppingCart()
         {
             Open();
-            _mainPageElements.AddToCartFalcon9.Click();
-            _mainPageElements.ViewCartButton.Click();
+            _elements.AddToCartFalcon9.Click();
+            _elements.ViewCartButton.Click();
 
             return this;
         }
 
         public MainPage AssertProductBoxLink(string name, string expectedLink)
         {
-            string actualLink = _mainPageElements.GetProductBoxByName(name).GetAttribute("href");
+            string actualLink = _elements.GetProductBoxByName(name).GetAttribute("href");
 
             Assert.AreEqual(expectedLink, actualLink);
 
             return this;
         }
 
-        protected override void WaitForElementToDisplay()
+        protected override void WaitForPageLoad()
         {
-            _mainPageElements.AddToCartFalcon9.WaitToExists();
+            _elements.AddToCartFalcon9.WaitToExists();
         }
     }
 }

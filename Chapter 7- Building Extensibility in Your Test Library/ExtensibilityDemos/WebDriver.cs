@@ -109,62 +109,62 @@ namespace ExtensibilityDemos
 
         public override List<Element> FindAllByClass(string cssClass)
         {
-            return FindAll<ByClassStrategy, Element>(cssClass);
+            return FindAll<ByClassStrategy, Element>(cssClass, new ByClassStrategy(cssClass));
         }
 
         public override List<Element> FindAllById(string id)
         {
-            return FindAll<ByIdStrategy, Element>(id);
+            return FindAll<ByIdStrategy, Element>(id, new ByIdStrategy(id));
         }
 
         public override List<Element> FindAllByTag(string tag)
         {
-            return FindAll<ByTagStrategy, Element>(tag);
+            return FindAll<ByTagStrategy, Element>(tag, new ByTagStrategy(tag));
         }
 
         public override List<Element> FindAllByXPath(string xpath)
         {
-            return FindAll<ByXPathStrategy, Element>(xpath);
+            return FindAll<ByXPathStrategy, Element>(xpath, new ByXPathStrategy(xpath));
         }
 
         public override List<Element> FindAllByCss(string css)
         {
-            return FindAll<ByCssStrategy, Element>(css);
+            return FindAll<ByCssStrategy, Element>(css, new ByCssStrategy(css));
         }
 
         public override List<Element> FindAllByLinkText(string linkText)
         {
-            return FindAll<ByLinkTextStrategy, Element>(linkText);
+            return FindAll<ByLinkTextStrategy, Element>(linkText, new ByLinkTextStrategy(linkText));
         }
 
         public override Element FindByCss(string css)
         {
-            return Find<ByCssStrategy, Element>(css);
+            return Find<ByCssStrategy, Element>(css, new ByCssStrategy(css));
         }
 
         public override Element FindByLinkText(string linkText)
         {
-            return Find<ByCssStrategy, Element>(linkText);
+            return Find<ByCssStrategy, Element>(linkText, new ByCssStrategy(linkText));
         }
 
         public override Element FindByClass(string cssClass)
         {
-            return Find<ByClassStrategy, Element>(cssClass);
+            return Find<ByClassStrategy, Element>(cssClass, new ByClassStrategy(cssClass));
         }
 
         public override Element FindById(string id)
         {
-            return Find<ByIdStrategy, Element>(id);
+            return Find<ByIdStrategy, Element>(id, new ByIdStrategy(id));
         }
 
         public override Element FindByTag(string tag)
         {
-            return Find<ByTagStrategy, Element>(tag);
+            return Find<ByTagStrategy, Element>(tag, new ByTagStrategy(tag));
         }
 
         public override Element FindByXPath(string xpath)
         {
-            return Find<ByXPathStrategy, Element>(xpath);
+            return Find<ByXPathStrategy, Element>(xpath, new ByXPathStrategy(xpath));
         }
 
         public override void WaitForAjax()
@@ -185,9 +185,8 @@ namespace ExtensibilityDemos
             _webDriverWait.Until(wd => js.ExecuteScript("return document.readyState").ToString() == "complete");
         }
 
-        public override List<TElement> FindAll<TByStrategy, TElement>(string value)
+        public override List<TElement> FindAll<TByStrategy, TElement>(string value, TByStrategy byStrategy)
         {
-            var byStrategy = (TByStrategy)Activator.CreateInstance(typeof(TByStrategy), value);
             var nativeElements = _nativeElementFinderService.FindAll(byStrategy);
             var resultElements = new List<TElement>();
             foreach (var nativeElement in nativeElements)
@@ -197,9 +196,8 @@ namespace ExtensibilityDemos
             return resultElements;
         }
 
-        public override TElement Find<TByStrategy, TElement>(string value)
+        public override TElement Find<TByStrategy, TElement>(string value, TByStrategy byStrategy)
         {
-            var byStrategy = (TByStrategy)Activator.CreateInstance(typeof(TByStrategy), value);
             var nativeElement = _nativeElementFinderService.Find(byStrategy);
             return new WebElement(_webDriver, nativeElement, byStrategy.Convert()) as TElement;
         }

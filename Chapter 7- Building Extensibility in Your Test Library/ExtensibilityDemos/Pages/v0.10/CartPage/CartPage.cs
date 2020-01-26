@@ -7,7 +7,8 @@ namespace ExtensibilityDemos.Tenth
         private readonly CartPageElements _cartPageElements;
         private readonly IElementWaitService _elementWaitService;
 
-        private CartPage(Driver driver) : base(driver)
+        private CartPage(Driver driver) 
+            : base(driver)
         {
             _elementWaitService = driver;
             BreadcrumbSection = new BreadcrumbSection(Driver);
@@ -62,7 +63,7 @@ namespace ExtensibilityDemos.Tenth
             return this;
         }
 
-        protected override void WaitForElementToDisplay()
+        protected override void WaitForPageLoad()
         {
             _cartPageElements.CouponCodeTextField.WaitToExists();
         }

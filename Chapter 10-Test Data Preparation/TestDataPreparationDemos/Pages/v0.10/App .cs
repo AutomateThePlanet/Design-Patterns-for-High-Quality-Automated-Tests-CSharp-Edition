@@ -15,8 +15,11 @@ namespace TestDataPreparationDemos.Pages.Tenth
             _driver.Start(browserType);
         }
 
-        public void Dispose() => _driver.Quit();
-
+        public void Dispose()
+        {
+            _driver.Quit();
+            GC.SuppressFinalize(this);
+        }
 
         public TPage Create<TPage>()
             where TPage : EShopPage

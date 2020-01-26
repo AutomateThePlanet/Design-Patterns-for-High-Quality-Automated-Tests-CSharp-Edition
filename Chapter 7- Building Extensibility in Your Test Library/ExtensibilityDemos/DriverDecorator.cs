@@ -66,8 +66,8 @@ namespace ExtensibilityDemos
         public override List<Element> FindAllByClass(string cssClass) => driver?.FindAllByClass(cssClass);
         public override List<Element> FindAllByCss(string css) => driver?.FindAllByCss(css);
         public override List<Element> FindAllByLinkText(string linkText) => driver?.FindAllByLinkText(linkText);
-        public override List<TElement> FindAll<TByStrategy, TElement>(string value) => driver?.FindAll<TByStrategy, TElement>(value);
-        public override TElement Find<TByStrategy, TElement>(string value) => driver?.Find<TByStrategy, TElement>(value);
+        public override List<TElement> FindAll<TByStrategy, TElement>(string value, TByStrategy byStrategy) => driver?.FindAll<TByStrategy, TElement>(value, byStrategy);
+        public override TElement Find<TByStrategy, TElement>(string value, TByStrategy byStrategy) => driver?.Find<TByStrategy, TElement>(value, byStrategy);
         public override void Wait<TWaitStrategy, TElement>(TElement element, TWaitStrategy waitStrategy) => driver?.Wait(element, waitStrategy);
     }
 }

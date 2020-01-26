@@ -22,7 +22,7 @@ namespace ApiUsabilityDemos.Eight
         {
             MainPage.Instance.Open();
 
-            MainPage.Instance.MainPageAssertions.AssertProductBoxLink("Falcon 9", "http://demos.bellatrix.solutions/product/falcon-9/");
+            MainPage.Instance.Assertions.AssertProductBoxLink("Falcon 9", "http://demos.bellatrix.solutions/product/falcon-9/");
         }
 
         [TestMethod]
@@ -30,7 +30,7 @@ namespace ApiUsabilityDemos.Eight
         {
             MainPage.Instance.Open();
 
-            MainPage.Instance.MainPageAssertions.AssertProductBoxLink("Saturn V", "http://demos.bellatrix.solutions/product/saturn-v/");
+            MainPage.Instance.Assertions.AssertProductBoxLink("Saturn V", "http://demos.bellatrix.solutions/product/saturn-v/");
         }
     }
 }

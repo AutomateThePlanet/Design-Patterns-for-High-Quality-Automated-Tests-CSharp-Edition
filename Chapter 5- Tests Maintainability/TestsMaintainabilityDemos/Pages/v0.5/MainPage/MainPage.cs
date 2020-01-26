@@ -8,7 +8,8 @@ namespace TestsMaintainabilityDemos.Fifth
         private Element _addToCartFalcon9 => Driver.FindElement(By.CssSelector("[data-product_id*='28']"));
         private Element _viewCartButton => Driver.FindElement(By.CssSelector("[class*='added_to_cart wc-forward']"));
 
-        public MainPage(Driver driver) : base(driver)
+        public MainPage(Driver driver) 
+            : base(driver)
         {
         }
 
@@ -28,7 +29,7 @@ namespace TestsMaintainabilityDemos.Fifth
             Assert.AreEqual(expectedLink, actualLink);
         }
 
-        protected override void WaitForElementToBeDisplayed()
+        protected override void WaitForPageLoad()
         {
             _addToCartFalcon9.WaitToExists();
         }

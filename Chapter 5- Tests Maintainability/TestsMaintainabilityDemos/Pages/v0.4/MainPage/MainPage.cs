@@ -7,7 +7,8 @@ namespace TestsMaintainabilityDemos.Fourth
         private Element _addToCartFalcon9 => Driver.FindElement(By.CssSelector("[data-product_id*='28']"));
         private Element _viewCartButton => Driver.FindElement(By.CssSelector("[class*='added_to_cart wc-forward']"));
 
-        public MainPage(Driver driver) : base(driver)
+        public MainPage(Driver driver) 
+            : base(driver)
         {
         }
 

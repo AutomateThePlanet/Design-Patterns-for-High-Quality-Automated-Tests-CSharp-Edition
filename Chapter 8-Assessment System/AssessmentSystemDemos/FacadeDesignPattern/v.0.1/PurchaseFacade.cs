@@ -18,12 +18,12 @@
             _mainPage.Open();
             _mainPage.AddRocketToShoppingCart(rocketName);
             _cartPage.ApplyCoupon(couponName);
-            _cartPage.CartPageAssertions.AssertCouponAppliedSuccessfully();
+            _cartPage.Assertions.AssertCouponAppliedSuccessfully();
             _cartPage.IncreaseProductQuantity(quantity);
-            _cartPage.CartPageAssertions.AssertTotalPrice(expectedPrice);
-            _cartPage.CartPageElements.ProceedToCheckout.Click();
+            _cartPage.Assertions.AssertTotalPrice(expectedPrice);
+            _cartPage.Elements.ProceedToCheckout.Click();
             _checkoutPage.FillBillingInfo(purchaseInfo);
-            _checkoutPage.CheckoutPageAssertions.AssertOrderReceived();
+            _checkoutPage.Assertions.AssertOrderReceived();
         }
     }
 }

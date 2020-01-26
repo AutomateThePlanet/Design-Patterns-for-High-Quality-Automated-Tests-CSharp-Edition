@@ -4,11 +4,12 @@ namespace AssessmentSystemDemos.Tenth
 {
     public class MainPage : NavigatableEShopPage
     {
-        private MainPageElements _mainPageElements;
+        private MainPageElements _еlements;
 
-        private MainPage(Driver driver) : base(driver)
+        private MainPage(Driver driver) 
+            : base(driver)
         {
-            _mainPageElements = new MainPageElements(driver);
+            _еlements = new MainPageElements(driver);
         }
 
         protected override string Url => "http://demos.bellatrix.solutions/";
@@ -16,24 +17,24 @@ namespace AssessmentSystemDemos.Tenth
         public MainPage AddRocketToShoppingCart()
         {
             Open();
-            _mainPageElements.AddToCartFalcon9.Click();
-            _mainPageElements.ViewCartButton.Click();
+            _еlements.AddToCartFalcon9.Click();
+            _еlements.ViewCartButton.Click();
 
             return this;
         }
 
         public MainPage AssertProductBoxLink(string name, string expectedLink)
         {
-            string actualLink = _mainPageElements.GetProductBoxByName(name).GetAttribute("href");
+            string actualLink = _еlements.GetProductBoxByName(name).GetAttribute("href");
 
             Assert.AreEqual(expectedLink, actualLink);
 
             return this;
         }
 
-        protected override void WaitForElementToDisplay()
+        protected override void WaitForPageLoad()
         {
-            _mainPageElements.AddToCartFalcon9.WaitToExists();
+            _еlements.AddToCartFalcon9.WaitToExists();
         }
     }
 }

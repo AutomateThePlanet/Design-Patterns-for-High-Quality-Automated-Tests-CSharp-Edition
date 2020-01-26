@@ -5,12 +5,13 @@ namespace TestDataPreparationDemos.Tenth
 {
     public class CartPage : NavigatableEShopPage
     {
-        private CartPageElements _cartPageElements;
+        private CartPageElements _elements;
 
-        private CartPage(Driver driver) : base(driver)
+        private CartPage(Driver driver)
+            : base(driver)
         {
             BreadcrumbSection = new BreadcrumbSection(Driver);
-            _cartPageElements = new CartPageElements(driver);
+            _elements = new CartPageElements(driver);
         }
 
         ////protected override string Url => "http://demos.bellatrix.solutions/cart/";
@@ -21,8 +22,8 @@ namespace TestDataPreparationDemos.Tenth
 
         public CartPage ApplyCoupon(string coupon)
         {
-            _cartPageElements.CouponCodeTextField.TypeText(coupon);
-            _cartPageElements.ApplyCouponButton.Click();
+            _elements.CouponCodeTextField.TypeText(coupon);
+            _elements.ApplyCouponButton.Click();
             Driver.WaitForAjax();
 
             return this;
@@ -30,8 +31,8 @@ namespace TestDataPreparationDemos.Tenth
 
         public CartPage IncreaseProductQuantity(int newQuantity)
         {
-            _cartPageElements.QuantityBox.TypeText(newQuantity.ToString());
-            _cartPageElements.UpdateCart.Click();
+            _elements.QuantityBox.TypeText(newQuantity.ToString());
+            _elements.UpdateCart.Click();
             Driver.WaitForAjax();
 
             return this;
@@ -39,28 +40,28 @@ namespace TestDataPreparationDemos.Tenth
 
         public CartPage ProceedToCheckout()
         {
-            _cartPageElements.ProceedToCheckout.Click();
+            _elements.ProceedToCheckout.Click();
 
             return this;
         }
 
         public CartPage AssertTotal(string expectedTotal)
         {
-            Assert.AreEqual(_cartPageElements.TotalSpan.Text, expectedTotal);
+            Assert.AreEqual(_elements.TotalSpan.Text, expectedTotal);
 
             return this;
         }
 
         public CartPage AssertMessageNotification(string expectedMessage)
         {
-            Assert.AreEqual(_cartPageElements.MessageAlert.Text, expectedMessage);
+            Assert.AreEqual(_elements.MessageAlert.Text, expectedMessage);
 
             return this;
         }
 
-        protected override void WaitForElementToDisplay()
+        protected override void WaitForPageLoad()
         {
-            _cartPageElements.CouponCodeTextField.WaitToExists();
+            _elements.CouponCodeTextField.WaitToExists();
         }
     }
 }

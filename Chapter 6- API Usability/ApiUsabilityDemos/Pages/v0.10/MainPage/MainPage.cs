@@ -6,7 +6,8 @@ namespace ApiUsabilityDemos.Tenth
     {
         private MainPageElements _mainPageElements;
 
-        private MainPage(Driver driver) : base(driver)
+        private MainPage(Driver driver) 
+            : base(driver)
         {
             _mainPageElements = new MainPageElements(driver);
         }

@@ -34,10 +34,10 @@ namespace ApiUsabilityDemos.Facades.First
             _mainPage.Open();
             _mainPage.AddRocketToShoppingCart("Falcon 9");
             _cartPage.ApplyCoupon("happybirthday");
-            _cartPage.CartPageAssertions.AssertCouponAppliedSuccessfully();
+            _cartPage.Assertions.AssertCouponAppliedSuccessfully();
             _cartPage.IncreaseProductQuantity(2);
-            _cartPage.CartPageAssertions.AssertTotalPrice("114.00€");
-            _cartPage.CartPageElements.ProceedToCheckout.Click();
+            _cartPage.Assertions.AssertTotalPrice("114.00€");
+            _cartPage.Elements.ProceedToCheckout.Click();
 
             var purchaseInfo = new PurchaseInfo()
                                {
@@ -52,7 +52,7 @@ namespace ApiUsabilityDemos.Facades.First
                                    Phone = "+00498888999281",
                                };
             _checkoutPage.FillBillingInfo(purchaseInfo);
-            _checkoutPage.CheckoutPageAssertions.AssertOrderReceived();
+            _checkoutPage.Assertions.AssertOrderReceived();
         }
 
         [TestMethod]
@@ -61,10 +61,10 @@ namespace ApiUsabilityDemos.Facades.First
             _mainPage.Open();
             _mainPage.AddRocketToShoppingCart("Saturn V");
             _cartPage.ApplyCoupon("happybirthday");
-            _cartPage.CartPageAssertions.AssertCouponAppliedSuccessfully();
+            _cartPage.Assertions.AssertCouponAppliedSuccessfully();
             _cartPage.IncreaseProductQuantity(3);
-            _cartPage.CartPageAssertions.AssertTotalPrice("355.00€");
-            _cartPage.CartPageElements.ProceedToCheckout.Click();
+            _cartPage.Assertions.AssertTotalPrice("355.00€");
+            _cartPage.Elements.ProceedToCheckout.Click();
 
             var purchaseInfo = new PurchaseInfo()
                                {
@@ -79,7 +79,7 @@ namespace ApiUsabilityDemos.Facades.First
                                    Phone = "+00498888999281",
                                };
             _checkoutPage.FillBillingInfo(purchaseInfo);
-            _checkoutPage.CheckoutPageAssertions.AssertOrderReceived();
+            _checkoutPage.Assertions.AssertOrderReceived();
         }
 
         [TestMethod]

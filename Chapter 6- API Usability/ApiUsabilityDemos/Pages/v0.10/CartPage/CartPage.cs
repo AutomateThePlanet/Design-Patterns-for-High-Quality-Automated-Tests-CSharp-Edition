@@ -6,7 +6,8 @@ namespace ApiUsabilityDemos.Tenth
     {
         private CartPageElements _cartPageElements;
 
-        private CartPage(Driver driver) : base(driver)
+        private CartPage(Driver driver) 
+            : base(driver)
         {
             BreadcrumbSection = new BreadcrumbSection(Driver);
             _cartPageElements = new CartPageElements(driver);

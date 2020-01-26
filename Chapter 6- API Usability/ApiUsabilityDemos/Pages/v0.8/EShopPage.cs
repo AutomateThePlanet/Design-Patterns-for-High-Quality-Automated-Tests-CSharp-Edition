@@ -1,9 +1,9 @@
 ﻿namespace ApiUsabilityDemos.Eight
 {
-    public abstract class EShopPage<T>
-        where T : EShopPage<T>, new()
+    public abstract class EShopPage<TPage>
+        where TPage : EShopPage<TPage>, new()
     {
-        private static T instance;
+        private static TPage instance;
 
         protected readonly IElementFindService ElementFindService;
 
@@ -15,13 +15,13 @@
             CartInfoSection = new CartInfoSection(LoggingSingletonDriver.Instance);
         }
 
-        public static T Instance
+        public static TPage Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new T();
+                    instance = new TPage();
                 }
 
                 return instance;

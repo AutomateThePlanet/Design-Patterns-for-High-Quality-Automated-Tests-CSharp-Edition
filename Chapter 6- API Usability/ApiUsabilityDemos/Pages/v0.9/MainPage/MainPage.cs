@@ -2,27 +2,28 @@
 {
     public class MainPage : NavigatableEShopPage
     {
-        private MainPage(Driver driver) : base(driver)
+        private MainPage(Driver driver) 
+            : base(driver)
         {
-            MainPageElements = new MainPageElements(driver);
-            MainPageAssertions = new MainPageAssertions(MainPageElements);
+            Elements = new MainPageElements(driver);
+            Assertions = new MainPageAssertions(Elements);
         }
 
-        public MainPageElements MainPageElements { get; set; }
-        public MainPageAssertions MainPageAssertions { get; set; }
+        public MainPageElements Elements { get; set; }
+        public MainPageAssertions Assertions { get; set; }
 
         protected override string Url => "http://demos.bellatrix.solutions/";
 
         public void AddRocketToShoppingCart()
         {
             Open();
-            MainPageElements.AddToCartFalcon9.Click();
-            MainPageElements.ViewCartButton.Click();
+            Elements.AddToCartFalcon9.Click();
+            Elements.ViewCartButton.Click();
         }
 
-        protected override void WaitForElementToDisplay()
+        protected override void WaitForPageLoad()
         {
-            MainPageElements.AddToCartFalcon9.WaitToExists();
+            Elements.AddToCartFalcon9.WaitToExists();
         }
     }
 }

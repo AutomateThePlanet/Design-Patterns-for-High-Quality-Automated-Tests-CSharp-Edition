@@ -25,7 +25,7 @@ namespace ApiUsabilityDemos.Ninth
         {
             var mainPage = _app.GoTo<MainPage>();
 
-            mainPage.MainPageAssertions.AssertProductBoxLink("Falcon 9", "http://demos.bellatrix.solutions/product/falcon-9/");
+            mainPage.Assertions.AssertProductBoxLink("Falcon 9", "http://demos.bellatrix.solutions/product/falcon-9/");
         }
 
         [TestMethod]
@@ -33,7 +33,7 @@ namespace ApiUsabilityDemos.Ninth
         {
             var mainPage = _app.GoTo<MainPage>();
 
-            mainPage.MainPageAssertions.AssertProductBoxLink("Saturn V", "http://demos.bellatrix.solutions/product/saturn-v/");
+            mainPage.Assertions.AssertProductBoxLink("Saturn V", "http://demos.bellatrix.solutions/product/saturn-v/");
         }
     }
 }

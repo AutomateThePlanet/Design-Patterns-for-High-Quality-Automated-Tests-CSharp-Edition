@@ -6,7 +6,8 @@ namespace ExtensibilityDemos.Tenth
     {
         private MainPageElements _mainPageElements;
 
-        private MainPage(Driver driver) : base(driver)
+        private MainPage(Driver driver) 
+            : base(driver)
         {
             _mainPageElements = new MainPageElements(driver);
         }
@@ -31,7 +32,7 @@ namespace ExtensibilityDemos.Tenth
             return this;
         }
 
-        protected override void WaitForElementToDisplay()
+        protected override void WaitForPageLoad()
         {
             _mainPageElements.AddToCartFalcon9.WaitToExists();
         }
