@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using BenchmarkingDemos.BenchmarkCore;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 
 namespace BenchmarkingDemos
@@ -38,10 +39,10 @@ namespace BenchmarkingDemos
 
         public override void PostCleanup(MemberInfo memberInfo)
         {
-            if (_currentBrowserConfiguration.BrowserBehavior == BrowserBehavior.RestartOnFail && BaseBenchmark.TestContext.CurrentTestOutcome.Equals(TestOutcome.Failed))
-            {
-                RestartBrowser();
-            }
+            ////if (_currentBrowserConfiguration.BrowserBehavior == BrowserBehavior.RestartOnFail && BaseBenchmark.TestContext.CurrentTestOutcome.Equals(TestOutcome.Failed))
+            ////{
+            ////    RestartBrowser();
+            ////}
         }
 
         private bool ShouldRestartBrowser(BrowserConfiguration browserConfiguration)

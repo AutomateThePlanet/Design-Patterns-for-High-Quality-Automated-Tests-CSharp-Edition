@@ -4,9 +4,10 @@ using BenchmarkDotNet.Diagnosers;
 using BenchmarkDotNet.Diagnostics.Windows;
 using BenchmarkDotNet.Diagnostics.Windows.Configs;
 using BenchmarkDotNet.Running;
-using BenchRunner.Second;
+////using BenchRunner.Second;
 using StackExchange.Profiling;
 using System;
+using BenchRunner.First;
 
 namespace BenchRunner
 {
@@ -14,7 +15,7 @@ namespace BenchRunner
 
     [CsvExporter]
     [HtmlExporter]
-    [DisassemblyDiagnoser(printAsm: true, printSource: true)]
+    ////[DisassemblyDiagnoser(printAsm: true, printSource: true)]
     ////[EtwProfiler]
     public class Program
     {
