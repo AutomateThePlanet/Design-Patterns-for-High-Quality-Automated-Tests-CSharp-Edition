@@ -45,7 +45,6 @@ namespace TestsReadabilityDemos.Second
             return TotalSpan.Text;
         }
 
-
         public string GetMessageNotification()
         {
             return MessageAlert.Text;
