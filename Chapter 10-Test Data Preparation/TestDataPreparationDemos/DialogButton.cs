@@ -10,6 +10,5 @@
         Close = 5,
         Run = 6,
         Save = 7,
-        Nots
     }
 }

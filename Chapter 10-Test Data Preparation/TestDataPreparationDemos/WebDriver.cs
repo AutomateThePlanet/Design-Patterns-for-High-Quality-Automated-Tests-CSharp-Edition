@@ -56,41 +56,42 @@ namespace TestDataPreparationDemos
             {
                 case Browser.Chrome:
                     _webDriver = new ChromeDriver(Environment.CurrentDirectory);
-                    _webDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(ConfigurationService.Instance.GetWebSettings().Chrome.PageLoadTimeout);
-                    _webDriver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(ConfigurationService.Instance.GetWebSettings().Chrome.ScriptTimeout);
+                    _webDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(ConfigurationService.GetWebSettings().Chrome.PageLoadTimeout);
+                    _webDriver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(ConfigurationService.GetWebSettings().Chrome.ScriptTimeout);
                     break;
                 case Browser.Firefox:
                     _webDriver = new FirefoxDriver(Environment.CurrentDirectory);
-                    _webDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(ConfigurationService.Instance.GetWebSettings().Firefox.PageLoadTimeout);
-                    _webDriver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(ConfigurationService.Instance.GetWebSettings().Firefox.ScriptTimeout);
+                    _webDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(ConfigurationService.GetWebSettings().Firefox.PageLoadTimeout);
+                    _webDriver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(ConfigurationService.GetWebSettings().Firefox.ScriptTimeout);
                     break;
                 case Browser.Edge:
                     _webDriver = new EdgeDriver(Environment.CurrentDirectory);
-                    _webDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(ConfigurationService.Instance.GetWebSettings().Edge.PageLoadTimeout);
-                    _webDriver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(ConfigurationService.Instance.GetWebSettings().Edge.ScriptTimeout);
+                    _webDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(ConfigurationService.GetWebSettings().Edge.PageLoadTimeout);
+                    _webDriver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(ConfigurationService.GetWebSettings().Edge.ScriptTimeout);
                     break;
                 case Browser.Opera:
                     _webDriver = new OperaDriver(Environment.CurrentDirectory);
-                    _webDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(ConfigurationService.Instance.GetWebSettings().Opera.PageLoadTimeout);
-                    _webDriver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(ConfigurationService.Instance.GetWebSettings().Opera.ScriptTimeout);
+                    _webDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(ConfigurationService.GetWebSettings().Opera.PageLoadTimeout);
+                    _webDriver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(ConfigurationService.GetWebSettings().Opera.ScriptTimeout);
                     break;
                 case Browser.Safari:
                     _webDriver = new SafariDriver(Environment.CurrentDirectory);
-                    _webDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(ConfigurationService.Instance.GetWebSettings().Safari.PageLoadTimeout);
-                    _webDriver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(ConfigurationService.Instance.GetWebSettings().Safari.ScriptTimeout);
+                    _webDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(ConfigurationService.GetWebSettings().Safari.PageLoadTimeout);
+                    _webDriver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(ConfigurationService.GetWebSettings().Safari.ScriptTimeout);
                     break;
                 case Browser.InternetExplorer:
                     _webDriver = new InternetExplorerDriver(Environment.CurrentDirectory);
-                    _webDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(ConfigurationService.Instance.GetWebSettings().InternetExplorer.PageLoadTimeout);
-                    _webDriver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(ConfigurationService.Instance.GetWebSettings().InternetExplorer.ScriptTimeout);
+                    _webDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(ConfigurationService.GetWebSettings().InternetExplorer.PageLoadTimeout);
+                    _webDriver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(ConfigurationService.GetWebSettings().InternetExplorer.ScriptTimeout);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(browser), browser, null);
             }
 
-            _webDriverWait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(ConfigurationService.Instance.GetWebSettings().ElementWaitTimeout));
-            _webDriverWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+            _webDriverWait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(ConfigurationService.GetWebSettings().ElementWaitTimeout));
             _webDriverWait.IgnoreExceptionTypes(typeof(WebDriverException));
+            _webDriverWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+            _webDriverWait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
         }
 
         public override void Quit()
@@ -109,7 +110,7 @@ namespace TestDataPreparationDemos
             Element element = new WebElement(_webDriver, nativeWebElement, locator);
 
             // If we use log decorator.
-            LogElement logElement = new LogElement(element);
+            Element logElement = new LogElement(element);
 
             return logElement;
         }
@@ -117,7 +118,7 @@ namespace TestDataPreparationDemos
         public override List<Element> FindElements(By locator)
         {
             ReadOnlyCollection<IWebElement> nativeWebElements = _webDriverWait.Until(drv => drv.FindElements(locator));
-            List<Element> elements = new List<Element>();
+            var elements = new List<Element>();
             foreach (var nativeWebElement in nativeWebElements)
             {
                 Element element = new WebElement(_webDriver, nativeWebElement, locator);

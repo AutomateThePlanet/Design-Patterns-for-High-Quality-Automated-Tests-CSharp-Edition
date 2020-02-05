@@ -6,11 +6,12 @@ namespace TestDataPreparationDemos.Configuration
 {
     public static class ResourcesService
     {
-        private static ResourceManager _resourceManager = new ResourceManager("defaultValues", Assembly.GetExecutingAssembly());
+        private static readonly ResourceManager ResourceManager 
+            = new ResourceManager("defaultValues", Assembly.GetExecutingAssembly());
 
         public static string GetString(string name)
         {
-            return _resourceManager.GetString(name, CultureInfo.CurrentCulture);
+            return ResourceManager.GetString(name, CultureInfo.CurrentCulture);
         }
     }
 }

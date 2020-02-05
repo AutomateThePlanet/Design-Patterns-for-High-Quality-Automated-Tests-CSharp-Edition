@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace TestDataPreparationDemos.Configuration
 {
@@ -16,6 +17,10 @@ namespace TestDataPreparationDemos.Configuration
 
         public ConfigurationNotFoundException(string message, Exception inner)
             : base(message, inner)
+        {
+        }
+
+        protected ConfigurationNotFoundException(SerializationInfo serializationInfo, StreamingContext streamingContext)
         {
         }
     }

@@ -6,30 +6,13 @@ using TestDataPreparationDemos.Configuration;
 
 namespace TestDataPreparationDemos
 {
-    public sealed class ConfigurationService
+    public static class ConfigurationService
     {
-        private static ConfigurationService _instance;
+        private static readonly IConfigurationRoot Root = InitializeConfiguration();
 
-        public ConfigurationService() => Root = InitializeConfiguration();
-
-        public static ConfigurationService Instance
+        public static UrlSettings GetTestEnvironmentSettings()
         {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new ConfigurationService();
-                }
-
-                return _instance;
-            }
-        }
-
-        public IConfigurationRoot Root { get; }
-
-        public UrlSettings GetTestEnvironmentSettings()
-        {
-            var result = ConfigurationService.Instance.Root.GetSection("urlSettings").Get<UrlSettings>();
+            var result = Root.GetSection("urlSettings").Get<UrlSettings>();
 
             if (result == null)
             {
@@ -39,21 +22,22 @@ namespace TestDataPreparationDemos
             return result;
         }
 
-        public BillingInfoDefaultValues GetBillingInfoDefaultValues()
+        public static BillingInfoDefaultValues GetBillingInfoDefaultValues()
         {
-            var result = ConfigurationService.Instance.Root.GetSection("billingInfoDefaultValues").Get<BillingInfoDefaultValues>();
+            var result = Root.GetSection("billingInfoDefaultValues").Get<BillingInfoDefaultValues>();
             return result;
         }
 
 
-        public WebSettings GetWebSettings()
-         => ConfigurationService.Instance.Root.GetSection("webSettings").Get<WebSettings>();
+        public static WebSettings GetWebSettings()
+        {
+            return Root.GetSection("webSettings").Get<WebSettings>();
+        }
 
-        private IConfigurationRoot InitializeConfiguration()
+        private static IConfigurationRoot InitializeConfiguration()
         {
             var filesInExecutionDir = Directory.GetFiles(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
-            var settingsFile =
-                filesInExecutionDir.FirstOrDefault(x => x.Contains("testFrameworkSettings") && x.EndsWith(".json"));
+            var settingsFile = filesInExecutionDir.FirstOrDefault(x => x.Contains("testFrameworkSettings") && x.EndsWith(".json"));
             var builder = new ConfigurationBuilder();
             if (settingsFile != null)
             {

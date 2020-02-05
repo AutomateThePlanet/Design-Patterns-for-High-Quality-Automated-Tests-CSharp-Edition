@@ -6,12 +6,12 @@ namespace TestDataPreparationDemos.Configuration
     {
         public static string GetShopUrl(string urlPart)
         {
-            return Url.Combine(ConfigurationService.Instance.GetTestEnvironmentSettings().ShopUrl, urlPart).ToString();
+            return Url.Combine(ConfigurationService.GetTestEnvironmentSettings().ShopUrl, urlPart);
         }
 
         public static string GetAccountUrl(string urlPart)
         {
-            return Url.Combine(ConfigurationService.Instance.GetTestEnvironmentSettings().AccountUrl, urlPart).ToString();
+            return Url.Combine(ConfigurationService.GetTestEnvironmentSettings().AccountUrl, urlPart);
         }
     }
 }

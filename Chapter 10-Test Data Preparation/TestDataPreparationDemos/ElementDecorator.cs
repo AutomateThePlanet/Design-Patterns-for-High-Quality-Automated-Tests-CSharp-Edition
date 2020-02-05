@@ -4,58 +4,34 @@ namespace TestDataPreparationDemos
 {
     public abstract class ElementDecorator : Element
     {
-        protected Element element;
+        protected Element Element;
 
-        public ElementDecorator(Element element)
+        protected ElementDecorator(Element element)
         {
-            this.element = element;
+            Element = element;
         }
 
-        public override By By
-        {
-            get
-            {
-                return element?.By;
-            }
-        }
+        public override By By => Element?.By;
 
-        public override string Text
-        {
-            get
-            {
-                return element?.Text;
-            }
-        }
+        public override string Text => Element?.Text;
 
-        public override bool? Enabled
-        {
-            get
-            {
-                return element?.Enabled;
-            }
-        }
+        public override bool? Enabled => Element?.Enabled;
 
-        public override bool? Displayed
-        {
-            get
-            {
-                return element?.Displayed;
-            }
-        }
+        public override bool? Displayed => Element?.Displayed;
 
         public override void Click()
         {
-            element?.Click();
+            Element?.Click();
         }
 
         public override string GetAttribute(string attributeName)
         {
-            return element?.GetAttribute(attributeName);
+            return Element?.GetAttribute(attributeName);
         }
 
         public override void TypeText(string text)
         {
-            element?.TypeText(text);
+            Element?.TypeText(text);
         }
     }
 }
