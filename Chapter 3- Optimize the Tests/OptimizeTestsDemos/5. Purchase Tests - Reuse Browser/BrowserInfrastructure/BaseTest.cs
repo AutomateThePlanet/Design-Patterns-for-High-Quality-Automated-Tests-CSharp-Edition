@@ -8,7 +8,6 @@ namespace StabilizeTestsDemos.FifthVersion
     {
         private static readonly ITestExecutionSubject CurrentTestExecutionSubject;
         private static Driver _driver;
-        private static TestContext _testContextInstance;
 
         static BaseTest()
         {
@@ -25,11 +24,7 @@ namespace StabilizeTestsDemos.FifthVersion
 
         public Driver Driver { get; set; }
 
-        public TestContext TestContext
-        {
-            get => _testContextInstance;
-            set => _testContextInstance = value;
-        }
+        public TestContext TestContext { get; set; }
 
         public string TestName => TestContext.TestName;
 

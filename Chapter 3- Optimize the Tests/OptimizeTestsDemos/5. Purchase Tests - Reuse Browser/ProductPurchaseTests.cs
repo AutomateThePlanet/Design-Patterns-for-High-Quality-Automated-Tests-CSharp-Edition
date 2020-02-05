@@ -15,14 +15,10 @@ namespace StabilizeTestsDemos.FifthVersion
         public void CompletePurchaseSuccessfully_WhenNewClient()
         {
             AddRocketToShoppingCart();
-
             ApplyCoupon();
-
             IncreaseProductQuantity();
-
             var proceedToCheckout = Driver.FindElement(By.CssSelector("[class*='checkout-button button alt wc-forward']"));
             proceedToCheckout.Click();
-
             Driver.WaitUntilPageLoadsCompletely();
             var billingFirstName = Driver.FindElement(By.Id("billing_first_name"));
             billingFirstName.TypeText("Anton");
@@ -51,6 +47,7 @@ namespace StabilizeTestsDemos.FifthVersion
             _purchaseEmail = GenerateUniqueEmail();
             var createAccountCheckBox = Driver.FindElement(By.Id("createaccount"));
             createAccountCheckBox.Click();
+            Driver.WaitUntilPageLoadsCompletely();
             var checkPaymentsRadioButton = Driver.FindElement(By.CssSelector("[for*='payment_method_cheque']"));
             checkPaymentsRadioButton.Click();
             var placeOrderButton = Driver.FindElement(By.Id("place_order"));
@@ -62,6 +59,7 @@ namespace StabilizeTestsDemos.FifthVersion
         }
 
         [TestMethod]
+        [ExecutionBrowser(Browser.Firefox, BrowserBehavior.ReuseIfStarted)]
         public void CompletePurchaseSuccessfully_WhenExistingClient()
         {
             AddRocketToShoppingCart();
