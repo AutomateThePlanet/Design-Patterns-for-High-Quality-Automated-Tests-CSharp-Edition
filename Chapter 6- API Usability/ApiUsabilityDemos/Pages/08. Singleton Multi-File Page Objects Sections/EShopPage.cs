@@ -3,7 +3,7 @@
     public abstract class EShopPage<TPage>
         where TPage : EShopPage<TPage>, new()
     {
-        private static TPage instance;
+        private static TPage _instance;
 
         protected readonly IElementFindService ElementFindService;
 
@@ -21,7 +21,7 @@
             {
                 if (_instance == null)
                 {
-                    instance = new TPage();
+                    _instance = new TPage();
                 }
 
                 return _instance;

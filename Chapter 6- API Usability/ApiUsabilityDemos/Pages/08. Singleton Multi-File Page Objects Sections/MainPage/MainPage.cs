@@ -20,7 +20,7 @@
             Elements.ViewCartButton.Click();
         }
 
-        protected override void WaitForElementToDisplay()
+        protected override void WaitForPageLoad()
         {
             Elements.AddToCartFalcon9.WaitToExists();
         }

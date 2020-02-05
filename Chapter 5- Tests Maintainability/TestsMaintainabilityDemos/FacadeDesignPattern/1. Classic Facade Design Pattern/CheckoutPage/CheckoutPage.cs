@@ -9,8 +9,8 @@
             Assertions = new CheckoutPageAssertions(Elements);
         }
 
-        public CheckoutPageElements CheckoutPageElements { get; }
-        public CheckoutPageAssertions CheckoutPageAssertions { get; }
+        public CheckoutPageElements Elements { get; }
+        public CheckoutPageAssertions Assertions { get; }
 
         public void FillBillingInfo(PurchaseInfo purchaseInfo)
         {

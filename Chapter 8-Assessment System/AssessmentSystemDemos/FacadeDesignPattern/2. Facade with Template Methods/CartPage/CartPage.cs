@@ -11,8 +11,8 @@
         }
 
         public BreadcrumbSection BreadcrumbSection { get; }
-        public CartPageElements CartPageElements { get; }
-        public CartPageAssertions CartPageAssertions { get; }
+        public CartPageElements Elements { get; }
+        public CartPageAssertions Assertions { get; }
 
         public void ApplyCoupon(string coupon)
         {

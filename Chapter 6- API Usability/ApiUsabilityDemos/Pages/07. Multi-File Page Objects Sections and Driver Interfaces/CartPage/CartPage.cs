@@ -13,7 +13,7 @@
         }
 
         public BreadcrumbSection BreadcrumbSection { get; }
-        public CartPageElements CartPageElements { get; }
+        public CartPageElements Elements { get; }
 
         protected override string Url => "http://demos.bellatrix.solutions/cart/";
 
