@@ -2,19 +2,19 @@
 {
     public class WaitStrategyFactory
     {
-        public WaitToExistsStrategy Exists(int? timeoutInterval = null, int? sleepinterval = null)
+        public WaitToExistsStrategy Exists(int? timeoutInterval = null, int? sleepInterval = null)
         {
-            return new WaitToExistsStrategy(timeoutInterval, sleepinterval);
+            return new WaitToExistsStrategy(timeoutInterval, sleepInterval);
         }
 
-        public WaitToBeVisibleStrategy BeVisible(int? timeoutInterval = null, int? sleepinterval = null)
+        public WaitToBeVisibleStrategy BeVisible(int? timeoutInterval = null, int? sleepInterval = null)
         {
-            return new WaitToBeVisibleStrategy(timeoutInterval, sleepinterval);
+            return new WaitToBeVisibleStrategy(timeoutInterval, sleepInterval);
         }
 
-        public WaitToBeClickableStrategy BeClickable(int? timeoutInterval = null, int? sleepinterval = null)
+        public WaitToBeClickableStrategy BeClickable(int? timeoutInterval = null, int? sleepInterval = null)
         {
-            return new WaitToBeClickableStrategy(timeoutInterval, sleepinterval);
+            return new WaitToBeClickableStrategy(timeoutInterval, sleepInterval);
         }
     }
 }

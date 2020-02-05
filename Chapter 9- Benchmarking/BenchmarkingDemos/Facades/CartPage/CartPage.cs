@@ -2,28 +2,29 @@
 {
     public class CartPage : EShopPage
     {
-        public CartPage(Driver driver) : base(driver)
+        public CartPage(Driver driver) 
+            : base(driver)
         {
             BreadcrumbSection = new BreadcrumbSection(Driver);
-            CartPageElements = new CartPageElements(driver);
-            CartPageAssertions = new CartPageAssertions(CartPageElements);
+            Elements = new CartPageElements(driver);
+            Assertions = new CartPageAssertions(Elements);
         }
 
-        public BreadcrumbSection BreadcrumbSection { get; set; }
-        public CartPageElements CartPageElements { get; set; }
-        public CartPageAssertions CartPageAssertions { get; set; }
+        public BreadcrumbSection BreadcrumbSection { get; }
+        public CartPageElements Elements { get; }
+        public CartPageAssertions Assertions { get; }
 
         public void ApplyCoupon(string coupon)
         {
-            CartPageElements.CouponCodeTextField.TypeText(coupon);
-            CartPageElements.ApplyCouponButton.Click();
+            Elements.CouponCodeTextField.TypeText(coupon);
+            Elements.ApplyCouponButton.Click();
             Driver.WaitForAjax();
         }
 
         public void IncreaseProductQuantity(int newQuantity)
         {
-            CartPageElements.QuantityBox.TypeText(newQuantity.ToString());
-            CartPageElements.UpdateCart.Click();
+            Elements.QuantityBox.TypeText(newQuantity.ToString());
+            Elements.UpdateCart.Click();
             Driver.WaitForAjax();
         }
     }

@@ -1,0 +1,26 @@
+﻿using OpenQA.Selenium;
+
+namespace ApiUsabilityDemos.Seventh
+{
+    public class CartInfoSection
+    {
+        private readonly IElementFindService _driver;
+
+        public CartInfoSection(IElementFindService driver)
+        {
+            _driver = driver;
+        }
+        private Element CartIcon => _driver.FindElement(By.ClassName("cart-contents"));
+        private Element CartAmount => _driver.FindElement(By.ClassName("amount"));
+
+        public string GetCurrentAmount()
+        {
+            return CartAmount.Text;
+        }
+
+        public void OpenCart()
+        {
+            CartIcon.Click();
+        }
+    }
+}

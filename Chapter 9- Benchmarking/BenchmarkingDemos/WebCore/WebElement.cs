@@ -7,9 +7,9 @@ namespace BenchmarkingDemos
 {
     public class WebElement : Element
     {
-        private IWebDriver _webDriver;
-        private IWebElement _webElement;
-        private By _by;
+        private readonly IWebDriver _webDriver;
+        private readonly IWebElement _webElement;
+        private readonly By _by;
 
         public WebElement(IWebDriver webDriver, IWebElement webElement, By by)
         {
@@ -18,29 +18,11 @@ namespace BenchmarkingDemos
             _by = by;
         }
 
-        public override IWebElement WrappedElement
-        {
-            get
-            {
-                return _webElement;
-            }
-        }
+        public override IWebElement WrappedElement => _webElement;
 
-        public override By By
-        {
-            get
-            {
-                return _by;
-            }
-        }
+        public override By By => _by;
 
-        public override string Text
-        {
-            get
-            {
-                return _webElement?.Text;
-            }
-        }
+        public override string Text => _webElement?.Text;
 
         public override bool? Enabled
         {
@@ -50,13 +32,7 @@ namespace BenchmarkingDemos
             }
         }
 
-        public override bool? Displayed
-        {
-            get
-            {
-                return _webElement?.Displayed;
-            }
-        }
+        public override bool? Displayed => _webElement?.Displayed;
 
         public override void Click()
         {
@@ -85,11 +61,11 @@ namespace BenchmarkingDemos
         {
             if (timeoutInSeconds > 0)
             {
-                var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(timeoutInSeconds));
-                wait.IgnoreExceptionTypes(typeof(WebDriverException));
-                wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-                wait.IgnoreExceptionTypes(typeof(NoSuchElementException), typeof(StaleElementReferenceException));
-                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By));
+                var webDriverWait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(timeoutInSeconds));
+                webDriverWait.IgnoreExceptionTypes(typeof(WebDriverException));
+                webDriverWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+                webDriverWait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
+                webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By));
             }
         }
 
@@ -97,11 +73,11 @@ namespace BenchmarkingDemos
         {
             if (timeoutInSeconds > 0)
             {
-                var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(timeoutInSeconds));
-                wait.IgnoreExceptionTypes(typeof(WebDriverException));
-                wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-                wait.IgnoreExceptionTypes(typeof(NoSuchElementException), typeof(StaleElementReferenceException));
-                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(by));
+                var webDriverWait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(timeoutInSeconds));
+                webDriverWait.IgnoreExceptionTypes(typeof(WebDriverException));
+                webDriverWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+                webDriverWait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
+                webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(by));
             }
         }
     }

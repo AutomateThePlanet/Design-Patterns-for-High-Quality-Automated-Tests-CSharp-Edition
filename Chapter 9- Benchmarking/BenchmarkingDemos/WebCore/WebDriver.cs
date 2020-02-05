@@ -48,8 +48,9 @@ namespace BenchmarkingDemos
             }
 
             _webDriverWait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(30));
-            _webDriverWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
             _webDriverWait.IgnoreExceptionTypes(typeof(WebDriverException));
+            _webDriverWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+            _webDriverWait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
         }
 
         public override void Quit()
@@ -68,7 +69,7 @@ namespace BenchmarkingDemos
             Element element = new WebElement(_webDriver, nativeWebElement, locator);
 
             // If we use log decorator.
-            LogElement logElement = new LogElement(element);
+            Element logElement = new LogElement(element);
 
             return logElement;
         }
@@ -76,7 +77,7 @@ namespace BenchmarkingDemos
         public override List<Element> FindElements(By locator)
         {
             ReadOnlyCollection<IWebElement> nativeWebElements = _webDriverWait.Until(drv => drv.FindElements(locator));
-            List<Element> elements = new List<Element>();
+            var elements = new List<Element>();
             foreach (var nativeWebElement in nativeWebElements)
             {
                 Element element = new WebElement(_webDriver, nativeWebElement, locator);

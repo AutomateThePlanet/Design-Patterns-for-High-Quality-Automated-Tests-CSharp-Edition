@@ -1,8 +1,11 @@
 ﻿namespace ExtensibilityDemos.Locators
 {
-    public abstract class ByStrategy
+    public abstract class FindStrategy
     {
-        public ByStrategy(string value) => Value = value;
+        protected FindStrategy(string value)
+        {
+            Value = value;
+        }
 
         public string Value { get; }
 

@@ -11,10 +11,10 @@ namespace BenchmarkingDemos.BenchmarkCore
             var directoryInfo = new DirectoryInfo(assemblyFolder);
             for (int i = 0; i < 4; i++)
             {
-                directoryInfo = directoryInfo.Parent;
+                directoryInfo = directoryInfo?.Parent;
             }
 
-            return directoryInfo.FullName;
+            return directoryInfo?.FullName;
         }
     }
 }

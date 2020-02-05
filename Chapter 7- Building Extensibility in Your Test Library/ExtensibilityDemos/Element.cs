@@ -29,11 +29,11 @@ namespace ExtensibilityDemos
         public abstract List<Element> FindAllByCss(string css);
         public abstract List<Element> FindAllByLinkText(string linkText);
 
-        public abstract List<TElement> FindAll<TByStrategy, TElement>(string value)
-            where TByStrategy : ByStrategy
+        public abstract List<TElement> FindAll<TFindStrategy, TElement>(TFindStrategy findStrategy)
+            where TFindStrategy : FindStrategy
             where TElement : Element;
-        public abstract TElement Find<TByStrategy, TElement>(string value)
-            where TByStrategy : ByStrategy
+        public abstract TElement Find<TFindStrategy, TElement>(TFindStrategy findStrategy)
+            where TFindStrategy : FindStrategy
             where TElement : Element;
     }
 }

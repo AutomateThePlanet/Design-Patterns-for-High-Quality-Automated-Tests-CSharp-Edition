@@ -4,55 +4,55 @@ using OpenQA.Selenium;
 
 namespace AssessmentSystemDemos
 {
-    public class DriverDecorator : Driver
+    public abstract class DriverDecorator : Driver
     {
-        protected Driver driver;
+        protected Driver Driver;
 
         public DriverDecorator(Driver driver)
         {
-            this.driver = driver;
+            Driver = driver;
         }
 
-        public override Uri Url => driver?.Url;
+        public override Uri Url => Driver?.Url;
 
         public override void Start(Browser browser)
         {
-            driver?.Start(browser);
+            Driver?.Start(browser);
         }
 
         public override void Quit()
         {
-            driver?.Quit();
+            Driver?.Quit();
         }
 
         public override void GoToUrl(string url)
         {
-            driver?.GoToUrl(url);
+            Driver?.GoToUrl(url);
         }
 
         public override Element FindElement(By locator)
         {
-            return driver?.FindElement(locator);
+            return Driver?.FindElement(locator);
         }
 
         public override List<Element> FindElements(By locator)
         {
-            return driver?.FindElements(locator);
+            return Driver?.FindElements(locator);
         }
 
         public override void WaitForAjax()
         {
-            driver?.WaitForAjax();
+            Driver?.WaitForAjax();
         }
 
         public override void WaitForJavaScriptAnimations()
         {
-            driver?.WaitForJavaScriptAnimations();
+            Driver?.WaitForJavaScriptAnimations();
         }
 
         public override void WaitUntilPageLoadsCompletely()
         {
-            driver?.WaitUntilPageLoadsCompletely();
+            Driver?.WaitUntilPageLoadsCompletely();
         }
     }
 }

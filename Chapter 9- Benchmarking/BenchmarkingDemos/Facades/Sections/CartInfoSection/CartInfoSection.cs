@@ -5,23 +5,23 @@ namespace BenchmarkingDemos.Facades.Second
     public class CartInfoSection
     {
         private readonly Driver _driver;
-
-        private Element _cartIcon => _driver.FindElement(By.ClassName("cart-contents"));
-        private Element _cartAmount => _driver.FindElement(By.ClassName("amount"));
         
         public CartInfoSection(Driver driver)
         {
             _driver = driver;
         }
+
+        private Element CartIcon => _driver.FindElement(By.ClassName("cart-contents"));
+        private Element CartAmount => _driver.FindElement(By.ClassName("amount"));
         
         public string GetCurrentAmount()
         {
-            return _cartAmount.Text;
+            return CartAmount.Text;
         }
 
         public void OpenCart()
         {
-            _cartIcon.Click();
+            CartIcon.Click();
         }
     }
 }

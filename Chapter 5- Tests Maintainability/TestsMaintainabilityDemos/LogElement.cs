@@ -10,20 +10,14 @@ namespace TestsMaintainabilityDemos
         {
         }
 
-        public override By By
-        {
-            get
-            {
-                return element?.By;
-            }
-        }
+        public override By By => Element?.By;
 
         public override string Text
         {
             get
             {
-                Console.WriteLine($"Element Text = {element?.Text}");
-                return element?.Text;
+                Console.WriteLine($"Element Text = {Element?.Text}");
+                return Element?.Text;
             }
         }
 
@@ -31,8 +25,8 @@ namespace TestsMaintainabilityDemos
         {
             get
             {
-                Console.WriteLine($"Element Enabled = {element?.Enabled}");
-                return element?.Enabled;
+                Console.WriteLine($"Element Enabled = {Element?.Enabled}");
+                return Element?.Enabled;
             }
         }
 
@@ -40,39 +34,39 @@ namespace TestsMaintainabilityDemos
         {
             get
             {
-                Console.WriteLine($"Element Displayed = {element?.Displayed}");
-                return element?.Displayed;
+                Console.WriteLine($"Element Displayed = {Element?.Displayed}");
+                return Element?.Displayed;
             }
         }
 
         public override void Click()
         {
             Console.WriteLine($"Element Clicked");
-            element?.Click();
+            Element?.Click();
         }
 
         public override Element FindElement(By locator)
         {
-            Console.WriteLine($"Find element with locator = {locator.ToString()}");
-            return element?.FindElement(locator);
+            Console.WriteLine($"Find Element with locator = {locator.ToString()}");
+            return Element?.FindElement(locator);
         }
 
         public override string GetAttribute(string attributeName)
         {
             Console.WriteLine($"Get Element's Attribute = {attributeName}");
-            return element?.GetAttribute(attributeName);
+            return Element?.GetAttribute(attributeName);
         }
 
         public override void TypeText(string text)
         {
             Console.WriteLine($"Type Text = {text}");
-            element?.TypeText(text);
+            Element?.TypeText(text);
         }
 
         public override void WaitToExists(int timeoutInSeconds = 30)
         {
-            Console.WriteLine($"Wait for element with locator = {By}");
-            element?.WaitToExists(timeoutInSeconds);
+            Console.WriteLine($"Wait for Element with locator = {By}");
+            Element?.WaitToExists(timeoutInSeconds);
         }
     }
 }

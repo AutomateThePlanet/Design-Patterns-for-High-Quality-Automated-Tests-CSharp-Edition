@@ -6,7 +6,10 @@ namespace BenchmarkingDemos.Facades.Second
     {
         private readonly CheckoutPageElements _elements;
 
-        public CheckoutPageAssertions(CheckoutPageElements elements) => _elements = elements;
+        public CheckoutPageAssertions(CheckoutPageElements elements)
+        {
+            _elements = elements;
+        }
 
         public void AssertOrderReceived()
         {

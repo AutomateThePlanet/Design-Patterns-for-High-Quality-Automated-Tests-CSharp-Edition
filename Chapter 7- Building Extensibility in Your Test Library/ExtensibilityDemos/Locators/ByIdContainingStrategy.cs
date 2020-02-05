@@ -2,7 +2,7 @@
 
 namespace ExtensibilityDemos.Locators
 {
-    public class ByIdContainingStrategy : ByStrategy
+    public class ByIdContainingStrategy : FindStrategy
     {
         public ByIdContainingStrategy(string value)
             : base(value)

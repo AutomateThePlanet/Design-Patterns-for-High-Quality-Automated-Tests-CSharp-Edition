@@ -11,20 +11,14 @@ namespace ExtensibilityDemos
         {
         }
 
-        public override By By
-        {
-            get
-            {
-                return element?.By;
-            }
-        }
+        public override By By => Element?.By;
 
         public override string Text
         {
             get
             {
-                Console.WriteLine($"Element Text = {element?.Text}");
-                return element?.Text;
+                Console.WriteLine($"Element Text = {Element?.Text}");
+                return Element?.Text;
             }
         }
 
@@ -32,8 +26,8 @@ namespace ExtensibilityDemos
         {
             get
             {
-                Console.WriteLine($"Element Enabled = {element?.Enabled}");
-                return element?.Enabled;
+                Console.WriteLine($"Element Enabled = {Element?.Enabled}");
+                return Element?.Enabled;
             }
         }
 
@@ -41,54 +35,109 @@ namespace ExtensibilityDemos
         {
             get
             {
-                Console.WriteLine($"Element Displayed = {element?.Displayed}");
-                return element?.Displayed;
+                Console.WriteLine($"Element Displayed = {Element?.Displayed}");
+                return Element?.Displayed;
             }
         }
 
         public override void Click()
         {
             Console.WriteLine($"Element Clicked");
-            element?.Click();
+            Element?.Click();
         }
 
-        public override TElement Find<TByStrategy, TElement>(string value) => element?.Find<TByStrategy, TElement>(value);
-        public override List<TElement> FindAll<TByStrategy, TElement>(string value) => element?.FindAll<TByStrategy, TElement>(value);
-        public override List<Element> FindAllByClass(string cssClass) => element?.FindAllByClass(cssClass);
-        public override List<Element> FindAllByCss(string css) => element?.FindAllByCss(css);
-        public override List<Element> FindAllById(string id) => element?.FindAllById(id);
-        public override List<Element> FindAllByLinkText(string linkText) => element?.FindAllByLinkText(linkText);
-        public override List<Element> FindAllByTag(string tag) => element?.FindAllByTag(tag);
-        public override List<Element> FindAllByXPath(string xpath) => element?.FindAllByXPath(xpath);
-        public override Element FindByClass(string cssClass) => element?.FindByClass(cssClass);
-        public override Element FindByCss(string css) => element?.FindByCss(css);
-        public override Element FindById(string id) => element?.FindById(id);
-        public override Element FindByLinkText(string linkText) => element?.FindByLinkText(linkText);
-        public override Element FindByTag(string tag) => element?.FindByTag(tag);
-        public override Element FindByXPath(string xpath) => element?.FindByXPath(xpath);
+        public override TElement Find<TFindStrategy, TElement>(TFindStrategy findStrategy)
+        {
+            return Element?.Find<TFindStrategy, TElement>(findStrategy);
+        }
+
+        public override List<TElement> FindAll<TFindStrategy, TElement>(TFindStrategy findStrategy)
+        {
+            return Element?.FindAll<TFindStrategy, TElement>(findStrategy);
+        }
+
+        public override List<Element> FindAllByClass(string cssClass)
+        {
+            return Element?.FindAllByClass(cssClass);
+        }
+
+        public override List<Element> FindAllByCss(string css)
+        {
+            return Element?.FindAllByCss(css);
+        }
+
+        public override List<Element> FindAllById(string id)
+        {
+            return Element?.FindAllById(id);
+        }
+
+        public override List<Element> FindAllByLinkText(string linkText)
+        {
+            return Element?.FindAllByLinkText(linkText);
+        }
+
+        public override List<Element> FindAllByTag(string tag)
+        {
+            return Element?.FindAllByTag(tag);
+        }
+
+        public override List<Element> FindAllByXPath(string xpath)
+        {
+            return Element?.FindAllByXPath(xpath);
+        }
+
+        public override Element FindByClass(string cssClass)
+        {
+            return Element?.FindByClass(cssClass);
+        }
+
+        public override Element FindByCss(string css)
+        {
+            return Element?.FindByCss(css);
+        }
+
+        public override Element FindById(string id)
+        {
+            return Element?.FindById(id);
+        }
+
+        public override Element FindByLinkText(string linkText)
+        {
+            return Element?.FindByLinkText(linkText);
+        }
+
+        public override Element FindByTag(string tag)
+        {
+            return Element?.FindByTag(tag);
+        }
+
+        public override Element FindByXPath(string xpath)
+        {
+            return Element?.FindByXPath(xpath);
+        }
 
         ////public override Element FindElement(By locator)
         ////{
-        ////    Console.WriteLine($"Find element with locator = {locator.ToString()}");
-        ////    return element?.FindElement(locator);
+        ////    Console.WriteLine($"Find Element with locator = {locator.ToString()}");
+        ////    return Element?.FindElement(locator);
         ////}
 
         public override string GetAttribute(string attributeName)
         {
             Console.WriteLine($"Get Element's Attribute = {attributeName}");
-            return element?.GetAttribute(attributeName);
+            return Element?.GetAttribute(attributeName);
         }
 
         public override void TypeText(string text)
         {
             Console.WriteLine($"Type Text = {text}");
-            element?.TypeText(text);
+            Element?.TypeText(text);
         }
 
         public override void WaitToExists(int timeoutInSeconds = 30)
         {
-            Console.WriteLine($"Wait for element with locator = {By}");
-            element?.WaitToExists(timeoutInSeconds);
+            Console.WriteLine($"Wait for Element with locator = {By}");
+            Element?.WaitToExists(timeoutInSeconds);
         }
     }
 }

@@ -6,7 +6,10 @@ namespace BenchmarkingDemos.Facades.Second
     {
         private readonly Driver _driver;
 
-        public CheckoutPageElements(Driver driver) => _driver = driver;
+        public CheckoutPageElements(Driver driver)
+        {
+            _driver = driver;
+        }
 
         public Element BillingFirstName => _driver.FindElement(By.Id("billing_first_name"));
         public Element BillingLastName => _driver.FindElement(By.Id("billing_last_name"));

@@ -12,33 +12,29 @@ namespace ExtensibilityDemos.Locators
             _searchContext = searchContext;
         }
 
-        public IWebElement Find<TByStrategy>(TByStrategy by)
-            where TByStrategy : ByStrategy
+        public IWebElement Find<TFindStrategy>(TFindStrategy by)
+            where TFindStrategy : FindStrategy
         {
             var element = _searchContext.FindElement(by.Convert());
-
             return element;
         }
 
         public IWebElement Find(By by)
         {
             var element = _searchContext.FindElement(by);
-
             return element;
         }
 
         public IEnumerable<IWebElement> FindAll(By by)
         {
             IEnumerable<IWebElement> result = _searchContext.FindElements(by);
-
             return result;
         }
 
-        public IEnumerable<IWebElement> FindAll<TByStrategy>(TByStrategy by)
-            where TByStrategy : ByStrategy
+        public IEnumerable<IWebElement> FindAll<TFindStrategy>(TFindStrategy by)
+            where TFindStrategy : FindStrategy
         {
             IEnumerable<IWebElement> result = _searchContext.FindElements(@by.Convert());
-
             return result;
         }
     }

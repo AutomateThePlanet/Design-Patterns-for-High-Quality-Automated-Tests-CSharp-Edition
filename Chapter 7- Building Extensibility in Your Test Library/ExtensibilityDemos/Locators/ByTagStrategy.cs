@@ -2,7 +2,7 @@
 
 namespace ExtensibilityDemos.Locators
 {
-    public class ByTagStrategy : ByStrategy
+    public class ByTagStrategy : FindStrategy
     {
         public ByTagStrategy(string value)
             : base(value)

@@ -6,15 +6,15 @@ namespace BenchmarkingDemos
     [TestClass]
     public class BaseTest
     {
-        private static readonly ITestExecutionSubject _currentTestExecutionSubject;
+        private static readonly ITestExecutionSubject CurrentTestExecutionSubject;
         private static Driver _driver;
 
         static BaseTest()
         {
-            _currentTestExecutionSubject = new TestExecutionSubject();
-            InitializeTestExecutionBehaviorObservers(_currentTestExecutionSubject);
+            CurrentTestExecutionSubject = new TestExecutionSubject();
+            InitializeTestExecutionBehaviorObservers(CurrentTestExecutionSubject);
             var memberInfo = MethodBase.GetCurrentMethod();
-            _currentTestExecutionSubject.MemberInstantiated(memberInfo);
+            CurrentTestExecutionSubject.MemberInstantiated(memberInfo);
         }
 
         public BaseTest()
@@ -22,17 +22,11 @@ namespace BenchmarkingDemos
             Driver = _driver;
         }
 
-        public Driver Driver { get; set; }
+        public Driver Driver { get; }
 
         public static TestContext TestContext { get; set; }
 
-        public string TestName
-        {
-            get
-            {
-                return TestContext.TestName;
-            }
-        }
+        public string TestName => TestContext.TestName;
 
         [ClassInitialize]
         public static void OnClassInitialize(TestContext context)
@@ -48,18 +42,18 @@ namespace BenchmarkingDemos
         public void CoreTestInit()
         {
             var memberInfo = GetCurrentExecutionMethodInfo();
-            _currentTestExecutionSubject.PreInitialize(memberInfo);
+            CurrentTestExecutionSubject.PreInitialize(memberInfo);
             TestInit();
-            _currentTestExecutionSubject.PostInitialize(memberInfo);
+            CurrentTestExecutionSubject.PostInitialize(memberInfo);
         }
 
         [TestCleanup]
         public void CoreTestCleanup()
         {
             var memberInfo = GetCurrentExecutionMethodInfo();
-            _currentTestExecutionSubject.PreCleanup(memberInfo);
+            CurrentTestExecutionSubject.PreCleanup(memberInfo);
             TestCleanup();
-            _currentTestExecutionSubject.PostCleanup(memberInfo);
+            CurrentTestExecutionSubject.PostCleanup(memberInfo);
 
         }
 

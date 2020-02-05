@@ -13,7 +13,6 @@ namespace ExtensibilityDemos
         public abstract void WaitForAjax();
         public abstract void WaitForJavaScriptAnimations();
         public abstract void WaitUntilPageLoadsCompletely();
-
         public abstract Element FindById(string id);
         public abstract Element FindByXPath(string xpath);
         public abstract Element FindByTag(string tag);
@@ -26,11 +25,11 @@ namespace ExtensibilityDemos
         public abstract List<Element> FindAllByClass(string cssClass);
         public abstract List<Element> FindAllByCss(string css);
         public abstract List<Element> FindAllByLinkText(string linkText);
-        public abstract List<TElement> FindAll<TByStrategy, TElement>(string value)
-            where TByStrategy : ByStrategy
+        public abstract List<TElement> FindAll<TFindStrategy, TElement>(TFindStrategy findStrategy)
+            where TFindStrategy : FindStrategy
             where TElement : Element;
-        public abstract TElement Find<TByStrategy, TElement>(string value)
-            where TByStrategy : ByStrategy
+        public abstract TElement Find<TFindStrategy, TElement>(TFindStrategy findStrategy)
+            where TFindStrategy : FindStrategy
             where TElement : Element;
         public abstract void Wait<TWaitStrategy, TElement>(TElement element, TWaitStrategy waitStrategy)
             where TWaitStrategy : WaitStrategy

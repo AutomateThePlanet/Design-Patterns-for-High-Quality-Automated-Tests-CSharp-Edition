@@ -1,5 +1,4 @@
 ﻿using System;
-using ExtensibilityDemos.Locators;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
@@ -25,9 +24,11 @@ namespace ExtensibilityDemos
             {
                 var timeoutTimeSpan = TimeSpan.FromSeconds((int)timeout);
                 var sleepIntervalTimeSpan = TimeSpan.FromSeconds((int)sleepInterval);
-                var wait = new WebDriverWait(new SystemClock(), driver, timeoutTimeSpan, sleepIntervalTimeSpan);
-                wait.IgnoreExceptionTypes(typeof(NoSuchElementException), typeof(StaleElementReferenceException));
-                wait.Until(waitCondition);
+                var webDriverWait = new WebDriverWait(new SystemClock(), driver, timeoutTimeSpan, sleepIntervalTimeSpan);
+                webDriverWait.IgnoreExceptionTypes(typeof(WebDriverException));
+                webDriverWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+                webDriverWait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
+                webDriverWait.Until(waitCondition);
             }
         }
 
@@ -37,15 +38,17 @@ namespace ExtensibilityDemos
             {
                 var timeoutTimeSpan = TimeSpan.FromSeconds((int)timeout);
                 var sleepIntervalTimeSpan = TimeSpan.FromSeconds((int)sleepInterval);
-                var wait = new WebDriverWait(new SystemClock(), driver, timeoutTimeSpan, sleepIntervalTimeSpan);
-                wait.IgnoreExceptionTypes(typeof(NoSuchElementException), typeof(StaleElementReferenceException));
-                wait.Until(waitCondition);
+                var webDriverWait = new WebDriverWait(new SystemClock(), driver, timeoutTimeSpan, sleepIntervalTimeSpan);
+                webDriverWait.IgnoreExceptionTypes(typeof(WebDriverException));
+                webDriverWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+                webDriverWait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
+                webDriverWait.Until(waitCondition);
             }
         }
 
         protected IWebElement FindElement(ISearchContext searchContext, By by)
         {
-            var nativeElementFinder = new NativeElementFinderService(searchContext);
+            var nativeElementFinder = new ElementFinderService(searchContext);
             var element = nativeElementFinder.Find(by);
             return element;
         }

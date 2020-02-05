@@ -6,7 +6,10 @@ namespace BenchmarkingDemos.Facades.Second
     {
         private readonly Driver _driver;
 
-        public CartPageElements(Driver driver) => _driver = driver;
+        public CartPageElements(Driver driver)
+        {
+            _driver = driver;
+        }
 
         public Element CouponCodeTextField => _driver.FindElement(By.Id("coupon_code"));
         public Element ApplyCouponButton => _driver.FindElement(By.CssSelector("[value*='Apply coupon']"));

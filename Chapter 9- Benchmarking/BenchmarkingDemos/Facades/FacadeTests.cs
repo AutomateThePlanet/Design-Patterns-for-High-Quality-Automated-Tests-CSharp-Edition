@@ -31,7 +31,7 @@ namespace BenchmarkingDemos.Facades.Second
         [TestMethod]
         public void PurchaseFalcon9WithFacade()
         {
-            var purchaseInfo = new PurchaseInfo()
+            var purchaseInfo = new PurchaseInfo
                                {
                                    FirstName = "Anton",
                                    LastName = "Angelov",
@@ -50,7 +50,7 @@ namespace BenchmarkingDemos.Facades.Second
         [TestMethod]
         public void PurchaseSaturnVWithFacade()
         {
-            var purchaseInfo = new PurchaseInfo()
+            var purchaseInfo = new PurchaseInfo
                                {
                                    FirstName = "John",
                                    LastName = "Atanasov",

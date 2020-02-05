@@ -6,7 +6,10 @@ namespace BenchmarkingDemos.Facades.Second
     {
         private readonly CartPageElements _elements;
 
-        public CartPageAssertions(CartPageElements elements) => _elements = elements;
+        public CartPageAssertions(CartPageElements elements)
+        {
+            _elements = elements;
+        }
 
         public void AssertCouponAppliedSuccessfully()
         {

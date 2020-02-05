@@ -12,9 +12,9 @@
             CartInfoSection = new CartInfoSection(driver);
         }
 
-        public SearchSection SearchSection { get; set; }
-        public MainMenuSection MainMenuSection { get; set; }
-        public CartInfoSection CartInfoSection { get; set; }
+        public SearchSection SearchSection { get; }
+        public MainMenuSection MainMenuSection { get; }
+        public CartInfoSection CartInfoSection { get; }
 
         protected abstract string Url { get; }
 

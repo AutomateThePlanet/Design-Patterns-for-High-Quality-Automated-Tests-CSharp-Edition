@@ -72,7 +72,7 @@ namespace OptimizeTestsDemos.Black_Hole_Proxy_Pattern
         [TestMethod]
         public void FontRequestsNotMade_When_FontRequestSetToBeBlocked()
         {
-            _blockUrls.Add("fontawesome-webfont.woff");
+            _blockUrls.Add("http://myanalytics.com");
 
             _driver.Navigate().GoToUrl("https://automatetheplanet.com/");
         }

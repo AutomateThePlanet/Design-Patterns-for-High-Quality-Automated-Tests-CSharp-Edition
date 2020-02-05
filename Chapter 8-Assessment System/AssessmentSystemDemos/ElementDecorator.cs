@@ -4,18 +4,18 @@ namespace AssessmentSystemDemos
 {
     public abstract class ElementDecorator : Element
     {
-        protected Element element;
+        protected Element Element;
 
-        public ElementDecorator(Element element)
+        protected ElementDecorator(Element element)
         {
-            this.element = element;
+            this.Element = element;
         }
 
         public override By By
         {
             get
             {
-                return element?.By;
+                return Element?.By;
             }
         }
 
@@ -23,7 +23,7 @@ namespace AssessmentSystemDemos
         {
             get
             {
-                return element?.Text;
+                return Element?.Text;
             }
         }
 
@@ -31,7 +31,7 @@ namespace AssessmentSystemDemos
         {
             get
             {
-                return element?.Enabled;
+                return Element?.Enabled;
             }
         }
 
@@ -39,23 +39,23 @@ namespace AssessmentSystemDemos
         {
             get
             {
-                return element?.Displayed;
+                return Element?.Displayed;
             }
         }
 
         public override void Click()
         {
-            element?.Click();
+            Element?.Click();
         }
 
         public override string GetAttribute(string attributeName)
         {
-            return element?.GetAttribute(attributeName);
+            return Element?.GetAttribute(attributeName);
         }
 
         public override void TypeText(string text)
         {
-            element?.TypeText(text);
+            Element?.TypeText(text);
         }
     }
 }

@@ -6,14 +6,14 @@ namespace BenchmarkingDemos.BenchmarkCore
 {
     public class BaseBenchmark
     {
-        private static readonly ITestExecutionSubject _currentTestExecutionSubject;
+        private static readonly ITestExecutionSubject CurrentTestExecutionSubject;
 
         static BaseBenchmark()
         {
-            _currentTestExecutionSubject = new TestExecutionSubject();
-            InitializeTestExecutionBehaviorObservers(_currentTestExecutionSubject);
+            CurrentTestExecutionSubject = new TestExecutionSubject();
+            InitializeTestExecutionBehaviorObservers(CurrentTestExecutionSubject);
             var memberInfo = MethodBase.GetCurrentMethod();
-            _currentTestExecutionSubject.MemberInstantiated(memberInfo);
+            CurrentTestExecutionSubject.MemberInstantiated(memberInfo);
         }
 
         protected static Driver Driver { get; set; }
@@ -21,17 +21,17 @@ namespace BenchmarkingDemos.BenchmarkCore
         public void BenchmarkInitialize(Action benchmarkInitializeAction = null)
         {
             var benchmarkMethodMemberInfo = GetCurrentExecutionMethodInfo();
-            _currentTestExecutionSubject.PreInitialize(benchmarkMethodMemberInfo);
+            CurrentTestExecutionSubject.PreInitialize(benchmarkMethodMemberInfo);
             benchmarkInitializeAction?.Invoke();
-            _currentTestExecutionSubject.PostInitialize(benchmarkMethodMemberInfo);
+            CurrentTestExecutionSubject.PostInitialize(benchmarkMethodMemberInfo);
         }
 
         public void BenchmarkCleanup(Action benchmarkCleanupAction = null)
         {
             var benchmarkMethodMemberInfo = GetCurrentExecutionMethodInfo();
-            _currentTestExecutionSubject.PreCleanup(benchmarkMethodMemberInfo);
+            CurrentTestExecutionSubject.PreCleanup(benchmarkMethodMemberInfo);
             benchmarkCleanupAction?.Invoke();
-            _currentTestExecutionSubject.PostCleanup(benchmarkMethodMemberInfo);
+            CurrentTestExecutionSubject.PostCleanup(benchmarkMethodMemberInfo);
         }
 
         private static void InitializeTestExecutionBehaviorObservers(ITestExecutionSubject currentTestExecutionSubject)

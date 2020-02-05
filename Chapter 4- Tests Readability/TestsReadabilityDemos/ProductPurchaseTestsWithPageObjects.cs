@@ -9,7 +9,6 @@ namespace TestsReadabilityDemos
     public class ProductPurchaseTestsWithPageObjects
     {
         private static Driver _driver;
-        private static string _purchaseEmail;
         private static string _purchaseOrderNumber;
         private static MainPage _mainPage;
         private static CartPage _cartPage;
@@ -33,7 +32,6 @@ namespace TestsReadabilityDemos
         public void CompletePurchaseSuccessfully_WhenNewClient()
         {
             _mainPage.AddRocketToShoppingCart();
-
             _cartPage.ApplyCoupon("happybirthday");
 
             Assert.AreEqual("Coupon code applied successfully.", _cartPage.GetMessageNotification());
@@ -42,7 +40,7 @@ namespace TestsReadabilityDemos
 
             Assert.AreEqual("114.00€", _cartPage.GetTotal());
 
-            _cartPage.ProceedToCheckout();
+            _cartPage.ClickProceedToCheckout();
 
             var receivedMessage = _driver.FindElement(By.XPath("//h1"));
             Assert.AreEqual("Order received", receivedMessage.Text);
@@ -54,18 +52,15 @@ namespace TestsReadabilityDemos
             AddRocketToShoppingCart();
             ApplyCoupon();
             IncreaseProductQuantity();
-
             var proceedToCheckout = _driver.FindElement(By.CssSelector("[class*='checkout-button button alt wc-forward']"));
             proceedToCheckout.Click();
-
             var loginHereLink = _driver.FindElement(By.LinkText("Click here to login"));
             loginHereLink.Click();
             Login("info@berlinspaceflowers.com");
-
             var placeOrderButton = _driver.FindElement(By.Id("place_order"));
             placeOrderButton.Click();
-
             Thread.Sleep(4000);
+
             var receivedMessage = _driver.FindElement(By.XPath("//h1"));
             Assert.AreEqual("Order received", receivedMessage.Text);
 
@@ -87,7 +82,6 @@ namespace TestsReadabilityDemos
         {
             var quantityBox = _driver.FindElement(By.CssSelector("[class*='input-text qty text']"));
             quantityBox.TypeText("2");
-
             Thread.Sleep(2000);
             var updateCart = _driver.FindElement(By.CssSelector("[value*='Update cart']"));
             updateCart.Click();
@@ -101,11 +95,10 @@ namespace TestsReadabilityDemos
         {
             var couponCodeTextField = _driver.FindElement(By.Id("coupon_code"));
             couponCodeTextField.TypeText("happybirthday");
-
             var applyCouponButton = _driver.FindElement(By.CssSelector("[value*='Apply coupon']"));
             applyCouponButton.Click();
-
             Thread.Sleep(2000);
+
             var messageAlert = _driver.FindElement(By.CssSelector("[class*='woocommerce-message']"));
             Assert.AreEqual("Coupon code applied successfully.", messageAlert.Text);
         }
@@ -113,7 +106,6 @@ namespace TestsReadabilityDemos
         private void AddRocketToShoppingCart()
         {
             _driver.GoToUrl("http://demos.bellatrix.solutions/");
-
             var addToCartFalcon9 = _driver.FindElement(By.CssSelector("[data-product_id*='28']"));
             addToCartFalcon9.Click();
             var viewCartButton = _driver.FindElement(By.CssSelector("[class*='added_to_cart wc-forward']"));

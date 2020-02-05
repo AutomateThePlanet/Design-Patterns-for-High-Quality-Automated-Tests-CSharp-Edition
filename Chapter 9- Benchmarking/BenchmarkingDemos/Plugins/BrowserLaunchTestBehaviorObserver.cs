@@ -78,21 +78,13 @@ namespace BenchmarkingDemos
         private BrowserConfiguration GetExecutionBrowserMethodLevel(MemberInfo memberInfo)
         {
             var executionBrowserAttribute = memberInfo.GetCustomAttribute<ExecutionBrowserAttribute>(true);
-            if (executionBrowserAttribute != null)
-            {
-                return executionBrowserAttribute.BrowserConfiguration;
-            }
-            return null;
+            return executionBrowserAttribute?.BrowserConfiguration;
         }
 
         private BrowserConfiguration GetExecutionBrowserClassLevel(Type type)
         {
             var executionBrowserAttribute = type.GetCustomAttribute<ExecutionBrowserAttribute>(true);
-            if (executionBrowserAttribute != null)
-            {
-                return executionBrowserAttribute.BrowserConfiguration;
-            }
-            return null;
+            return executionBrowserAttribute?.BrowserConfiguration;
         }
     }
 }

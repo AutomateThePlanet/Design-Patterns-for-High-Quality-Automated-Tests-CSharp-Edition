@@ -7,12 +7,12 @@ namespace ExtensibilityDemos
     {
         public override void OnElementClicked(object sender, WebElementEventArgs e)
         {
-            Console.WriteLine(e.Element);
+            Console.WriteLine($"Click on element with tag= {e.Element.TagName}");
         }
 
         public override void OnExceptionThrown(object sender, WebDriverExceptionEventArgs e)
         {
-            Console.WriteLine(e.ThrownException);
+            Console.WriteLine($"Exception thrown= {e.ThrownException}");
         }
     }
 }

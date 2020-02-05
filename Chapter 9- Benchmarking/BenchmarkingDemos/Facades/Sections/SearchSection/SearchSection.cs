@@ -5,16 +5,16 @@ namespace BenchmarkingDemos.Facades.Second
     public class SearchSection
     {
         private readonly Driver _driver;
-        private Element _searchField => _driver.FindElement(By.Id("woocommerce-product-search-field-0"));
         
         public SearchSection(Driver driver)
         {
             _driver = driver;
         }
+        private Element SearchField => _driver.FindElement(By.Id("woocommerce-product-search-field-0"));
 
         public void SearchForItem(string searchText)
         {
-            _searchField.TypeText(searchText);
+            SearchField.TypeText(searchText);
         }
     }
 }

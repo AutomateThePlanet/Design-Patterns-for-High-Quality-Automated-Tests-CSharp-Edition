@@ -19,7 +19,7 @@ namespace ExtensibilityDemos
         private IWebDriver _webDriver;
         private EventFiringWebDriver _eventFiringWebDriver;
         private WebDriverWait _webDriverWait;
-        private NativeElementFinderService _nativeElementFinderService;
+        private ElementFinderService _elementFinderService;
 
         public WebDriver()
         {
@@ -59,10 +59,11 @@ namespace ExtensibilityDemos
             }
 
             _webDriverWait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(30));
-            _webDriverWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
             _webDriverWait.IgnoreExceptionTypes(typeof(WebDriverException));
+            _webDriverWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+            _webDriverWait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
 
-            _nativeElementFinderService = new NativeElementFinderService(_webDriver);
+            _elementFinderService = new ElementFinderService(_webDriver);
 
             // 1st version with private methods
             ////_eventFiringWebDriver = new EventFiringWebDriver(_webDriver);
@@ -86,10 +87,10 @@ namespace ExtensibilityDemos
         ////public override Element FindElement(By locator)
         ////{
         ////    IWebElement nativeWebElement = _webDriverWait.Until(drv => drv.FindElement(locator));
-        ////    Element element = new WebElement(_webDriver, nativeWebElement, locator);
+        ////    Element Element = new WebElement(_webDriver, nativeWebElement, locator);
 
         ////    // If we use log decorator.
-        ////    LogElement logElement = new LogElement(element);
+        ////    LogElement logElement = new LogElement(Element);
 
         ////    return logElement;
         ////}
@@ -100,8 +101,8 @@ namespace ExtensibilityDemos
         ////    List<Element> elements = new List<Element>();
         ////    foreach (var nativeWebElement in nativeWebElements)
         ////    {
-        ////        Element element = new WebElement(_webDriver, nativeWebElement, locator);
-        ////        elements.Add(element);
+        ////        Element Element = new WebElement(_webDriver, nativeWebElement, locator);
+        ////        elements.Add(Element);
         ////    }
 
         ////    return elements;
@@ -109,62 +110,62 @@ namespace ExtensibilityDemos
 
         public override List<Element> FindAllByClass(string cssClass)
         {
-            return FindAll<ByClassStrategy, Element>(cssClass);
+            return FindAll<ByClassStrategy, Element>(new ByClassStrategy(cssClass));
         }
 
         public override List<Element> FindAllById(string id)
         {
-            return FindAll<ByIdStrategy, Element>(id);
+            return FindAll<ByIdStrategy, Element>(new ByIdStrategy(id));
         }
 
         public override List<Element> FindAllByTag(string tag)
         {
-            return FindAll<ByTagStrategy, Element>(tag);
+            return FindAll<ByTagStrategy, Element>(new ByTagStrategy(tag));
         }
 
         public override List<Element> FindAllByXPath(string xpath)
         {
-            return FindAll<ByXPathStrategy, Element>(xpath);
+            return FindAll<ByXPathStrategy, Element>(new ByXPathStrategy(xpath));
         }
 
         public override List<Element> FindAllByCss(string css)
         {
-            return FindAll<ByCssStrategy, Element>(css);
+            return FindAll<ByCssStrategy, Element>(new ByCssStrategy(css));
         }
 
         public override List<Element> FindAllByLinkText(string linkText)
         {
-            return FindAll<ByLinkTextStrategy, Element>(linkText);
+            return FindAll<ByLinkTextStrategy, Element>(new ByLinkTextStrategy(linkText));
         }
 
         public override Element FindByCss(string css)
         {
-            return Find<ByCssStrategy, Element>(css);
+            return Find<ByCssStrategy, Element>(new ByCssStrategy(css));
         }
 
         public override Element FindByLinkText(string linkText)
         {
-            return Find<ByCssStrategy, Element>(linkText);
+            return Find<ByLinkTextStrategy, Element>(new ByLinkTextStrategy(linkText));
         }
 
         public override Element FindByClass(string cssClass)
         {
-            return Find<ByClassStrategy, Element>(cssClass);
+            return Find<ByClassStrategy, Element>(new ByClassStrategy(cssClass));
         }
 
         public override Element FindById(string id)
         {
-            return Find<ByIdStrategy, Element>(id);
+            return Find<ByIdStrategy, Element>(new ByIdStrategy(id));
         }
 
         public override Element FindByTag(string tag)
         {
-            return Find<ByTagStrategy, Element>(tag);
+            return Find<ByTagStrategy, Element>(new ByTagStrategy(tag));
         }
 
         public override Element FindByXPath(string xpath)
         {
-            return Find<ByXPathStrategy, Element>(xpath);
+            return Find<ByXPathStrategy, Element>(new ByXPathStrategy(xpath));
         }
 
         public override void WaitForAjax()
@@ -185,23 +186,21 @@ namespace ExtensibilityDemos
             _webDriverWait.Until(wd => js.ExecuteScript("return document.readyState").ToString() == "complete");
         }
 
-        public override List<TElement> FindAll<TByStrategy, TElement>(string value)
+        public override List<TElement> FindAll<TFindStrategy, TElement>(TFindStrategy findStrategy)
         {
-            var byStrategy = (TByStrategy)Activator.CreateInstance(typeof(TByStrategy), value);
-            var nativeElements = _nativeElementFinderService.FindAll(byStrategy);
+            var nativeElements = _elementFinderService.FindAll(findStrategy);
             var resultElements = new List<TElement>();
             foreach (var nativeElement in nativeElements)
             {
-                resultElements.Add(new WebElement(_webDriver, nativeElement, byStrategy.Convert()) as TElement);
+                resultElements.Add(new WebElement(_webDriver, nativeElement, findStrategy.Convert()) as TElement);
             }
             return resultElements;
         }
 
-        public override TElement Find<TByStrategy, TElement>(string value)
+        public override TElement Find<TFindStrategy, TElement>(TFindStrategy strategy)
         {
-            var byStrategy = (TByStrategy)Activator.CreateInstance(typeof(TByStrategy), value);
-            var nativeElement = _nativeElementFinderService.Find(byStrategy);
-            return new WebElement(_webDriver, nativeElement, byStrategy.Convert()) as TElement;
+            var nativeElement = _elementFinderService.Find(strategy);
+            return new WebElement(_webDriver, nativeElement, strategy.Convert()) as TElement;
         }
 
         public override void Wait<TWaitStrategy, TElement>(TElement element, TWaitStrategy waitStrategy)

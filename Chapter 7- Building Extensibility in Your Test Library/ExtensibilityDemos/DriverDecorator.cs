@@ -3,71 +3,130 @@ using System.Collections.Generic;
 
 namespace ExtensibilityDemos
 {
-    public class DriverDecorator : Driver
+    public abstract class DriverDecorator : Driver
     {
-        protected Driver driver;
+        protected Driver Driver;
 
-        public DriverDecorator(Driver driver)
+        protected DriverDecorator(Driver driver)
         {
-            this.driver = driver;
+            Driver = driver;
         }
 
-        public override Uri Url => driver?.Url;
+        public override Uri Url => Driver?.Url;
 
         public override void Start(Browser browser)
         {
-            driver?.Start(browser);
+            Driver?.Start(browser);
         }
 
         public override void Quit()
         {
-            driver?.Quit();
+            Driver?.Quit();
         }
 
         public override void GoToUrl(string url)
         {
-            driver?.GoToUrl(url);
+            Driver?.GoToUrl(url);
         }
 
         ////public override Element FindElement(By locator)
         ////{
-        ////    return driver?.FindElement(locator);
+        ////    return Driver?.FindElement(locator);
         ////}
 
         ////public override List<Element> FindElements(By locator)
         ////{
-        ////    return driver?.FindElements(locator);
+        ////    return Driver?.FindElements(locator);
         ////}
 
         public override void WaitForAjax()
         {
-            driver?.WaitForAjax();
+            Driver?.WaitForAjax();
         }
 
         public override void WaitForJavaScriptAnimations()
         {
-            driver?.WaitForJavaScriptAnimations();
+            Driver?.WaitForJavaScriptAnimations();
         }
 
         public override void WaitUntilPageLoadsCompletely()
         {
-            driver?.WaitUntilPageLoadsCompletely();
+            Driver?.WaitUntilPageLoadsCompletely();
         }
 
-        public override Element FindById(string id) => driver?.FindById(id);
-        public override Element FindByXPath(string xpath) => driver?.FindByXPath(xpath);
-        public override Element FindByTag(string tag) => driver?.FindByTag(tag);
-        public override Element FindByClass(string cssClass) => driver?.FindByClass(cssClass);
-        public override Element FindByCss(string css) => driver?.FindByCss(css);
-        public override Element FindByLinkText(string linkText) => driver?.FindByLinkText(linkText);
-        public override List<Element> FindAllById(string id) => driver?.FindAllById(id);
-        public override List<Element> FindAllByXPath(string xpath) => driver?.FindAllByXPath(xpath);
-        public override List<Element> FindAllByTag(string tag) => driver?.FindAllByTag(tag);
-        public override List<Element> FindAllByClass(string cssClass) => driver?.FindAllByClass(cssClass);
-        public override List<Element> FindAllByCss(string css) => driver?.FindAllByCss(css);
-        public override List<Element> FindAllByLinkText(string linkText) => driver?.FindAllByLinkText(linkText);
-        public override List<TElement> FindAll<TByStrategy, TElement>(string value) => driver?.FindAll<TByStrategy, TElement>(value);
-        public override TElement Find<TByStrategy, TElement>(string value) => driver?.Find<TByStrategy, TElement>(value);
-        public override void Wait<TWaitStrategy, TElement>(TElement element, TWaitStrategy waitStrategy) => driver?.Wait(element, waitStrategy);
+        public override Element FindById(string id)
+        {
+            return Driver?.FindById(id);
+        }
+
+        public override Element FindByXPath(string xpath)
+        {
+            return Driver?.FindByXPath(xpath);
+        }
+
+        public override Element FindByTag(string tag)
+        {
+            return Driver?.FindByTag(tag);
+        }
+
+        public override Element FindByClass(string cssClass)
+        {
+            return Driver?.FindByClass(cssClass);
+        }
+
+        public override Element FindByCss(string css)
+        {
+            return Driver?.FindByCss(css);
+        }
+
+        public override Element FindByLinkText(string linkText)
+        {
+            return Driver?.FindByLinkText(linkText);
+        }
+
+        public override List<Element> FindAllById(string id)
+        {
+            return Driver?.FindAllById(id);
+        }
+
+        public override List<Element> FindAllByXPath(string xpath)
+        {
+            return Driver?.FindAllByXPath(xpath);
+        }
+
+        public override List<Element> FindAllByTag(string tag)
+        {
+            return Driver?.FindAllByTag(tag);
+        }
+
+        public override List<Element> FindAllByClass(string cssClass)
+        {
+            return Driver?.FindAllByClass(cssClass);
+        }
+
+        public override List<Element> FindAllByCss(string css)
+        {
+            return Driver?.FindAllByCss(css);
+        }
+
+        public override List<Element> FindAllByLinkText(string linkText)
+        {
+            return Driver?.FindAllByLinkText(linkText);
+        }
+
+        public override List<TElement> FindAll<TFindStrategy, TElement>(TFindStrategy findStrategy)
+        {
+            return Driver?.FindAll<TFindStrategy, TElement>(findStrategy);
+        }
+
+        public override TElement Find<TFindStrategy, TElement>(TFindStrategy findStrategy)
+        {
+            return Driver?.Find<TFindStrategy, TElement>(findStrategy);
+        }
+
+        public override void Wait<TWaitStrategy, TElement>(TElement element, TWaitStrategy waitStrategy)
+        {
+            Driver?.Wait(element, waitStrategy);
+        }
     }
 }

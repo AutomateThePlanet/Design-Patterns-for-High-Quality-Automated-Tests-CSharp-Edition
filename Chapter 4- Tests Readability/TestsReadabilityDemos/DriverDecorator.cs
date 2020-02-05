@@ -5,36 +5,36 @@ namespace TestsReadabilityDemos
 {
     public class DriverDecorator : Driver
     {
-        protected Driver driver;
+        protected Driver Driver;
 
-        public DriverDecorator(Driver driver)
+        protected DriverDecorator(Driver driver)
         {
-            this.driver = driver;
+            Driver = driver;
         }
 
         public override void Start(Browser browser)
         {
-            driver?.Start(browser);
+            Driver?.Start(browser);
         }
 
         public override void Quit()
         {
-            driver?.Quit();
+            Driver?.Quit();
         }
 
         public override void GoToUrl(string url)
         {
-            driver?.GoToUrl(url);
+            Driver?.GoToUrl(url);
         }
 
         public override Element FindElement(By locator)
         {
-            return driver?.FindElement(locator);
+            return Driver?.FindElement(locator);
         }
 
         public override List<Element> FindElements(By locator)
         {
-            return driver?.FindElements(locator);
+            return Driver?.FindElements(locator);
         }
     }
 }

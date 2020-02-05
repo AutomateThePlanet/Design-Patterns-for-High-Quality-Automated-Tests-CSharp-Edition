@@ -5,16 +5,16 @@ namespace BenchmarkingDemos.Facades.Second
     public class BreadcrumbSection
     {
         private readonly Driver _driver;
-        private Element _breadcrumb => _driver.FindElement(By.ClassName("woocommerce-breadcrumb"));
         
         public BreadcrumbSection(Driver driver)
         {
             _driver = driver;
         }
-     
+        private Element Breadcrumb => _driver.FindElement(By.ClassName("woocommerce-breadcrumb"));
+
         public void OpenBreadcrumbItem(string itemToOpen)
         {
-            _breadcrumb.FindElement(By.LinkText(itemToOpen)).Click();
+            Breadcrumb.FindElement(By.LinkText(itemToOpen)).Click();
         }        
     }
 }
