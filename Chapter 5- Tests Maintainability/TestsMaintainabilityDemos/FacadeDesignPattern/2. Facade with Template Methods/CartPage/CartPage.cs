@@ -6,8 +6,8 @@
             : base(driver)
         {
             BreadcrumbSection = new BreadcrumbSection(Driver);
-            CartPageElements = new CartPageElements(driver);
-            CartPageAssertions = new CartPageAssertions(CartPageElements);
+            Elements = new CartPageElements(driver);
+            Assertions = new CartPageAssertions(Elements);
         }
 
         public BreadcrumbSection BreadcrumbSection { get; }
@@ -16,15 +16,15 @@
 
         public void ApplyCoupon(string coupon)
         {
-            CartPageElements.CouponCodeTextField.TypeText(coupon);
-            CartPageElements.ApplyCouponButton.Click();
+            Elements.CouponCodeTextField.TypeText(coupon);
+            Elements.ApplyCouponButton.Click();
             Driver.WaitForAjax();
         }
 
         public void IncreaseProductQuantity(int newQuantity)
         {
-            CartPageElements.QuantityBox.TypeText(newQuantity.ToString());
-            CartPageElements.UpdateCart.Click();
+            Elements.QuantityBox.TypeText(newQuantity.ToString());
+            Elements.UpdateCart.Click();
             Driver.WaitForAjax();
         }
     }

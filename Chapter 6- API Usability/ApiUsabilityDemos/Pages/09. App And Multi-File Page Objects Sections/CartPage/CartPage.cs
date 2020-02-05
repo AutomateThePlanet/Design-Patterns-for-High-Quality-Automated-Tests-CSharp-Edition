@@ -45,7 +45,7 @@
             return Elements.MessageAlert.Text;
         }
 
-        protected override void WaitForElementToDisplay()
+        protected override void WaitForPageLoad()
         {
             Elements.CouponCodeTextField.WaitToExists();
         }

@@ -23,7 +23,7 @@
             _cartPage.Assertions.AssertTotalPrice(expectedPrice);
             _cartPage.Elements.ProceedToCheckout.Click();
             _checkoutPage.FillBillingInfo(purchaseInfo);
-            _checkoutPage.CheckoutPageAssertions.AssertOrderReceived();
+            _checkoutPage.Assertions.AssertOrderReceived();
         }
     }
 }

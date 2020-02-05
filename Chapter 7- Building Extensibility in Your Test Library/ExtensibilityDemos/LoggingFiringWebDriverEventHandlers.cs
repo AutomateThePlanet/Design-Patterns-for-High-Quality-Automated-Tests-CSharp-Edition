@@ -7,7 +7,7 @@ namespace ExtensibilityDemos
     {
         public override void OnElementClicked(object sender, WebElementEventArgs e)
         {
-            Console.WriteLine($"Click on element with tag= {e.Element.TagName}");
+            Console.WriteLine($"Clicking on element with tag name: {e.Element.TagName}");
         }
 
         public override void OnExceptionThrown(object sender, WebDriverExceptionEventArgs e)

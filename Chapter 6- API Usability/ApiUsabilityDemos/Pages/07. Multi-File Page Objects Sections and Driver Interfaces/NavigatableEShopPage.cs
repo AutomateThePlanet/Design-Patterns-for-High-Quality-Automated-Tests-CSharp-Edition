@@ -1,31 +1,23 @@
 ﻿namespace ApiUsabilityDemos.Seventh
 {
-    public abstract class NavigatableEShopPage
+    public abstract class NavigatableEShopPage : EShopPage
     {
-        protected readonly INavigationService NavigationService;
-        protected readonly IElementFindService FindService;
+        protected readonly INavigationService _navigationService;
 
         protected NavigatableEShopPage(IElementFindService findService, INavigationService navigationService)
+             : base(findService)
         {
-            NavigationService = navigationService;
-            FindService = findService;
-            SearchSection = new SearchSection(findService);
-            MainMenuSection = new MainMenuSection(findService);
-            CartInfoSection = new CartInfoSection(findService);
+            _navigationService = navigationService;
         }
-
-        public SearchSection SearchSection { get; }
-        public MainMenuSection MainMenuSection { get; }
-        public CartInfoSection CartInfoSection { get; }
 
         protected abstract string Url { get; }
 
         public void Open()
         {
-            NavigationService.GoToUrl(Url);
-            WaitForElementToDisplay();
+            _navigationService.GoToUrl(Url);
+            WaitForPageLoad();
         }
 
-        protected abstract void WaitForElementToDisplay();
+        protected abstract void WaitForPageLoad();
     }
 }

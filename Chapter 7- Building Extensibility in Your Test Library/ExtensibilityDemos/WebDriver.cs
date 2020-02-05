@@ -197,10 +197,10 @@ namespace ExtensibilityDemos
             return resultElements;
         }
 
-        public override TElement Find<TFindStrategy, TElement>(TFindStrategy strategy)
+        public override TElement Find<TFindStrategy, TElement>(TFindStrategy findStrategy)
         {
-            var nativeElement = _elementFinderService.Find(strategy);
-            return new WebElement(_webDriver, nativeElement, strategy.Convert()) as TElement;
+            var nativeElement = _elementFinderService.Find(findStrategy);
+            return new WebElement(_webDriver, nativeElement, findStrategy.Convert()) as TElement;
         }
 
         public override void Wait<TWaitStrategy, TElement>(TElement element, TWaitStrategy waitStrategy)

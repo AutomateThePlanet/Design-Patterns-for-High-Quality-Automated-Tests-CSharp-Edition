@@ -26,7 +26,7 @@
 
         protected override void AssertCouponAppliedSuccessfully()
         {
-            _cartPage.CartPageAssertions.AssertCouponAppliedSuccessfully();
+            _cartPage.Assertions.AssertCouponAppliedSuccessfully();
         }
 
         protected override void AssertOrderReceived()
@@ -36,7 +36,7 @@
 
         protected override void AssertTotalPrice(string expectedPrice)
         {
-            _cartPage.CartPageAssertions.AssertTotalPrice(expectedPrice);
+            _cartPage.Assertions.AssertTotalPrice(expectedPrice);
         }
 
         protected override void FillBillingInfo(PurchaseInfo purchaseInfo)
@@ -51,7 +51,7 @@
 
         protected override void ProceedToCheckout()
         {
-            _cartPage.CartPageElements.ProceedToCheckout.Click();
+            _cartPage.Elements.ProceedToCheckout.Click();
         }
     }
 }

@@ -5,8 +5,8 @@
         public CheckoutPage(Driver driver) 
             : base(driver)
         {
-            CheckoutPageElements = new CheckoutPageElements(driver);
-            CheckoutPageAssertions = new CheckoutPageAssertions(CheckoutPageElements);
+            Elements = new CheckoutPageElements(driver);
+            Assertions = new CheckoutPageAssertions(Elements);
         }
 
         public CheckoutPageElements CheckoutPageElements { get; }
@@ -14,29 +14,29 @@
 
         public void FillBillingInfo(PurchaseInfo purchaseInfo)
         {
-            CheckoutPageElements.BillingFirstName.TypeText(purchaseInfo.FirstName);
-            CheckoutPageElements.BillingLastName.TypeText(purchaseInfo.LastName);
-            CheckoutPageElements.BillingCompany.TypeText(purchaseInfo.Company);
-            CheckoutPageElements.BillingCountryWrapper.Click();
-            CheckoutPageElements.BillingCountryFilter.TypeText(purchaseInfo.Country);
-            CheckoutPageElements.GetCountryOptionByName(purchaseInfo.Country).Click();
-            CheckoutPageElements.BillingAddress1.TypeText(purchaseInfo.Address1);
-            CheckoutPageElements.BillingAddress2.TypeText(purchaseInfo.Address2);
-            CheckoutPageElements.BillingCity.TypeText(purchaseInfo.City);
-            CheckoutPageElements.BillingZip.TypeText(purchaseInfo.Zip);
-            CheckoutPageElements.BillingPhone.TypeText(purchaseInfo.Phone);
-            CheckoutPageElements.BillingEmail.TypeText(purchaseInfo.Email);
+            Elements.BillingFirstName.TypeText(purchaseInfo.FirstName);
+            Elements.BillingLastName.TypeText(purchaseInfo.LastName);
+            Elements.BillingCompany.TypeText(purchaseInfo.Company);
+            Elements.BillingCountryWrapper.Click();
+            Elements.BillingCountryFilter.TypeText(purchaseInfo.Country);
+            Elements.GetCountryOptionByName(purchaseInfo.Country).Click();
+            Elements.BillingAddress1.TypeText(purchaseInfo.Address1);
+            Elements.BillingAddress2.TypeText(purchaseInfo.Address2);
+            Elements.BillingCity.TypeText(purchaseInfo.City);
+            Elements.BillingZip.TypeText(purchaseInfo.Zip);
+            Elements.BillingPhone.TypeText(purchaseInfo.Phone);
+            Elements.BillingEmail.TypeText(purchaseInfo.Email);
             if (purchaseInfo.ShouldCreateAccount)
             {
-                CheckoutPageElements.CreateAccountCheckBox.Click();
+                Elements.CreateAccountCheckBox.Click();
             }
 
             if (purchaseInfo.ShouldCheckPayment)
             {
-                CheckoutPageElements.CheckPaymentsRadioButton.Click();
+                Elements.CheckPaymentsRadioButton.Click();
             }
 
-            CheckoutPageElements.PlaceOrderButton.Click();
+            Elements.PlaceOrderButton.Click();
             Driver.WaitForAjax();
         }
     }

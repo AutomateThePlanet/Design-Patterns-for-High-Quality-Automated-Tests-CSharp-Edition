@@ -51,7 +51,7 @@ namespace AssessmentSystemDemos.Tenth
             return this;
         }
 
-        protected override void WaitForElementToDisplay()
+        protected override void WaitForPageLoad()
         {
             _elements.CouponCodeTextField.WaitToExists();
         }

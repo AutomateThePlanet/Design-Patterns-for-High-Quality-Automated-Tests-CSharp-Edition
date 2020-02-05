@@ -9,7 +9,7 @@
         {
             _browserService = browserService;
             BreadcrumbSection = new BreadcrumbSection(elementFindService);
-            CartPageElements = new CartPageElements(elementFindService);
+            Elements = new CartPageElements(elementFindService);
         }
 
         public BreadcrumbSection BreadcrumbSection { get; }
@@ -19,36 +19,36 @@
 
         public void ApplyCoupon(string coupon)
         {
-            CartPageElements.CouponCodeTextField.TypeText(coupon);
-            CartPageElements.ApplyCouponButton.Click();
+            Elements.CouponCodeTextField.TypeText(coupon);
+            Elements.ApplyCouponButton.Click();
             _browserService.WaitForAjax();
         }
 
         public void IncreaseProductQuantity(int newQuantity)
         {
-            CartPageElements.QuantityBox.TypeText(newQuantity.ToString());
-            CartPageElements.UpdateCart.Click();
+            Elements.QuantityBox.TypeText(newQuantity.ToString());
+            Elements.UpdateCart.Click();
             _browserService.WaitForAjax();
         }
 
         public void ProceedToCheckout()
         {
-            CartPageElements.ProceedToCheckout.Click();
+            Elements.ProceedToCheckout.Click();
         }
 
         public string GetTotal()
         {
-            return CartPageElements.TotalSpan.Text;
+            return Elements.TotalSpan.Text;
         }
 
         public string GetMessageNotification()
         {
-            return CartPageElements.MessageAlert.Text;
+            return Elements.MessageAlert.Text;
         }
 
-        protected override void WaitForElementToDisplay()
+        protected override void WaitForPageLoad()
         {
-            CartPageElements.CouponCodeTextField.WaitToExists();
+            Elements.CouponCodeTextField.WaitToExists();
         }
     }
 }

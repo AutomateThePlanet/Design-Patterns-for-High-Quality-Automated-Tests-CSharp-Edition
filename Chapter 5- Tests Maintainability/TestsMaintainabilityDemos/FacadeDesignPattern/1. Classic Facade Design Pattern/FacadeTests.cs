@@ -52,7 +52,7 @@ namespace TestsMaintainabilityDemos.Facades.First
                                    Phone = "+00498888999281",
                                };
             _checkoutPage.FillBillingInfo(purchaseInfo);
-            _checkoutPage.CheckoutPageAssertions.AssertOrderReceived();
+            _checkoutPage.Assertions.AssertOrderReceived();
         }
 
         [TestMethod]
@@ -79,7 +79,7 @@ namespace TestsMaintainabilityDemos.Facades.First
                                    Phone = "+00498888999281",
                                };
             _checkoutPage.FillBillingInfo(purchaseInfo);
-            _checkoutPage.CheckoutPageAssertions.AssertOrderReceived();
+            _checkoutPage.Assertions.AssertOrderReceived();
         }
 
         [TestMethod]

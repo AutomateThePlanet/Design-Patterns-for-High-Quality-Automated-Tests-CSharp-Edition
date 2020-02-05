@@ -39,6 +39,8 @@ namespace TestDataPreparationDemos.Tenth
         public CartPage ProceedToCheckout()
         {
             _elements.ProceedToCheckout.Click();
+            _elements.ProceedToCheckout.Click();
+
             return this;
         }
 
@@ -54,7 +56,7 @@ namespace TestDataPreparationDemos.Tenth
             return this;
         }
 
-        protected override void WaitForElementToDisplay()
+        protected override void WaitForPageLoad()
         {
             _elements.CouponCodeTextField.WaitToExists();
         }

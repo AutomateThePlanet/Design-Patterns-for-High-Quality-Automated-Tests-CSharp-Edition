@@ -18,8 +18,8 @@ namespace TestDataPreparationDemos.Pages.Tenth
         public void Dispose()
         {
             _driver.Quit();
+            GC.SuppressFinalize(this);
         }
-
 
         public TPage Create<TPage>()
             where TPage : EShopPage

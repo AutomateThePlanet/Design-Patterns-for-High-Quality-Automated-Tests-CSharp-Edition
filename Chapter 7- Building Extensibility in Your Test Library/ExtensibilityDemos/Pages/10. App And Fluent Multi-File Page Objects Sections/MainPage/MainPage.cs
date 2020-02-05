@@ -29,7 +29,7 @@ namespace ExtensibilityDemos.Tenth
             return this;
         }
 
-        protected override void WaitForElementToDisplay()
+        protected override void WaitForPageLoad()
         {
             _elements.AddToCartFalcon9.WaitToExists();
         }
