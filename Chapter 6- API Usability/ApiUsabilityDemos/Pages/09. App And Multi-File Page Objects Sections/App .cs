@@ -8,6 +8,7 @@ namespace ApiUsabilityDemos.Pages.Ninth
     public class App : IDisposable
     {
         private readonly Driver _driver;
+        private bool _disposed = false;
 
         public App(Browser browserType = Browser.Chrome)
         {
@@ -16,11 +17,6 @@ namespace ApiUsabilityDemos.Pages.Ninth
             BrowserService = _driver;
             CookiesService = _driver;
             DialogService = _driver;
-        }
-
-        public void Dispose()
-        {
-            _driver.Quit();
         }
 
         public IBrowserService BrowserService { get; }
@@ -43,6 +39,27 @@ namespace ApiUsabilityDemos.Pages.Ninth
             page?.Open();
 
             return page;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                _driver.Quit();
+            }
+      
+            _disposed = true;
         }
     }
 }
