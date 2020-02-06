@@ -4,17 +4,16 @@ namespace TestsMaintainabilityDemos.Sixth
 {
     public class MainPageAssertions
     {
-        private readonly MainPageElements _pageElements;
+        private readonly MainPageElements _elements;
 
-        public MainPageAssertions(MainPageElements pageElements)
+        public MainPageAssertions(MainPageElements elements)
         {
-            _pageElements = pageElements;
+            _elements = elements;
         }
 
         public void AssertProductBoxLink(string name, string expectedLink)
         {
-            string actualLink = _pageElements.GetProductBoxByName(name).GetAttribute("href");
-
+            string actualLink = _elements.GetProductBoxByName(name).GetAttribute("href");
             Assert.AreEqual(expectedLink, actualLink);
         }
     }
