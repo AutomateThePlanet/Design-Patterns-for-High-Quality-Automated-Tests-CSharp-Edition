@@ -8,18 +8,20 @@ namespace TestDataPreparationDemos.Pages.Tenth
     public class App : IDisposable
     {
         private readonly Driver _driver;
+        private bool _disposed = false;
 
         public App(Browser browserType = Browser.Chrome)
         {
             _driver = new LoggingDriver(new WebDriver());
             _driver.Start(browserType);
+            BrowserService = _driver;
+            CookiesService = _driver;
+            DialogService = _driver;
         }
 
-        public void Dispose()
-        {
-            _driver.Quit();
-            GC.SuppressFinalize(this);
-        }
+        public IBrowserService BrowserService { get; }
+        public ICookiesService CookiesService { get; }
+        public IDialogService DialogService { get; }
 
         public TPage Create<TPage>()
             where TPage : EShopPage
@@ -37,6 +39,27 @@ namespace TestDataPreparationDemos.Pages.Tenth
             page?.Open();
 
             return page;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                _driver.Quit();
+            }
+      
+            _disposed = true;
         }
     }
 }
