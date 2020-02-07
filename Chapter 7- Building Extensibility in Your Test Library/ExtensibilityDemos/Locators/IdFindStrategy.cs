@@ -2,9 +2,9 @@
 
 namespace ExtensibilityDemos.Locators
 {
-    public class ByIdStrategy : FindStrategy
+    public class IdFindStrategy : FindStrategy
     {
-        public ByIdStrategy(string value)
+        public IdFindStrategy(string value)
             : base(value)
         {
         }

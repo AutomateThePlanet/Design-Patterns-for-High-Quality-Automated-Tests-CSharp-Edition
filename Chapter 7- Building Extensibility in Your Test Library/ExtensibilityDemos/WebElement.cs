@@ -38,7 +38,7 @@ namespace ExtensibilityDemos
 
         public override List<Element> FindAllByClass(string cssClass)
         {
-            var findStrategy = new ByClassStrategy(cssClass);
+            var findStrategy = new ClassFindStrategy(cssClass);
             var nativeElements = _elementFinderService.FindAll(findStrategy);
             var resultElements = new List<Element>();
             foreach (var nativeElement in nativeElements)
@@ -50,7 +50,7 @@ namespace ExtensibilityDemos
 
         public override List<Element> FindAllById(string id)
         {
-            var findStrategy = new ByIdStrategy(id);
+            var findStrategy = new IdFindStrategy(id);
             var nativeElements = _elementFinderService.FindAll(findStrategy);
             var resultElements = new List<Element>();
             foreach (var nativeElement in nativeElements)
@@ -62,7 +62,7 @@ namespace ExtensibilityDemos
 
         public override List<Element> FindAllByTag(string tag)
         {
-            var findStrategy = new ByTagStrategy(tag);
+            var findStrategy = new TagFindStrategy(tag);
             var nativeElements = _elementFinderService.FindAll(findStrategy);
             var resultElements = new List<Element>();
             foreach (var nativeElement in nativeElements)
@@ -74,7 +74,7 @@ namespace ExtensibilityDemos
 
         public override List<Element> FindAllByCss(string css)
         {
-            var findStrategy = new ByCssStrategy(css);
+            var findStrategy = new CssFindStrategy(css);
             var nativeElements = _elementFinderService.FindAll(findStrategy);
             var resultElements = new List<Element>();
             foreach (var nativeElement in nativeElements)
@@ -86,7 +86,7 @@ namespace ExtensibilityDemos
 
         public override List<Element> FindAllByLinkText(string linkText)
         {
-            var findStrategy = new ByLinkTextStrategy(linkText);
+            var findStrategy = new LinkTextFindStrategy(linkText);
             var nativeElements = _elementFinderService.FindAll(findStrategy);
             var resultElements = new List<Element>();
             foreach (var nativeElement in nativeElements)
@@ -98,7 +98,7 @@ namespace ExtensibilityDemos
 
         public override List<Element> FindAllByXPath(string xpath)
         {
-            var findStrategy = new ByXPathStrategy(xpath);
+            var findStrategy = new XPathFindStrategy(xpath);
             var nativeElements = _elementFinderService.FindAll(findStrategy);
             var resultElements = new List<Element>();
             foreach (var nativeElement in nativeElements)
@@ -110,42 +110,42 @@ namespace ExtensibilityDemos
 
         public override Element FindByClass(string cssClass)
         {
-            var findStrategy = new ByClassStrategy(cssClass);
+            var findStrategy = new ClassFindStrategy(cssClass);
             var nativeElement = _elementFinderService.Find(findStrategy);
             return new WebElement(_webDriver, nativeElement, findStrategy.Convert());
         }
 
         public override Element FindById(string id)
         {
-            var findStrategy = new ByIdStrategy(id);
+            var findStrategy = new IdFindStrategy(id);
             var nativeElement = _elementFinderService.Find(findStrategy);
             return new WebElement(_webDriver, nativeElement, findStrategy.Convert());
         }
 
         public override Element FindByTag(string tag)
         {
-            var findStrategy = new ByTagStrategy(tag);
+            var findStrategy = new TagFindStrategy(tag);
             var nativeElement = _elementFinderService.Find(findStrategy);
             return new WebElement(_webDriver, nativeElement, findStrategy.Convert());
         }
 
         public override Element FindByXPath(string xpath)
         {
-            var findStrategy = new ByXPathStrategy(xpath);
+            var findStrategy = new XPathFindStrategy(xpath);
             var nativeElement = _elementFinderService.Find(findStrategy);
             return new WebElement(_webDriver, nativeElement, findStrategy.Convert());
         }
 
         public override Element FindByCss(string css)
         {
-            var findStrategy = new ByCssStrategy(css);
+            var findStrategy = new CssFindStrategy(css);
             var nativeElement = _elementFinderService.Find(findStrategy);
             return new WebElement(_webDriver, nativeElement, findStrategy.Convert());
         }
 
         public override Element FindByLinkText(string linkText)
         {
-            var findStrategy = new ByLinkTextStrategy(linkText);
+            var findStrategy = new LinkTextFindStrategy(linkText);
             var nativeElement = _elementFinderService.Find(findStrategy);
             return new WebElement(_webDriver, nativeElement, findStrategy.Convert());
         }

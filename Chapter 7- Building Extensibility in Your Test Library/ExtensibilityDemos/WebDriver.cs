@@ -110,62 +110,62 @@ namespace ExtensibilityDemos
 
         public override List<Element> FindAllByClass(string cssClass)
         {
-            return FindAll<ByClassStrategy, Element>(new ByClassStrategy(cssClass));
+            return FindAll<ClassFindStrategy, Element>(new ClassFindStrategy(cssClass));
         }
 
         public override List<Element> FindAllById(string id)
         {
-            return FindAll<ByIdStrategy, Element>(new ByIdStrategy(id));
+            return FindAll<IdFindStrategy, Element>(new IdFindStrategy(id));
         }
 
         public override List<Element> FindAllByTag(string tag)
         {
-            return FindAll<ByTagStrategy, Element>(new ByTagStrategy(tag));
+            return FindAll<TagFindStrategy, Element>(new TagFindStrategy(tag));
         }
 
         public override List<Element> FindAllByXPath(string xpath)
         {
-            return FindAll<ByXPathStrategy, Element>(new ByXPathStrategy(xpath));
+            return FindAll<XPathFindStrategy, Element>(new XPathFindStrategy(xpath));
         }
 
         public override List<Element> FindAllByCss(string css)
         {
-            return FindAll<ByCssStrategy, Element>(new ByCssStrategy(css));
+            return FindAll<CssFindStrategy, Element>(new CssFindStrategy(css));
         }
 
         public override List<Element> FindAllByLinkText(string linkText)
         {
-            return FindAll<ByLinkTextStrategy, Element>(new ByLinkTextStrategy(linkText));
+            return FindAll<LinkTextFindStrategy, Element>(new LinkTextFindStrategy(linkText));
         }
 
         public override Element FindByCss(string css)
         {
-            return Find<ByCssStrategy, Element>(new ByCssStrategy(css));
+            return Find<CssFindStrategy, Element>(new CssFindStrategy(css));
         }
 
         public override Element FindByLinkText(string linkText)
         {
-            return Find<ByLinkTextStrategy, Element>(new ByLinkTextStrategy(linkText));
+            return Find<LinkTextFindStrategy, Element>(new LinkTextFindStrategy(linkText));
         }
 
         public override Element FindByClass(string cssClass)
         {
-            return Find<ByClassStrategy, Element>(new ByClassStrategy(cssClass));
+            return Find<ClassFindStrategy, Element>(new ClassFindStrategy(cssClass));
         }
 
         public override Element FindById(string id)
         {
-            return Find<ByIdStrategy, Element>(new ByIdStrategy(id));
+            return Find<IdFindStrategy, Element>(new IdFindStrategy(id));
         }
 
         public override Element FindByTag(string tag)
         {
-            return Find<ByTagStrategy, Element>(new ByTagStrategy(tag));
+            return Find<TagFindStrategy, Element>(new TagFindStrategy(tag));
         }
 
         public override Element FindByXPath(string xpath)
         {
-            return Find<ByXPathStrategy, Element>(new ByXPathStrategy(xpath));
+            return Find<XPathFindStrategy, Element>(new XPathFindStrategy(xpath));
         }
 
         public override void WaitForAjax()
@@ -220,7 +220,7 @@ namespace ExtensibilityDemos
 
         private void OnElementClicked(object sender, WebElementEventArgs e)
         {
-            Console.WriteLine(e.Element);
+            Console.WriteLine($"Element with tag = {e.Element.TagName} clicked.");
         }
 
         private void InitializeEventFiringWebDriver()

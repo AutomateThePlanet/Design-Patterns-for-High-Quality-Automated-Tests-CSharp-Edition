@@ -3,9 +3,9 @@ using OpenQA.Selenium;
 
 namespace ExtensibilityDemos
 {
-    public class WaitToExistsStrategy : WaitStrategy
+    public class ToBeVisibleWaitStrategy : WaitStrategy
     {
-        public WaitToExistsStrategy(int? timeoutInterval = null, int? sleepInterval = null)
+        public ToBeVisibleWaitStrategy(int? timeoutInterval = null, int? sleepInterval = null)
             : base(timeoutInterval, sleepInterval)
         {
             TimeoutInterval = timeoutInterval;
@@ -13,17 +13,21 @@ namespace ExtensibilityDemos
 
         public override void WaitUntil(IWebDriver driver, By by)
         {
-            WaitUntil(ElementExists(driver, by), driver, TimeoutInterval, SleepInterval);
+            WaitUntil(ElementIsVisible(driver, by), driver, TimeoutInterval, SleepInterval);
         }
 
-        private Func<IWebDriver, bool> ElementExists(ISearchContext searchContext, By by)
+        private Func<IWebDriver, bool> ElementIsVisible(ISearchContext searchContext, By by)
         {
             return driver =>
             {
                 try
                 {
                     var element = FindElement(searchContext, by);
-                    return element != null;
+                    return element != null && element.Displayed;
+                }
+                catch (StaleElementReferenceException)
+                {
+                    return false;
                 }
                 catch (NoSuchElementException)
                 {

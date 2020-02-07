@@ -3,9 +3,9 @@ using OpenQA.Selenium;
 
 namespace ExtensibilityDemos
 {
-    public class WaitToBeClickableStrategy : WaitStrategy
+    public class ToBeClickableWaitStrategy : WaitStrategy
     {
-        public WaitToBeClickableStrategy(int? timeoutInterval = null, int? sleepInterval = null)
+        public ToBeClickableWaitStrategy(int? timeoutInterval = null, int? sleepInterval = null)
             : base(timeoutInterval, sleepInterval)
         {
             TimeoutInterval = timeoutInterval;

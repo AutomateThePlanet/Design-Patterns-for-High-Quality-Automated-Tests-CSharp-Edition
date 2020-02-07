@@ -7,7 +7,7 @@ namespace ExtensibilityDemos.Pages
         public static TElement CreateByIdContaining<TElement>(this TElement element, string idContaining)
             where TElement : Element
         {
-            return element.Find<ByIdContainingStrategy, TElement>(new ByIdContainingStrategy(idContaining));
+            return element.Find<IdContainingFindStrategy, TElement>(new IdContainingFindStrategy(idContaining));
         }
     }
 }

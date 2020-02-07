@@ -6,7 +6,7 @@ namespace ExtensibilityDemos.Extensions
     {
         public static Element CreateByIdContaining(this IElementFindService findService, string idContaining)
         {
-            return findService.Find<ByIdContainingStrategy, Element>(new ByIdContainingStrategy(idContaining));
+            return findService.Find<IdContainingFindStrategy, Element>(new IdContainingFindStrategy(idContaining));
         }
     }
 }
