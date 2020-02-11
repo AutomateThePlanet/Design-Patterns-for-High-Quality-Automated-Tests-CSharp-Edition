@@ -7,19 +7,20 @@ namespace BenchmarkingDemos
     public class BaseTest
     {
         private static readonly ITestExecutionSubject CurrentTestExecutionSubject;
-        private static Driver _driver;
+        private static readonly Driver LoggingDriver;
 
         static BaseTest()
         {
             CurrentTestExecutionSubject = new TestExecutionSubject();
-            InitializeTestExecutionBehaviorObservers(CurrentTestExecutionSubject);
+            LoggingDriver = new LoggingDriver(new WebDriver());
+            new BrowserLaunchTestBehaviorObserver(CurrentTestExecutionSubject, LoggingDriver);
             var memberInfo = MethodBase.GetCurrentMethod();
             CurrentTestExecutionSubject.MemberInstantiated(memberInfo);
         }
 
         public BaseTest()
         {
-            Driver = _driver;
+            Driver = LoggingDriver;
         }
 
         public Driver Driver { get; }
@@ -41,7 +42,7 @@ namespace BenchmarkingDemos
         [TestInitialize]
         public void CoreTestInit()
         {
-            var memberInfo = GetCurrentExecutionMethodInfo();
+            var memberInfo = GetType().GetMethod(TestContext.TestName);
             CurrentTestExecutionSubject.PreInitialize(memberInfo);
             TestInit();
             CurrentTestExecutionSubject.PostInitialize(memberInfo);
@@ -50,7 +51,7 @@ namespace BenchmarkingDemos
         [TestCleanup]
         public void CoreTestCleanup()
         {
-            var memberInfo = GetCurrentExecutionMethodInfo();
+            var memberInfo = GetType().GetMethod(TestContext.TestName);
             CurrentTestExecutionSubject.PreCleanup(memberInfo);
             TestCleanup();
             CurrentTestExecutionSubject.PostCleanup(memberInfo);
@@ -60,7 +61,7 @@ namespace BenchmarkingDemos
         [AssemblyCleanup]
         public static void AssemblyCleanup()
         {
-            _driver?.Quit();
+            LoggingDriver?.Quit();
         }
 
         public virtual void TestInit()
@@ -69,18 +70,6 @@ namespace BenchmarkingDemos
 
         public virtual void TestCleanup()
         {
-        }
-
-        private MethodInfo GetCurrentExecutionMethodInfo()
-        {
-            var memberInfo = GetType().GetMethod(TestContext.TestName);
-            return memberInfo;
-        }
-
-        private static void InitializeTestExecutionBehaviorObservers(ITestExecutionSubject currentTestExecutionSubject)
-        {
-            _driver = new LoggingDriver(new WebDriver());
-            new BrowserLaunchTestBehaviorObserver(currentTestExecutionSubject, _driver);
         }
     }
 }
