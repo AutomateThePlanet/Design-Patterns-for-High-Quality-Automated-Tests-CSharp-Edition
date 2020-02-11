@@ -7,19 +7,20 @@ namespace StabilizeTestsDemos.FifthVersion
     public class BaseTest
     {
         private static readonly ITestExecutionSubject CurrentTestExecutionSubject;
-        private static Driver _driver;
+        private static readonly Driver LoggingDriver;
 
         static BaseTest()
         {
             CurrentTestExecutionSubject = new MsTestExecutionSubject();
-            InitializeTestExecutionBehaviorObservers(CurrentTestExecutionSubject);
+            LoggingDriver = new LoggingDriver(new WebDriver());
+            new BrowserLaunchTestBehaviorObserver(CurrentTestExecutionSubject, LoggingDriver);
             var memberInfo = MethodBase.GetCurrentMethod();
             CurrentTestExecutionSubject.TestInstantiated(memberInfo);
         }
 
         public BaseTest()
         {
-            Driver = _driver;
+            Driver = LoggingDriver;
         }
 
         public Driver Driver { get; set; }
@@ -41,7 +42,7 @@ namespace StabilizeTestsDemos.FifthVersion
         [TestInitialize]
         public void CoreTestInit()
         {
-            var memberInfo = GetCurrentExecutionMethodInfo();
+            var memberInfo = GetType().GetMethod(TestContext.TestName);
             CurrentTestExecutionSubject.PreTestInit(TestContext, memberInfo);
             TestInit();
             CurrentTestExecutionSubject.PostTestInit(TestContext, memberInfo);
@@ -50,7 +51,7 @@ namespace StabilizeTestsDemos.FifthVersion
         [TestCleanup]
         public void CoreTestCleanup()
         {
-            var memberInfo = GetCurrentExecutionMethodInfo();
+            var memberInfo = GetType().GetMethod(TestContext.TestName);;
             CurrentTestExecutionSubject.PreTestCleanup(TestContext, memberInfo);
             TestCleanup();
             CurrentTestExecutionSubject.PostTestCleanup(TestContext, memberInfo);
@@ -60,7 +61,7 @@ namespace StabilizeTestsDemos.FifthVersion
         [AssemblyCleanup]
         public static void AssemblyCleanup()
         {
-            _driver?.Quit();
+            LoggingDriver?.Quit();
         }
 
         public virtual void TestInit()
@@ -69,18 +70,6 @@ namespace StabilizeTestsDemos.FifthVersion
 
         public virtual void TestCleanup()
         {
-        }
-
-        private MethodInfo GetCurrentExecutionMethodInfo()
-        {
-            var memberInfo = GetType().GetMethod(TestContext.TestName);
-            return memberInfo;
-        }
-
-        private static void InitializeTestExecutionBehaviorObservers(ITestExecutionSubject currentTestExecutionSubject)
-        {
-            _driver = new LoggingDriver(new WebDriver());
-            new BrowserLaunchTestBehaviorObserver(currentTestExecutionSubject, _driver);
         }
     }
 }
