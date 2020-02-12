@@ -34,6 +34,7 @@
         public void ProceedToCheckout()
         {
             Elements.ProceedToCheckout.Click();
+            _browserService.WaitUntilPageLoadsCompletely();
         }
 
         public string GetTotal()

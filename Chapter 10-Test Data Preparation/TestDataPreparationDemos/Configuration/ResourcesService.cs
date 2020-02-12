@@ -7,7 +7,7 @@ namespace TestDataPreparationDemos.Configuration
     public static class ResourcesService
     {
         private static readonly ResourceManager ResourceManager 
-            = new ResourceManager("defaultValues", Assembly.GetExecutingAssembly());
+            = new ResourceManager("defaultValues.Debug.resources", Assembly.GetExecutingAssembly());
 
         public static string GetString(string name)
         {

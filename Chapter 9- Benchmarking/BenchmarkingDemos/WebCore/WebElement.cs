@@ -24,13 +24,7 @@ namespace BenchmarkingDemos
 
         public override string Text => _webElement?.Text;
 
-        public override bool? Enabled
-        {
-            get
-            {
-                return _webElement?.Enabled;
-            }
-        }
+        public override bool? Enabled => _webElement?.Enabled;
 
         public override bool? Displayed => _webElement?.Displayed;
 
@@ -57,28 +51,16 @@ namespace BenchmarkingDemos
             _webElement?.SendKeys(text);
         }
 
-        public override void WaitToExists(int timeoutInSeconds = 30)
+        public override void WaitToExists()
         {
-            if (timeoutInSeconds > 0)
-            {
-                var webDriverWait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(timeoutInSeconds));
-                webDriverWait.IgnoreExceptionTypes(typeof(WebDriverException));
-                webDriverWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-                webDriverWait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
-                webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By));
-            }
+            var webDriverWait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(30));
+            webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By));
         }
 
-        private void WaitToBeClickable(By by, int timeoutInSeconds = 30)
+        private void WaitToBeClickable(By by)
         {
-            if (timeoutInSeconds > 0)
-            {
-                var webDriverWait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(timeoutInSeconds));
-                webDriverWait.IgnoreExceptionTypes(typeof(WebDriverException));
-                webDriverWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-                webDriverWait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
-                webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(by));
-            }
+            var webDriverWait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(30));
+            webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(by));
         }
     }
 }

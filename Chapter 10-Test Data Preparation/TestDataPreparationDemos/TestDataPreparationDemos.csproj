@@ -51,6 +51,15 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>defaultValues.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="defaultValues.Debug.resx">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Update="defaultValues.Release.resx">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Update="defaultValues.resx">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

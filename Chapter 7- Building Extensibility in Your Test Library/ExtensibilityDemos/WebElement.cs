@@ -19,7 +19,7 @@ namespace ExtensibilityDemos
             _webDriver = webDriver;
             _webElement = webElement;
             _by = by;
-            _elementFinderService = new ElementFinderService(webElement);
+            _elementFinderService = new ElementFinderService(webElement, _webDriver);
         }
 
         public override By By => _by;
@@ -167,45 +167,33 @@ namespace ExtensibilityDemos
             _webElement?.SendKeys(text);
         }
 
-        public override void WaitToExists(int timeoutInSeconds = 30)
+        public override void WaitToExists()
         {
-            if (timeoutInSeconds > 0)
-            {
-                var webDriverWait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(timeoutInSeconds));
-                webDriverWait.IgnoreExceptionTypes(typeof(WebDriverException));
-                webDriverWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-                webDriverWait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
-                webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By));
-            }
+            var webDriverWait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(30));
+            webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By));
         }
 
-        private void WaitToBeClickable(By by, int timeoutInSeconds = 30)
+        private void WaitToBeClickable(By by)
         {
-            if (timeoutInSeconds > 0)
-            {
-                var webDriverWait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(timeoutInSeconds));
-                webDriverWait.IgnoreExceptionTypes(typeof(WebDriverException));
-                webDriverWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-                webDriverWait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
-                webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(by));
-            }
+            var webDriverWait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(30));
+            webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(by));
         }
 
-        public override List<TElement> FindAll<TFindStrategy, TElement>(TFindStrategy findStrategy)
+        public override List<Element> FindAll(FindStrategy findStrategy)
         {
             var nativeElements = _elementFinderService.FindAll(findStrategy);
-            var resultElements = new List<TElement>();
+            var resultElements = new List<Element>();
             foreach (var nativeElement in nativeElements)
             {
-                resultElements.Add(new WebElement(_webDriver, nativeElement, findStrategy.Convert()) as TElement);
+                resultElements.Add(new WebElement(_webDriver, nativeElement, findStrategy.Convert()));
             }
             return resultElements;
         }
 
-        public override TElement Find<TFindStrategy, TElement>(TFindStrategy findStrategy)
+        public override Element Find(FindStrategy findStrategy)
         {
             var nativeElement = _elementFinderService.Find(findStrategy);
-            return new WebElement(_webDriver, nativeElement, findStrategy.Convert()) as TElement;
+            return new WebElement(_webDriver, nativeElement, findStrategy.Convert());
         }
     }
 }

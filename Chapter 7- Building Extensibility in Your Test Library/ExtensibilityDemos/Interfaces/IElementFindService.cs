@@ -20,11 +20,7 @@ namespace ExtensibilityDemos
         List<Element> FindAllByCss(string css);
         List<Element> FindAllByLinkText(string linkText);
 
-        List<TElement> FindAll<TFindStrategy, TElement>(TFindStrategy findStrategy)
-            where TFindStrategy : FindStrategy
-            where TElement : Element;
-        TElement Find<TFindStrategy, TElement>(TFindStrategy findStrategy)
-            where TFindStrategy : FindStrategy
-            where TElement : Element;
+        List<Element> FindAll(FindStrategy findStrategy);
+        Element Find(FindStrategy findStrategy);
     }
 }

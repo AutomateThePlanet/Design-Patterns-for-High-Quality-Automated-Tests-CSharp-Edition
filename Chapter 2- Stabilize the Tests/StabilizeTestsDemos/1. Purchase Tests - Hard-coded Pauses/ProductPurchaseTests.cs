@@ -6,6 +6,15 @@ using System.Threading;
 
 namespace StabilizeTestsDemos.FirstVersion
 {
+    /*
+     * The order of test execution is important. The tests should be executed in the following order:
+     * CompletePurchaseSuccessfully_WhenNewClient
+     * CompletePurchaseSuccessfully_WhenExistingClient
+     * CorrectOrderDataDisplayed_WhenNavigateToMyAccountOrderSection
+     *
+     * The tests may fail because the hard-coded pauses were not enough.
+     * This is the expected behavior showing that this is not the best practice.
+     */
     [TestClass]
     public class ProductPurchaseTests
     {
@@ -32,7 +41,7 @@ namespace StabilizeTestsDemos.FirstVersion
 
             var addToCartFalcon9 = _driver.FindElement(By.CssSelector("[data-product_id*='28']"));
             addToCartFalcon9.Click();
-            Thread.Sleep(500);
+            Thread.Sleep(5000);
             var viewCartButton = _driver.FindElement(By.CssSelector("[class*='added_to_cart wc-forward']"));
             viewCartButton.Click();
 
@@ -41,19 +50,19 @@ namespace StabilizeTestsDemos.FirstVersion
             couponCodeTextField.SendKeys("happybirthday");
             var applyCouponButton = _driver.FindElement(By.CssSelector("[value*='Apply coupon']"));
             applyCouponButton.Click();
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
             var messageAlert = _driver.FindElement(By.CssSelector("[class*='woocommerce-message']"));
             Assert.AreEqual("Coupon code applied successfully.", messageAlert.Text);
 
             var quantityBox = _driver.FindElement(By.CssSelector("[class*='input-text qty text']"));
             quantityBox.Clear();
-            Thread.Sleep(50);
+            Thread.Sleep(500);
             quantityBox.SendKeys("2");
 
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
             var updateCart = _driver.FindElement(By.CssSelector("[value*='Update cart']"));
             updateCart.Click();
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
             var totalSpan = _driver.FindElement(By.XPath("//*[@class='order-total']//span"));
             Assert.AreEqual("114.00€", totalSpan.Text);
 
@@ -86,15 +95,12 @@ namespace StabilizeTestsDemos.FirstVersion
             var billingEmail = _driver.FindElement(By.Id("billing_email"));
             billingEmail.SendKeys("info@berlinspaceflowers.com");
             _purchaseEmail = "info@berlinspaceflowers.com";
-            var createAccountCheckBox = _driver.FindElement(By.Id("createaccount"));
-            createAccountCheckBox.Click();
-            var checkPaymentsRadioButton = _driver.FindElement(By.CssSelector("[for*='payment_method_cheque']"));
-            checkPaymentsRadioButton.Click();
+            Thread.Sleep(5000);
             var placeOrderButton = _driver.FindElement(By.Id("place_order"));
             placeOrderButton.Click();
 
-            Thread.Sleep(2000);
-            var receivedMessage = _driver.FindElement(By.XPath("//h1"));
+            Thread.Sleep(10000);
+            var receivedMessage = _driver.FindElement(By.XPath("/html/body/div[1]/div/div/div/main/div/header/h1"));
             Assert.AreEqual("Order received", receivedMessage.Text);
         }
 
@@ -105,7 +111,7 @@ namespace StabilizeTestsDemos.FirstVersion
 
             var addToCartFalcon9 = _driver.FindElement(By.CssSelector("[data-product_id*='28']"));
             addToCartFalcon9.Click();
-            Thread.Sleep(500);
+            Thread.Sleep(5000);
             var viewCartButton = _driver.FindElement(By.CssSelector("[class*='added_to_cart wc-forward']"));
             viewCartButton.Click();
 
@@ -114,18 +120,18 @@ namespace StabilizeTestsDemos.FirstVersion
             couponCodeTextField.SendKeys("happybirthday");
             var applyCouponButton = _driver.FindElement(By.CssSelector("[value*='Apply coupon']"));
             applyCouponButton.Click();
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
             var messageAlert = _driver.FindElement(By.CssSelector("[class*='woocommerce-message']"));
             Assert.AreEqual("Coupon code applied successfully.", messageAlert.Text);
 
             var quantityBox = _driver.FindElement(By.CssSelector("[class*='input-text qty text']"));
             quantityBox.Clear();
-            Thread.Sleep(50);
+            Thread.Sleep(500);
             quantityBox.SendKeys("2");
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
             var updateCart = _driver.FindElement(By.CssSelector("[value*='Update cart']"));
             updateCart.Click();
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
             var totalSpan = _driver.FindElement(By.XPath("//*[@class='order-total']//span"));
             Assert.AreEqual("114.00€", totalSpan.Text);
 
@@ -134,6 +140,7 @@ namespace StabilizeTestsDemos.FirstVersion
 
             var loginHereLink = _driver.FindElement(By.LinkText("Click here to login"));
             loginHereLink.Click();
+            Thread.Sleep(5000);
             var userName = _driver.FindElement(By.Id("username"));
             userName.SendKeys(_purchaseEmail);
             var password = _driver.FindElement(By.Id("password"));
@@ -141,10 +148,11 @@ namespace StabilizeTestsDemos.FirstVersion
             var loginButton = _driver.FindElement(By.XPath("//button[@name='login']"));
             loginButton.Click();
          
+            Thread.Sleep(5000);
             var placeOrderButton = _driver.FindElement(By.Id("place_order"));
             placeOrderButton.Click();
 
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
             var receivedMessage = _driver.FindElement(By.XPath("//h1"));
             Assert.AreEqual("Order received", receivedMessage.Text);
 
@@ -166,14 +174,14 @@ namespace StabilizeTestsDemos.FirstVersion
             var loginButton = _driver.FindElement(By.XPath("//button[@name='login']"));
             loginButton.Click();
 
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
             var orders = _driver.FindElement(By.LinkText("Orders"));
             orders.Click();
 
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
             var viewButtons = _driver.FindElements(By.LinkText("View"));
             viewButtons[0].Click();
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
 
             var orderName = _driver.FindElement(By.XPath("//h1"));
             string expectedMessage = $"Order #{_purchaseOrderNumber}";

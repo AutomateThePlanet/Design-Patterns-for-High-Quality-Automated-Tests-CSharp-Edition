@@ -5,7 +5,7 @@ namespace TestsReadabilityDemos.Fourth
     public class MainPage : BaseEShopPage
     {
         public MainPage(Driver driver) 
-        : base(driver)
+            : base(driver)
         {
         }
 

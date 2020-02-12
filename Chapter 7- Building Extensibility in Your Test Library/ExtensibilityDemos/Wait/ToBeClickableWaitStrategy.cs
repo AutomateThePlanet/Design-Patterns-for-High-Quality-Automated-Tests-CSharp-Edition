@@ -5,20 +5,19 @@ namespace ExtensibilityDemos
 {
     public class ToBeClickableWaitStrategy : WaitStrategy
     {
-        public ToBeClickableWaitStrategy(int? timeoutInterval = null, int? sleepInterval = null)
-            : base(timeoutInterval, sleepInterval)
+        public ToBeClickableWaitStrategy(int? timeoutIntervalInSeconds = null, int? sleepIntervalInSeconds = null)
+            : base(timeoutIntervalInSeconds, sleepIntervalInSeconds)
         {
-            TimeoutInterval = timeoutInterval;
         }
 
-        public override void WaitUntil(IWebDriver driver, By by)
+        public override void WaitUntil(ISearchContext searchContext, IWebDriver driver, By by)
         {
-            WaitUntil(ElementIsClickable(driver, by), driver, TimeoutInterval, SleepInterval);
+            WaitUntil(ElementIsClickable(searchContext, by), driver);
         }
 
-        private Func<IWebDriver, bool> ElementIsClickable(ISearchContext searchContext, By by)
+        private Func<ISearchContext, bool> ElementIsClickable(ISearchContext searchContext, By by)
         {
-            return driver =>
+            return _ =>
             {
                 var element = FindElement(searchContext, by);
                 try

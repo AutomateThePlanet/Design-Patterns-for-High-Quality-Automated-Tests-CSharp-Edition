@@ -25,15 +25,9 @@ namespace ExtensibilityDemos
         public abstract List<Element> FindAllByClass(string cssClass);
         public abstract List<Element> FindAllByCss(string css);
         public abstract List<Element> FindAllByLinkText(string linkText);
-        public abstract List<TElement> FindAll<TFindStrategy, TElement>(TFindStrategy findStrategy)
-            where TFindStrategy : FindStrategy
-            where TElement : Element;
-        public abstract TElement Find<TFindStrategy, TElement>(TFindStrategy findStrategy)
-            where TFindStrategy : FindStrategy
-            where TElement : Element;
-        public abstract void Wait<TWaitStrategy, TElement>(TElement element, TWaitStrategy waitStrategy)
-            where TWaitStrategy : WaitStrategy
-            where TElement : Element;
+        public abstract List<Element> FindAll(FindStrategy findStrategy);
+        public abstract Element Find(FindStrategy findStrategy);
+        public abstract void Wait(Element element, WaitStrategy waitStrategy);
 
         ////public abstract Element FindElement(By locator);
         ////public abstract List<Element> FindElements(By locator);

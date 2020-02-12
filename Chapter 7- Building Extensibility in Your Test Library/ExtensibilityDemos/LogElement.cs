@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ExtensibilityDemos.Locators;
 using OpenQA.Selenium;
 
 namespace ExtensibilityDemos
@@ -46,14 +47,14 @@ namespace ExtensibilityDemos
             Element?.Click();
         }
 
-        public override TElement Find<TFindStrategy, TElement>(TFindStrategy findStrategy)
+        public override Element Find(FindStrategy findStrategy)
         {
-            return Element?.Find<TFindStrategy, TElement>(findStrategy);
+            return Element?.Find(findStrategy);
         }
 
-        public override List<TElement> FindAll<TFindStrategy, TElement>(TFindStrategy findStrategy)
+        public override List<Element> FindAll(FindStrategy findStrategy)
         {
-            return Element?.FindAll<TFindStrategy, TElement>(findStrategy);
+            return Element?.FindAll(findStrategy);
         }
 
         public override List<Element> FindAllByClass(string cssClass)
@@ -134,10 +135,10 @@ namespace ExtensibilityDemos
             Element?.TypeText(text);
         }
 
-        public override void WaitToExists(int timeoutInSeconds = 30)
+        public override void WaitToExists()
         {
             Console.WriteLine($"Wait for Element with locator = {By}");
-            Element?.WaitToExists(timeoutInSeconds);
+            Element?.WaitToExists();
         }
     }
 }

@@ -51,7 +51,7 @@
 
         protected override void ProceedToCheckout()
         {
-            _cartPage.Elements.ProceedToCheckout.Click();
+            _cartPage.ClickProceedToCheckout();
         }
     }
 }

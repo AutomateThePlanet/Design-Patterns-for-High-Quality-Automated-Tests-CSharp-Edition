@@ -4,10 +4,9 @@ namespace ExtensibilityDemos.Pages
 {
     public static class WebElementFindExtensions
     {
-        public static TElement CreateByIdContaining<TElement>(this TElement element, string idContaining)
-            where TElement : Element
+        public static Element CreateByIdContaining(this Element element, string idContaining)
         {
-            return element.Find<IdContainingFindStrategy, TElement>(new IdContainingFindStrategy(idContaining));
+            return element.Find(new IdContainingFindStrategy(idContaining));
         }
     }
 }

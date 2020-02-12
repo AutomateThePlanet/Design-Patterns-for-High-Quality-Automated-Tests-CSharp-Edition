@@ -24,20 +24,20 @@ namespace TestsReadabilityDemos.Second
         {
             CouponCodeTextField.TypeText(coupon);
             ApplyCouponButton.Click();
-            Thread.Sleep(2000);
-
+            Driver.WaitForAjax();
         }
 
         public void IncreaseProductQuantity(int newQuantity)
         {
             QuantityBox.TypeText(newQuantity.ToString());
             UpdateCart.Click();
-            Thread.Sleep(4000);
+            Driver.WaitForAjax();
         }
 
         public void ClickProceedToCheckout()
         {
             ProceedToCheckout.Click();
+            Driver.WaitUntilPageLoadsCompletely();
         }
 
         public string GetTotal()

@@ -5,20 +5,19 @@ namespace ExtensibilityDemos
 {
     public class ToBeVisibleWaitStrategy : WaitStrategy
     {
-        public ToBeVisibleWaitStrategy(int? timeoutInterval = null, int? sleepInterval = null)
-            : base(timeoutInterval, sleepInterval)
+        public ToBeVisibleWaitStrategy(int? timeoutIntervalInSeconds = null, int? sleepIntervalInSeconds = null)
+            : base(timeoutIntervalInSeconds, sleepIntervalInSeconds)
         {
-            TimeoutInterval = timeoutInterval;
         }
 
-        public override void WaitUntil(IWebDriver driver, By by)
+        public override void WaitUntil(ISearchContext searchContext, IWebDriver driver, By by)
         {
-            WaitUntil(ElementIsVisible(driver, by), driver, TimeoutInterval, SleepInterval);
+            WaitUntil(ElementIsVisible(searchContext, by), driver);
         }
 
-        private Func<IWebDriver, bool> ElementIsVisible(ISearchContext searchContext, By by)
+        private Func<ISearchContext, bool> ElementIsVisible(ISearchContext searchContext, By by)
         {
-            return driver =>
+            return _ =>
             {
                 try
                 {

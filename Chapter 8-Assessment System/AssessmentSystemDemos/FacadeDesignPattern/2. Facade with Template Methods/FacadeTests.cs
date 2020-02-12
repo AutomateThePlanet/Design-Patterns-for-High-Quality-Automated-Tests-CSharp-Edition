@@ -33,6 +33,7 @@ namespace AssessmentSystemDemos.Facades.Second
         {
             var purchaseInfo = new PurchaseInfo()
                                {
+                                   Email = "info@berlinspaceflowers.com",
                                    FirstName = "Anton",
                                    LastName = "Angelov",
                                    Company = "Space Flowers",
@@ -52,6 +53,7 @@ namespace AssessmentSystemDemos.Facades.Second
         {
             var purchaseInfo = new PurchaseInfo()
                                {
+                                   Email = "info@berlinspaceflowers.com",
                                    FirstName = "John",
                                    LastName = "Atanasov",
                                    Company = "Space Flowers",

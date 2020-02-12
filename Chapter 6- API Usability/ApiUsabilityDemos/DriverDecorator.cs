@@ -8,7 +8,7 @@ namespace ApiUsabilityDemos
     {
         protected Driver Driver;
 
-        public DriverDecorator(Driver driver)
+        protected DriverDecorator(Driver driver)
         {
             Driver = driver;
         }

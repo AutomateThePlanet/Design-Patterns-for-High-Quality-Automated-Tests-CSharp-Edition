@@ -61,7 +61,7 @@ namespace StabilizeTestsDemos.ThirdVersion
 
         public override Element FindElement(By locator)
         {
-            IWebElement nativeWebElement = _webDriverWait.Until(drv => drv.FindElement(locator));
+            IWebElement nativeWebElement = _webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(locator));
             Element element = new WebElement(_webDriver, nativeWebElement, locator);
 
             // If we use log decorator.
@@ -72,7 +72,7 @@ namespace StabilizeTestsDemos.ThirdVersion
 
         public override List<Element> FindElements(By locator)
         {
-            ReadOnlyCollection<IWebElement> nativeWebElements = _webDriverWait.Until(drv => drv.FindElements(locator));
+            ReadOnlyCollection<IWebElement> nativeWebElements = _webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.PresenceOfAllElementsLocatedBy(locator));
             var elements = new List<Element>();
             foreach (var nativeWebElement in nativeWebElements)
             {

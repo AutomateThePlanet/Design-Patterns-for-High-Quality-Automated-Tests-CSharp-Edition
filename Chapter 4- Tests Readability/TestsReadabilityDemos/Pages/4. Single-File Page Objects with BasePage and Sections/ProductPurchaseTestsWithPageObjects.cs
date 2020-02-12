@@ -24,6 +24,12 @@ namespace TestsReadabilityDemos.Fourth
             _driver.Quit();
         }
 
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            _mainPage.Open();
+        }
+
         [TestMethod]
         public void OpenBlogPage()
         {

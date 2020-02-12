@@ -32,7 +32,7 @@ namespace ExtensibilityDemos.Tenth
                 .AssertMessageNotification("Coupon code applied successfully.")
                 .IncreaseProductQuantity(2)
                 .AssertTotal("114.00€")
-                .ProceedToCheckout();
+                .ClickProceedToCheckout();
         }
     }
 }

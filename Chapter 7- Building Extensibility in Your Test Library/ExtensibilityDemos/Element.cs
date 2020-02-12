@@ -13,7 +13,7 @@ namespace ExtensibilityDemos
         public abstract void TypeText(string text);
         public abstract void Click();
         public abstract string GetAttribute(string attributeName);
-        public abstract void WaitToExists(int timeoutInSeconds = 30);
+        public abstract void WaitToExists();
         ////public abstract Element FindElement(By locator);
 
         public abstract Element FindById(string id);
@@ -29,11 +29,7 @@ namespace ExtensibilityDemos
         public abstract List<Element> FindAllByCss(string css);
         public abstract List<Element> FindAllByLinkText(string linkText);
 
-        public abstract List<TElement> FindAll<TFindStrategy, TElement>(TFindStrategy findStrategy)
-            where TFindStrategy : FindStrategy
-            where TElement : Element;
-        public abstract TElement Find<TFindStrategy, TElement>(TFindStrategy findStrategy)
-            where TFindStrategy : FindStrategy
-            where TElement : Element;
+        public abstract List<Element> FindAll(FindStrategy findStrategy);
+        public abstract Element Find(FindStrategy findStrategy);
     }
 }

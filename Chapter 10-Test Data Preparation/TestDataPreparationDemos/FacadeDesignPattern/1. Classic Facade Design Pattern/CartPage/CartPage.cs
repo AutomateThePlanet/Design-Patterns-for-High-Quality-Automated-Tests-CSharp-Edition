@@ -27,5 +27,11 @@
             Elements.UpdateCart.Click();
             Driver.WaitForAjax();
         }
+
+        public void ClickProceedToCheckout()
+        {
+            Elements.ProceedToCheckout.Click();
+            Driver.WaitUntilPageLoadsCompletely();
+        }
     }
 }

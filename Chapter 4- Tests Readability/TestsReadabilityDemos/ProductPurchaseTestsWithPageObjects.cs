@@ -43,7 +43,7 @@ namespace TestsReadabilityDemos
             _cartPage.ClickProceedToCheckout();
 
             var receivedMessage = _driver.FindElement(By.XPath("//h1"));
-            Assert.AreEqual("Order received", receivedMessage.Text);
+            Assert.AreEqual("Checkout", receivedMessage.Text);
         }
 
         [TestMethod]
@@ -57,9 +57,10 @@ namespace TestsReadabilityDemos
             var loginHereLink = _driver.FindElement(By.LinkText("Click here to login"));
             loginHereLink.Click();
             Login("info@berlinspaceflowers.com");
+            _driver.WaitForAjax();
             var placeOrderButton = _driver.FindElement(By.Id("place_order"));
             placeOrderButton.Click();
-            Thread.Sleep(4000);
+            _driver.WaitForAjax();
 
             var receivedMessage = _driver.FindElement(By.XPath("//h1"));
             Assert.AreEqual("Order received", receivedMessage.Text);
@@ -82,10 +83,10 @@ namespace TestsReadabilityDemos
         {
             var quantityBox = _driver.FindElement(By.CssSelector("[class*='input-text qty text']"));
             quantityBox.TypeText("2");
-            Thread.Sleep(2000);
+            _driver.WaitForAjax();
             var updateCart = _driver.FindElement(By.CssSelector("[value*='Update cart']"));
             updateCart.Click();
-            Thread.Sleep(4000);
+            _driver.WaitForAjax();
 
             var totalSpan = _driver.FindElement(By.XPath("//*[@class='order-total']//span"));
             Assert.AreEqual("114.00€", totalSpan.Text);
@@ -97,7 +98,7 @@ namespace TestsReadabilityDemos
             couponCodeTextField.TypeText("happybirthday");
             var applyCouponButton = _driver.FindElement(By.CssSelector("[value*='Apply coupon']"));
             applyCouponButton.Click();
-            Thread.Sleep(2000);
+            _driver.WaitForAjax();
 
             var messageAlert = _driver.FindElement(By.CssSelector("[class*='woocommerce-message']"));
             Assert.AreEqual("Coupon code applied successfully.", messageAlert.Text);

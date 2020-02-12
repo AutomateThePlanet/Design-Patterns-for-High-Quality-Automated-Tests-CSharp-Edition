@@ -44,16 +44,10 @@ namespace StabilizeTestsDemos.FourthVersion
             _webElement?.SendKeys(text);
         }
 
-        private void WaitToBeClickable(By by, int timeoutInSeconds = 30)
+        private void WaitToBeClickable(By by)
         {
-            if (timeoutInSeconds > 0)
-            {
-                var webDriverWait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(timeoutInSeconds));
-                webDriverWait.IgnoreExceptionTypes(typeof(WebDriverException));
-                webDriverWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-                webDriverWait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
-                webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(by));
-            }
+            var webDriverWait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(30));
+            webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(by));
         }
     }
 }

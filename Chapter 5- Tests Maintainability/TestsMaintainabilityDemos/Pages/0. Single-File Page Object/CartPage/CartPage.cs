@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
 namespace TestsMaintainabilityDemos
 {
@@ -24,7 +23,7 @@ namespace TestsMaintainabilityDemos
         {
             CouponCodeTextField.TypeText(coupon);
             ApplyCouponButton.Click();
-            Thread.Sleep(2000);
+            _driver.WaitForAjax();
 
         }
 
@@ -32,19 +31,19 @@ namespace TestsMaintainabilityDemos
         {
             QuantityBox.TypeText(newQuantity.ToString());
             UpdateCart.Click();
-            Thread.Sleep(4000);
+            _driver.WaitForAjax();
         }
 
         public void ClickProceedToCheckout()
         {
             ProceedToCheckout.Click();
+            _driver.WaitUntilPageLoadsCompletely();
         }
 
         public string GetTotal()
         {
             return TotalSpan.Text;
         }
-
 
         public string GetMessageNotification()
         {

@@ -32,6 +32,7 @@
         public void ProceedToCheckout()
         {
             Elements.ProceedToCheckout.Click();
+            Driver.WaitUntilPageLoadsCompletely();
         }
 
         public string GetTotal()

@@ -1,12 +1,12 @@
 ﻿namespace BenchmarkingDemos.Facades.Second
 {
-    public class PurchaseFirstVersionFacade : PurchaseFacade
+    public class NewPurchaseFacade : PurchaseFacade
     {
         private readonly MainPage _mainPage;
         private readonly CartPage _cartPage;
         private readonly CheckoutPage _checkoutPage;
 
-        public PurchaseFirstVersionFacade(MainPage mainPage, CartPage cartPage, CheckoutPage checkoutPage)
+        public NewPurchaseFacade(MainPage mainPage, CartPage cartPage, CheckoutPage checkoutPage)
         {
             _mainPage = mainPage;
             _cartPage = cartPage;
@@ -51,7 +51,7 @@
 
         protected override void ProceedToCheckout()
         {
-            _cartPage.Elements.ProceedToCheckout.Click();
+            _cartPage.ClickProceedToCheckout();
         }
     }
 }

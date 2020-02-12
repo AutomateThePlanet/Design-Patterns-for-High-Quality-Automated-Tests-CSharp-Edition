@@ -6,6 +6,14 @@ using System.Threading;
 
 namespace StabilizeTestsDemos.ThirdVersion
 {
+    /*
+   * The order of test execution is important. The tests should be executed in the following order:
+   * CompletePurchaseSuccessfully_WhenNewClient
+   * CompletePurchaseSuccessfully_WhenExistingClient
+   * CorrectOrderDataDisplayed_WhenNavigateToMyAccountOrderSection
+   *
+   * This is the expected behavior showing that this is not the best practice.
+   */
     [TestClass]
     public class ProductPurchaseTests
     {
@@ -68,13 +76,14 @@ namespace StabilizeTestsDemos.ThirdVersion
             var billingEmail = _driver.FindElement(By.Id("billing_email"));
             billingEmail.TypeText("info@berlinspaceflowers.com");
             _purchaseEmail = GenerateUniqueEmail();
-            var createAccountCheckBox = _driver.FindElement(By.Id("createaccount"));
-            createAccountCheckBox.Click();
-            var checkPaymentsRadioButton = _driver.FindElement(By.CssSelector("[for*='payment_method_cheque']"));
-            checkPaymentsRadioButton.Click();
+
+            // This pause will be removed when we introduce a logic for waiting for AJAX requests.
+            Thread.Sleep(5000);
             var placeOrderButton = _driver.FindElement(By.Id("place_order"));
             placeOrderButton.Click();
-            var receivedMessage = _driver.FindElement(By.XPath("//h1"));
+
+            Thread.Sleep(10000);
+            var receivedMessage = _driver.FindElement(By.XPath("//h1[text() = 'Order received']"));
 
             Assert.AreEqual("Order received", receivedMessage.Text);
             Debug.WriteLine($"End CompletePurchaseSuccessfully_WhenNewClient: {_stopWatch.Elapsed.TotalSeconds}");
@@ -99,7 +108,7 @@ namespace StabilizeTestsDemos.ThirdVersion
             var placeOrderButton = _driver.FindElement(By.Id("place_order"));
             placeOrderButton.Click();
 
-            Thread.Sleep(4000);
+            Thread.Sleep(10000);
             var receivedMessage = _driver.FindElement(By.XPath("//h1"));
             Assert.AreEqual("Order received", receivedMessage.Text);
 
@@ -127,7 +136,7 @@ namespace StabilizeTestsDemos.ThirdVersion
         {
             var quantityBox = _driver.FindElement(By.CssSelector("[class*='input-text qty text']"));
             quantityBox.TypeText("2");
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
             var updateCart = _driver.FindElement(By.CssSelector("[value*='Update cart']"));
             updateCart.Click();
             Thread.Sleep(4000);
@@ -142,7 +151,7 @@ namespace StabilizeTestsDemos.ThirdVersion
             couponCodeTextField.TypeText("happybirthday");
             var applyCouponButton = _driver.FindElement(By.CssSelector("[value*='Apply coupon']"));
             applyCouponButton.Click();
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
             var messageAlert = _driver.FindElement(By.CssSelector("[class*='woocommerce-message']"));
 
             Assert.AreEqual("Coupon code applied successfully.", messageAlert.Text);

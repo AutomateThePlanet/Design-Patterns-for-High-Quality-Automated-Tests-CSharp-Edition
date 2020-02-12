@@ -5,20 +5,19 @@ namespace ExtensibilityDemos
 {
     public class ToExistsWaitStrategy : WaitStrategy
     {
-        public ToExistsWaitStrategy(int? timeoutInterval = null, int? sleepInterval = null)
-            : base(timeoutInterval, sleepInterval)
+        public ToExistsWaitStrategy(int? timeoutIntervalInSeconds = null, int? sleepIntervalInSeconds = null)
+            : base(timeoutIntervalInSeconds, sleepIntervalInSeconds)
         {
-            TimeoutInterval = timeoutInterval;
         }
 
-        public override void WaitUntil(IWebDriver driver, By by)
+        public override void WaitUntil(ISearchContext searchContext, IWebDriver driver, By by)
         {
-            WaitUntil(ElementExists(driver, by), driver, TimeoutInterval, SleepInterval);
+            WaitUntil(ElementExists(searchContext, by), driver);
         }
 
-        private Func<IWebDriver, bool> ElementExists(ISearchContext searchContext, By by)
+        private Func<ISearchContext, bool> ElementExists(ISearchContext searchContext, By by)
         {
-            return driver =>
+            return _ =>
             {
                 try
                 {

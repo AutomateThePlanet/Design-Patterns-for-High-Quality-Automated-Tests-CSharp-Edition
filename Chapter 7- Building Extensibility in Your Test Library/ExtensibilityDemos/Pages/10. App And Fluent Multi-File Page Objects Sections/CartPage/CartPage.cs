@@ -33,9 +33,10 @@ namespace ExtensibilityDemos.Tenth
             return this;
         }
 
-        public CartPage ProceedToCheckout()
+        public CartPage ClickProceedToCheckout()
         {
             _elements.ProceedToCheckout.Click();
+            Driver.WaitUntilPageLoadsCompletely();
             return this;
         }
 

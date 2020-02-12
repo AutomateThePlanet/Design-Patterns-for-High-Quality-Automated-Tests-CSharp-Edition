@@ -12,7 +12,7 @@
         public string Zip { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public bool ShouldCreateAccount { get; set; }
-        public bool ShouldCheckPayment { get; set; }
+        public bool ShouldCreateAccount { get; set; } = false;
+        public bool ShouldCheckPayment { get; set; } = false;
     }
 }

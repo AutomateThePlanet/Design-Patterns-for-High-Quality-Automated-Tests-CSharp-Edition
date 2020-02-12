@@ -8,6 +8,15 @@ using OpenQA.Selenium.Support.UI;
 
 namespace StabilizeTestsDemos.SecondVersion
 {
+    /*
+    * The order of test execution is important. The tests should be executed in the following order:
+    * CompletePurchaseSuccessfully_WhenNewClient
+    * CompletePurchaseSuccessfully_WhenExistingClient
+    * CorrectOrderDataDisplayed_WhenNavigateToMyAccountOrderSection
+    *
+    * The tests may fail because the hard-coded pauses were not enough.
+    * This is the expected behavior showing that this is not the best practice.
+    */
     [TestClass]
     public class ProductPurchaseTests
     {
@@ -67,14 +76,13 @@ namespace StabilizeTestsDemos.SecondVersion
             var billingEmail = WaitAndFindElement(By.Id("billing_email"));
             billingEmail.SendKeys("info@berlinspaceflowers.com");
             _purchaseEmail = "info@berlinspaceflowers.com";
-            var createAccountCheckBox = WaitAndFindElement(By.Id("createaccount"));
-            createAccountCheckBox.Click();
-            var checkPaymentsRadioButton = WaitAndFindElement(By.CssSelector("[for*='payment_method_cheque']"));
-            checkPaymentsRadioButton.Click();
+
+            // This pause will be removed when we introduce a logic for waiting for AJAX requests.
+            Thread.Sleep(5000);
             var placeOrderButton = WaitAndFindElement(By.Id("place_order"));
             placeOrderButton.Click();
-
-            var receivedMessage = WaitAndFindElement(By.XPath("//h1"));
+           
+            var receivedMessage = WaitAndFindElement(By.XPath("//h1[text() = 'Order received']"));
             Assert.AreEqual("Order received", receivedMessage.Text);
         }
 
@@ -92,11 +100,12 @@ namespace StabilizeTestsDemos.SecondVersion
             loginHereLink.Click();
             Login(_purchaseEmail);
 
+            // This pause will be removed when we introduce a logic for waiting for AJAX requests.
+            Thread.Sleep(5000);
             var placeOrderButton = WaitAndFindElement(By.Id("place_order"));
             placeOrderButton.Click();
 
-            Thread.Sleep(4000);
-            var receivedMessage = WaitAndFindElement(By.XPath("//h1"));
+            var receivedMessage = WaitAndFindElement(By.XPath("//h1[text() = 'Order received']"));
             Assert.AreEqual("Order received", receivedMessage.Text);
 
             var orderNumber = WaitAndFindElement(By.XPath("//*[@id='post-7']/div/div/div/ul/li[1]/strong"));
@@ -127,6 +136,8 @@ namespace StabilizeTestsDemos.SecondVersion
         private void Login(string userName)
         {
             var userNameTextField = WaitAndFindElement(By.Id("username"));
+            // This pause will be removed when we introduce a logic for waiting for AJAX requests.
+            Thread.Sleep(5000);
             userNameTextField.SendKeys(userName);
             var passwordField = WaitAndFindElement(By.Id("password"));
             passwordField.SendKeys(GetUserPasswordFromDb(userName));
@@ -158,7 +169,7 @@ namespace StabilizeTestsDemos.SecondVersion
             var applyCouponButton = WaitAndFindElement(By.CssSelector("[value*='Apply coupon']"));
             applyCouponButton.Click();
 
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
             var messageAlert = WaitAndFindElement(By.CssSelector("[class*='woocommerce-message']"));
             Assert.AreEqual("Coupon code applied successfully.", messageAlert.Text);
         }
@@ -178,42 +189,22 @@ namespace StabilizeTestsDemos.SecondVersion
             return "@purISQzt%%DYBnLCIhaoG6$";
         }
 
-        private void WaitToBeClickable(By by, int timeoutInSeconds = 30)
+        private void WaitToBeClickable(By by)
         {
-            if (timeoutInSeconds > 0)
-            {
-                var webDriverWait = new WebDriverWait(_driver, TimeSpan.FromSeconds(timeoutInSeconds));
-                webDriverWait.IgnoreExceptionTypes(typeof(WebDriverException));
-                webDriverWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-                webDriverWait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
-                webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(by));
-            }
+            var webDriverWait = new WebDriverWait(_driver, TimeSpan.FromSeconds(30));
+            webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(by));
         }
 
-        private IWebElement WaitAndFindElement(By by, int timeoutInSeconds = 60)
+        private IWebElement WaitAndFindElement(By by)
         {
-            if (timeoutInSeconds > 0)
-            {
-                var webDriverWait = new WebDriverWait(_driver, TimeSpan.FromSeconds(timeoutInSeconds));
-                webDriverWait.IgnoreExceptionTypes(typeof(WebDriverException));
-                webDriverWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-                webDriverWait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
-                return webDriverWait.Until(drv => drv.FindElement(by));
-            }
-            return _driver.FindElement(by);
+            var webDriverWait = new WebDriverWait(_driver, TimeSpan.FromSeconds(30));
+            return webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(by));
         }
 
-        private ReadOnlyCollection<IWebElement> WaitAndFindElements(By by, int timeoutInSeconds = 60)
+        private ReadOnlyCollection<IWebElement> WaitAndFindElements(By by)
         {
-            if (timeoutInSeconds > 0)
-            {
-                var webDriverWait = new WebDriverWait(_driver, TimeSpan.FromSeconds(timeoutInSeconds));
-                webDriverWait.IgnoreExceptionTypes(typeof(WebDriverException));
-                webDriverWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-                webDriverWait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
-                return webDriverWait.Until(drv => drv.FindElements(by));
-            }
-            return _driver.FindElements(by);
+            var webDriverWait = new WebDriverWait(_driver, TimeSpan.FromSeconds(30));
+            return webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.PresenceOfAllElementsLocatedBy(by));
         }
     }
 }

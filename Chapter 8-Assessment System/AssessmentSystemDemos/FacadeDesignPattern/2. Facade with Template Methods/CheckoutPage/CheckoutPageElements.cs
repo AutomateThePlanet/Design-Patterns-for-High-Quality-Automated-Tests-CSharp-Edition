@@ -14,8 +14,8 @@ namespace AssessmentSystemDemos.Facades.Second
         public Element BillingFirstName => _driver.FindElement(By.Id("billing_first_name"));
         public Element BillingLastName => _driver.FindElement(By.Id("billing_last_name"));
         public Element BillingCompany => _driver.FindElement(By.Id("billing_company"));
-        public Element BillingCountryWrapper => _driver.FindElement(By.Id("billing_country"));
-        public Element BillingCountryFilter => _driver.FindElement(By.Id("search__field"));
+        public Element BillingCountryWrapper => _driver.FindElement(By.Id("select2-billing_country-container"));
+        public Element BillingCountryFilter => _driver.FindElement(By.ClassName("select2-search__field"));
         public Element BillingAddress1 => _driver.FindElement(By.Id("billing_address_1"));
         public Element BillingAddress2 => _driver.FindElement(By.Id("billing_address_2"));
         public Element BillingCity => _driver.FindElement(By.Id("billing_city"));

@@ -20,6 +20,7 @@
             Elements.BillingCountryWrapper.Click();
             Elements.BillingCountryFilter.TypeText(purchaseInfo.Country);
             Elements.GetCountryOptionByName(purchaseInfo.Country).Click();
+            Driver.WaitForAjax();
             Elements.BillingAddress1.TypeText(purchaseInfo.Address1);
             Elements.BillingAddress2.TypeText(purchaseInfo.Address2);
             Elements.BillingCity.TypeText(purchaseInfo.City);

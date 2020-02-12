@@ -4,6 +4,14 @@ using OpenQA.Selenium;
 
 namespace StabilizeTestsDemos.FourthVersion
 {
+    /*
+    * The order of test execution is important. The tests should be executed in the following order:
+    * CompletePurchaseSuccessfully_WhenNewClient
+    * CompletePurchaseSuccessfully_WhenExistingClient
+    * CorrectOrderDataDisplayed_WhenNavigateToMyAccountOrderSection
+    *
+    * This is the expected behavior showing that this is not the best practice.
+    */
     [TestClass]
     public class ProductPurchaseTests
     {
@@ -58,14 +66,11 @@ namespace StabilizeTestsDemos.FourthVersion
             var billingEmail = _driver.FindElement(By.Id("billing_email"));
             billingEmail.TypeText(GenerateUniqueEmail());
             _purchaseEmail = GenerateUniqueEmail();
-            var createAccountCheckBox = _driver.FindElement(By.Id("createaccount"));
-            createAccountCheckBox.Click();
-            var checkPaymentsRadioButton = _driver.FindElement(By.CssSelector("[for*='payment_method_cheque']"));
-            checkPaymentsRadioButton.Click();
+            _driver.WaitForAjax();
             var placeOrderButton = _driver.FindElement(By.Id("place_order"));
             placeOrderButton.Click();
             _driver.WaitForAjax();
-            var receivedMessage = _driver.FindElement(By.XPath("//h1"));
+            var receivedMessage = _driver.FindElement(By.XPath("//h1[text() = 'Order received']"));
 
             Assert.AreEqual("Order received", receivedMessage.Text);
         }
@@ -86,7 +91,7 @@ namespace StabilizeTestsDemos.FourthVersion
             var placeOrderButton = _driver.FindElement(By.Id("place_order"));
             placeOrderButton.Click();
             _driver.WaitForAjax();
-            var receivedMessage = _driver.FindElement(By.XPath("//h1"));
+            var receivedMessage = _driver.FindElement(By.XPath("//h1[text() = 'Order received']"));
 
             Assert.AreEqual("Order received", receivedMessage.Text);
 

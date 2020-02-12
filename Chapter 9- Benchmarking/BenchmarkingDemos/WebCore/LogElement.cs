@@ -72,10 +72,10 @@ namespace BenchmarkingDemos
             Element?.TypeText(text);
         }
 
-        public override void WaitToExists(int timeoutInSeconds = 30)
+        public override void WaitToExists()
         {
             Console.WriteLine($"Wait for Element with locator = {By}");
-            Element?.WaitToExists(timeoutInSeconds);
+            Element?.WaitToExists();
         }
     }
 }

@@ -24,7 +24,6 @@ namespace TestDataPreparationDemos.Tenth
             _elements.CouponCodeTextField.TypeText(coupon);
             _elements.ApplyCouponButton.Click();
             Driver.WaitForAjax();
-
             return this;
         }
 
@@ -39,8 +38,7 @@ namespace TestDataPreparationDemos.Tenth
         public CartPage ProceedToCheckout()
         {
             _elements.ProceedToCheckout.Click();
-            _elements.ProceedToCheckout.Click();
-
+            Driver.WaitUntilPageLoadsCompletely();
             return this;
         }
 

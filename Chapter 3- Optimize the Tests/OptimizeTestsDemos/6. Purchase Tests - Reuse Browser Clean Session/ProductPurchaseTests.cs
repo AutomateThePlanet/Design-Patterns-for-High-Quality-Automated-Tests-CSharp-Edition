@@ -4,6 +4,14 @@ using OpenQA.Selenium;
 
 namespace StabilizeTestsDemos.SixthVersion
 {
+    /*
+     * The order of test execution is important. The tests should be executed in the following order:
+     * CompletePurchaseSuccessfully_WhenNewClient
+     * CompletePurchaseSuccessfully_WhenExistingClient
+     * CorrectOrderDataDisplayed_WhenNavigateToMyAccountOrderSection
+     *
+     * This is the expected behavior showing that this is not the best practice.
+     */
     [TestClass]
     [ExecutionBrowser(Browser.Chrome, BrowserBehavior.ReuseIfStarted)]
     public class ProductPurchaseTests : BaseTest
@@ -45,14 +53,11 @@ namespace StabilizeTestsDemos.SixthVersion
             var billingEmail = Driver.FindElement(By.Id("billing_email"));
             billingEmail.TypeText(GenerateUniqueEmail());
             _purchaseEmail = GenerateUniqueEmail();
-            var createAccountCheckBox = Driver.FindElement(By.Id("createaccount"));
-            createAccountCheckBox.Click();
-            var checkPaymentsRadioButton = Driver.FindElement(By.CssSelector("[for*='payment_method_cheque']"));
-            checkPaymentsRadioButton.Click();
+            Driver.WaitForAjax();
             var placeOrderButton = Driver.FindElement(By.Id("place_order"));
             placeOrderButton.Click();
             Driver.WaitForAjax();
-            var receivedMessage = Driver.FindElement(By.XPath("//h1"));
+            var receivedMessage = Driver.FindElement(By.XPath("//h1[text() = 'Order received']"));
 
             Assert.AreEqual("Order received", receivedMessage.Text);
         }
@@ -74,7 +79,7 @@ namespace StabilizeTestsDemos.SixthVersion
             placeOrderButton.Click();
             Driver.WaitForAjax();
 
-            var receivedMessage = Driver.FindElement(By.XPath("//h1"));
+            var receivedMessage = Driver.FindElement(By.XPath("//h1[text() = 'Order received']"));
             Assert.AreEqual("Order received", receivedMessage.Text);
 
             var orderNumber = Driver.FindElement(By.XPath("//*[@id='post-7']/div/div/div/ul/li[1]/strong"));
@@ -98,7 +103,7 @@ namespace StabilizeTestsDemos.SixthVersion
             var quantityBox = Driver.FindElement(By.CssSelector("[class*='input-text qty text']"));
             quantityBox.TypeText("2");
             Driver.WaitForAjax();
-            ////Thread.Sleep(2000);
+            ////Thread.Sleep(5000);
             var updateCart = Driver.FindElement(By.CssSelector("[value*='Update cart']"));
             updateCart.Click();
             ////Thread.Sleep(4000);
@@ -114,7 +119,7 @@ namespace StabilizeTestsDemos.SixthVersion
             couponCodeTextField.TypeText("happybirthday");
             var applyCouponButton = Driver.FindElement(By.CssSelector("[value*='Apply coupon']"));
             applyCouponButton.Click();
-            ////Thread.Sleep(2000);
+            ////Thread.Sleep(5000);
             Driver.WaitForAjax();
 
             var messageAlert = Driver.FindElement(By.CssSelector("[class*='woocommerce-message']"));

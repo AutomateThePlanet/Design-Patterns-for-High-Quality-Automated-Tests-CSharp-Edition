@@ -37,10 +37,11 @@ namespace TestsMaintainabilityDemos.Facades.First
             _cartPage.Assertions.AssertCouponAppliedSuccessfully();
             _cartPage.IncreaseProductQuantity(2);
             _cartPage.Assertions.AssertTotalPrice("114.00€");
-            _cartPage.Elements.ProceedToCheckout.Click();
+            _cartPage.ClickProceedToCheckout();
 
             var purchaseInfo = new PurchaseInfo()
                                {
+                                   Email = "info@berlinspaceflowers.com",
                                    FirstName = "Anton",
                                    LastName = "Angelov",
                                    Company = "Space Flowers",
@@ -64,10 +65,11 @@ namespace TestsMaintainabilityDemos.Facades.First
             _cartPage.Assertions.AssertCouponAppliedSuccessfully();
             _cartPage.IncreaseProductQuantity(3);
             _cartPage.Assertions.AssertTotalPrice("355.00€");
-            _cartPage.Elements.ProceedToCheckout.Click();
+            _cartPage.ClickProceedToCheckout();
 
             var purchaseInfo = new PurchaseInfo()
                                {
+                                   Email = "info@berlinspaceflowers.com",
                                    FirstName = "John",
                                    LastName = "Atanasov",
                                    Company = "Space Flowers",
@@ -87,6 +89,7 @@ namespace TestsMaintainabilityDemos.Facades.First
         {
             var purchaseInfo = new PurchaseInfo()
                                {
+                                   Email = "info@berlinspaceflowers.com",
                                    FirstName = "Anton",
                                    LastName = "Angelov",
                                    Company = "Space Flowers",
@@ -106,6 +109,7 @@ namespace TestsMaintainabilityDemos.Facades.First
         {
             var purchaseInfo = new PurchaseInfo()
                                {
+                                   Email = "info@berlinspaceflowers.com",
                                    FirstName = "John",
                                    LastName = "Atanasov",
                                    Company = "Space Flowers",

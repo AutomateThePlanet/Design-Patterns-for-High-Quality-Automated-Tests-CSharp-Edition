@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ExtensibilityDemos.Locators;
 
 namespace ExtensibilityDemos
 {
@@ -114,17 +115,17 @@ namespace ExtensibilityDemos
             return Driver?.FindAllByLinkText(linkText);
         }
 
-        public override List<TElement> FindAll<TFindStrategy, TElement>(TFindStrategy findStrategy)
+        public override List<Element> FindAll(FindStrategy findStrategy)
         {
-            return Driver?.FindAll<TFindStrategy, TElement>(findStrategy);
+            return Driver?.FindAll(findStrategy);
         }
 
-        public override TElement Find<TFindStrategy, TElement>(TFindStrategy findStrategy)
+        public override Element Find(FindStrategy findStrategy)
         {
-            return Driver?.Find<TFindStrategy, TElement>(findStrategy);
+            return Driver?.Find(findStrategy);
         }
 
-        public override void Wait<TWaitStrategy, TElement>(TElement element, TWaitStrategy waitStrategy)
+        public override void Wait(Element element, WaitStrategy waitStrategy)
         {
             Driver?.Wait(element, waitStrategy);
         }

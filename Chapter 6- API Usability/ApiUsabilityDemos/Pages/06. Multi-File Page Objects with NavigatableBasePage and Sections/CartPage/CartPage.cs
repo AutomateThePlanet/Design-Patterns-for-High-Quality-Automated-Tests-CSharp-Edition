@@ -14,7 +14,6 @@
 
         protected override string Url => "http://demos.bellatrix.solutions/cart/";
 
-
         public void ApplyCoupon(string coupon)
         {
             Elements.CouponCodeTextField.TypeText(coupon);
@@ -32,6 +31,7 @@
         public void ProceedToCheckout()
         {
             Elements.ProceedToCheckout.Click();
+            Driver.WaitUntilPageLoadsCompletely();
         }
 
         public string GetTotal()

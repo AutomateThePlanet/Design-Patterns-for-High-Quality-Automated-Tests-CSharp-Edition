@@ -36,6 +36,7 @@ namespace ApiUsabilityDemos.Tenth
         public CartPage ProceedToCheckout()
         {
             _elements.ProceedToCheckout.Click();
+            Driver.WaitUntilPageLoadsCompletely();
             return this;
         }
 

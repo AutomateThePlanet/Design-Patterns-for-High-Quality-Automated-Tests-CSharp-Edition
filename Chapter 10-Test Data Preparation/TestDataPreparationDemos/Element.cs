@@ -12,6 +12,6 @@ namespace TestDataPreparationDemos
         public abstract Element FindElement(By locator);
         public abstract void Click();
         public abstract string GetAttribute(string attributeName);
-        public abstract void WaitToExists(int timeoutInSeconds = 30);
+        public abstract void WaitToExists();
     }
 }

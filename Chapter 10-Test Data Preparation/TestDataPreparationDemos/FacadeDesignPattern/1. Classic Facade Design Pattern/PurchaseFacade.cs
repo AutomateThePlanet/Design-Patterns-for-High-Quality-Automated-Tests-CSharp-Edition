@@ -21,7 +21,7 @@
             _cartPage.Assertions.AssertCouponAppliedSuccessfully();
             _cartPage.IncreaseProductQuantity(quantity);
             _cartPage.Assertions.AssertTotalPrice(expectedPrice);
-            _cartPage.Elements.ProceedToCheckout.Click();
+            _cartPage.ClickProceedToCheckout();
             _checkoutPage.FillBillingInfo(purchaseInfo);
             _checkoutPage.Assertions.AssertOrderReceived();
         }

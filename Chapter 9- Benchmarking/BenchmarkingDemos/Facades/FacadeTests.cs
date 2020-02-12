@@ -9,7 +9,7 @@ namespace BenchmarkingDemos.Facades.Second
         private static MainPage _mainPage;
         private static CartPage _cartPage;
         private static CheckoutPage _checkoutPage;
-        private static PurchaseFirstVersionFacade _purchaseFirstVersionFacade;
+        private static NewPurchaseFacade _newPurchaseFacade;
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext testContext)
@@ -19,7 +19,7 @@ namespace BenchmarkingDemos.Facades.Second
             _mainPage = new MainPage(_driver);
             _cartPage = new CartPage(_driver);
             _checkoutPage = new CheckoutPage(_driver);
-            _purchaseFirstVersionFacade = new PurchaseFirstVersionFacade(_mainPage, _cartPage, _checkoutPage);
+            _newPurchaseFacade = new NewPurchaseFacade(_mainPage, _cartPage, _checkoutPage);
         }
 
         [ClassCleanup]
@@ -33,6 +33,7 @@ namespace BenchmarkingDemos.Facades.Second
         {
             var purchaseInfo = new PurchaseInfo
                                {
+                                   Email = "info@berlinspaceflowers.com",
                                    FirstName = "Anton",
                                    LastName = "Angelov",
                                    Company = "Space Flowers",
@@ -44,7 +45,7 @@ namespace BenchmarkingDemos.Facades.Second
                                    Phone = "+00498888999281",
                                };
 
-            _purchaseFirstVersionFacade.PurchaseItem("Falcon 9", "happybirthday", 2, "114.00€", purchaseInfo);
+            _newPurchaseFacade.PurchaseItem("Falcon 9", "happybirthday", 2, "114.00€", purchaseInfo);
         }
 
         [TestMethod]
@@ -52,6 +53,7 @@ namespace BenchmarkingDemos.Facades.Second
         {
             var purchaseInfo = new PurchaseInfo
                                {
+                                   Email = "info@berlinspaceflowers.com",
                                    FirstName = "John",
                                    LastName = "Atanasov",
                                    Company = "Space Flowers",
@@ -63,7 +65,7 @@ namespace BenchmarkingDemos.Facades.Second
                                    Phone = "+00498888999281",
                                };
 
-            _purchaseFirstVersionFacade.PurchaseItem("Saturn V", "happybirthday", 3, "355.00€", purchaseInfo);
+            _newPurchaseFacade.PurchaseItem("Saturn V", "happybirthday", 3, "355.00€", purchaseInfo);
         }
     }
 }

@@ -39,6 +39,7 @@ namespace TestsMaintainabilityDemos.Fifth
         public void ClickProceedToCheckout()
         {
             ProceedToCheckout.Click();
+            Driver.WaitUntilPageLoadsCompletely();
         }
 
         public string GetTotal()
