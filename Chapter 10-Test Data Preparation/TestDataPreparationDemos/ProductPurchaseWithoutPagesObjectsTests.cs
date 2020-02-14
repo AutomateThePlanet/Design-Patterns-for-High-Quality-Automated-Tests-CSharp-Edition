@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
-using System.Threading;
 
 namespace TestDataPreparationDemos
 {

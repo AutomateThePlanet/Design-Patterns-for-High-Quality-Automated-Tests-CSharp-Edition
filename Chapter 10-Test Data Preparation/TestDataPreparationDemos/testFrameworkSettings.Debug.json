@@ -1,6 +1,6 @@
 ﻿{
   "webSettings": {
-    "baseUrl": "http://local.bellatrix.solutions/",
+    "baseUrl": "http://demos.bellatrix.solutions/",
     "elementWaitTimeout": "30",
     "chrome": {
       "pageLoadTimeout": "120",
@@ -34,11 +34,11 @@
     }
   },
   "urlSettings": {
-    "shopUrl": "http://local.bellatrix.solutions/cart/",
-    "accountUrl": "http://local.bellatrix.solutions/account/"
+    "shopUrl": "http://demos.bellatrix.solutions/cart/",
+    "accountUrl": "http://demos.bellatrix.solutions/account/"
   },
   "billingInfoDefaultValues": {
-    "email": "angelov@spaceFlowers.com",
+    "email": "info@spaceFlowers.com",
     "company": "Space Flowers",
     "country": "Germany",
     "firstName": "Anton",

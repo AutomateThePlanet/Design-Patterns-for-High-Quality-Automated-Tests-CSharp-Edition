@@ -32,44 +32,6 @@ namespace TestDataPreparationDemos.Facades.Second
         }
 
         [TestMethod]
-        public void PurchaseFalcon9WithFacade()
-        {
-            var purchaseInfo = new PurchaseInfo
-                               {
-                                   FirstName = "Anton",
-                                   LastName = "Angelov",
-                                   Company = "Space Flowers",
-                                   Country = "Germany",
-                                   Address1 = "1 Willi Brandt Avenue Tiergarten",
-                                   Address2 = "Lützowplatz 17",
-                                   City = "Berlin",
-                                   Zip = "10115",
-                                   Phone = "+00498888999281",
-                               };
-
-            _purchaseFirstVersionFacade.PurchaseItem("Falcon 9", "happybirthday", 2, "114.00€", purchaseInfo);
-        }
-
-        [TestMethod]
-        public void PurchaseSaturnVWithFacade()
-        {
-            var purchaseInfo = new PurchaseInfo
-                               {
-                                   FirstName = "John",
-                                   LastName = "Atanasov",
-                                   Company = "Space Flowers",
-                                   Country = "Germany",
-                                   Address1 = "1 Willi Brandt Avenue Tiergarten",
-                                   Address2 = "Lützowplatz 17",
-                                   City = "Berlin",
-                                   Zip = "10115",
-                                   Phone = "+00498888999281",
-                               };
-
-            _purchaseFirstVersionFacade.PurchaseItem("Saturn V", "happybirthday", 3, "355.00€", purchaseInfo);
-        }
-
-        [TestMethod]
         public void PurchaseSaturnVWithRandomNoteFacade()
         {
             var purchaseInfo = new PurchaseInfo();

@@ -60,6 +60,7 @@ namespace TestDataPreparationDemos.DataStubs
         }
 
         [TestMethod]
+        [Ignore]
         public void RequestRedirected_When_UsingProxyRedirect()
         {
             SetUrlToBeRedirectedTo("https://secure.gravatar.com/js/gprofiles.js?ver=2019Junaa", "https://stub.gravatar.com/js/gprofiles.js?ver=2019Junaa");
