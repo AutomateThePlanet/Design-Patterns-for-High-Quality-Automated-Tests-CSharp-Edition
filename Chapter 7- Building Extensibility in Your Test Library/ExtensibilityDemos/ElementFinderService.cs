@@ -22,23 +22,9 @@ namespace ExtensibilityDemos
             return element;
         }
 
-        public IWebElement Find(By by)
-        {
-            Wait.To.Exists().WaitUntil(_searchContext, _driver, by);
-            var element = _searchContext.FindElement(by);
-            return element;
-        }
-
-        public IEnumerable<IWebElement> FindAll(By by)
-        {
-            Wait.To.Exists().WaitUntil(_searchContext, _driver, by);
-            IEnumerable<IWebElement> result = _searchContext.FindElements(by);
-            return result;
-        }
-
         public IEnumerable<IWebElement> FindAll(FindStrategy findStrategy)
         {
-            new ToExistsWaitStrategy().WaitUntil(_searchContext, _driver, findStrategy.Convert());
+            Wait.To.Exists().WaitUntil(_searchContext, _driver, findStrategy.Convert());
             IEnumerable<IWebElement> result = _searchContext.FindElements(findStrategy.Convert());
             return result;
         }

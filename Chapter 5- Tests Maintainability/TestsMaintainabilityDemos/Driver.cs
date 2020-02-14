@@ -11,7 +11,6 @@ namespace TestsMaintainabilityDemos
         public abstract Element FindElement(By locator);
         public abstract List<Element> FindElements(By locator);
         public abstract void WaitForAjax();
-        public abstract void WaitForJavaScriptAnimations();
         public abstract void WaitUntilPageLoadsCompletely();
     }
 }

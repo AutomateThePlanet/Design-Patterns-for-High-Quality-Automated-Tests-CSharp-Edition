@@ -11,7 +11,6 @@ namespace ExtensibilityDemos
         public abstract void Quit();
         public abstract void GoToUrl(string url);
         public abstract void WaitForAjax();
-        public abstract void WaitForJavaScriptAnimations();
         public abstract void WaitUntilPageLoadsCompletely();
         public abstract Element FindById(string id);
         public abstract Element FindByXPath(string xpath);

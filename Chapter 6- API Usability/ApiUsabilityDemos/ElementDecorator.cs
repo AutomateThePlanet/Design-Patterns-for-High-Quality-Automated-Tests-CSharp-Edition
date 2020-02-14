@@ -11,37 +11,13 @@ namespace ApiUsabilityDemos
             this.Element = element;
         }
 
-        public override By By
-        {
-            get
-            {
-                return Element?.By;
-            }
-        }
+        public override By By => Element?.By;
 
-        public override string Text
-        {
-            get
-            {
-                return Element?.Text;
-            }
-        }
+        public override string Text => Element?.Text;
 
-        public override bool? Enabled
-        {
-            get
-            {
-                return Element?.Enabled;
-            }
-        }
+        public override bool? Enabled => Element?.Enabled;
 
-        public override bool? Displayed
-        {
-            get
-            {
-                return Element?.Displayed;
-            }
-        }
+        public override bool? Displayed => Element?.Displayed;
 
         public override void Click()
         {

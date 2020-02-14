@@ -90,12 +90,6 @@ namespace AssessmentSystemDemos
             _webDriverWait.Until(wd => js.ExecuteScript("return jQuery.active").ToString() == "0");
         }
 
-        public override void WaitForJavaScriptAnimations()
-        {
-            var js = (IJavaScriptExecutor)_webDriver;
-            _webDriverWait.Until(wd => js.ExecuteScript("jQuery(':animated').length").ToString() == "0");
-        }
-
         public override void WaitUntilPageLoadsCompletely()
         {
             var js = (IJavaScriptExecutor)_webDriver;

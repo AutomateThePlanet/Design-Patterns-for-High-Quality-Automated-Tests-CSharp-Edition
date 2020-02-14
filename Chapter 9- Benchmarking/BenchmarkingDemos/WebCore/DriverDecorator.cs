@@ -45,11 +45,6 @@ namespace BenchmarkingDemos
             Driver?.WaitForAjax();
         }
 
-        public override void WaitForJavaScriptAnimations()
-        {
-            Driver?.WaitForJavaScriptAnimations();
-        }
-
         public override void WaitUntilPageLoadsCompletely()
         {
             Driver?.WaitUntilPageLoadsCompletely();
