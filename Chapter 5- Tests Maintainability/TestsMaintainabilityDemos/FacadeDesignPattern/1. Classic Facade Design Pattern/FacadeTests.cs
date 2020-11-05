@@ -36,7 +36,7 @@ namespace TestsMaintainabilityDemos.Facades.First
             _cartPage.ApplyCoupon("happybirthday");
             _cartPage.Assertions.AssertCouponAppliedSuccessfully();
             _cartPage.IncreaseProductQuantity(2);
-            _cartPage.Assertions.AssertTotalPrice("114.00€");
+            _cartPage.Assertions.AssertTotalPrice("114.00ˆ");
             _cartPage.ClickProceedToCheckout();
 
             var purchaseInfo = new PurchaseInfo()
@@ -64,7 +64,7 @@ namespace TestsMaintainabilityDemos.Facades.First
             _cartPage.ApplyCoupon("happybirthday");
             _cartPage.Assertions.AssertCouponAppliedSuccessfully();
             _cartPage.IncreaseProductQuantity(3);
-            _cartPage.Assertions.AssertTotalPrice("355.00€");
+            _cartPage.Assertions.AssertTotalPrice("355.00ˆ");
             _cartPage.ClickProceedToCheckout();
 
             var purchaseInfo = new PurchaseInfo()
@@ -101,7 +101,7 @@ namespace TestsMaintainabilityDemos.Facades.First
                                    Phone = "+00498888999281",
                                };
 
-            _purchaseFacade.PurchaseItem("Falcon 9", "happybirthday", 2, "114.00€", purchaseInfo);
+            _purchaseFacade.PurchaseItem("Falcon 9", "happybirthday", 2, "114.00ˆ", purchaseInfo);
         }
 
         [TestMethod]
@@ -121,7 +121,7 @@ namespace TestsMaintainabilityDemos.Facades.First
                                    Phone = "+00498888999281",
                                };
 
-            _purchaseFacade.PurchaseItem("Saturn V", "happybirthday", 3, "355.00€", purchaseInfo);
+            _purchaseFacade.PurchaseItem("Saturn V", "happybirthday", 3, "355.00ˆ", purchaseInfo);
         }
     }
 }

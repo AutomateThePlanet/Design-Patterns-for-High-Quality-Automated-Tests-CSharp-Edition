@@ -64,7 +64,7 @@ namespace StabilizeTestsDemos.FirstVersion
             updateCart.Click();
             Thread.Sleep(5000);
             var totalSpan = _driver.FindElement(By.XPath("//*[@class='order-total']//span"));
-            Assert.AreEqual("114.00€", totalSpan.Text);
+            Assert.AreEqual("114.00ˆ", totalSpan.Text);
 
             var proceedToCheckout = _driver.FindElement(By.CssSelector("[class*='checkout-button button alt wc-forward']"));
             proceedToCheckout.Click();
@@ -133,7 +133,7 @@ namespace StabilizeTestsDemos.FirstVersion
             updateCart.Click();
             Thread.Sleep(5000);
             var totalSpan = _driver.FindElement(By.XPath("//*[@class='order-total']//span"));
-            Assert.AreEqual("114.00€", totalSpan.Text);
+            Assert.AreEqual("114.00ˆ", totalSpan.Text);
 
             var proceedToCheckout = _driver.FindElement(By.CssSelector("[class*='checkout-button button alt wc-forward']"));
             proceedToCheckout.Click();

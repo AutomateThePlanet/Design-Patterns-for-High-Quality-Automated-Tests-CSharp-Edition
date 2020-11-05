@@ -38,7 +38,7 @@ namespace TestDataPreparationDemos.Facades.Second
             var fixture = new Fixture();
             purchaseInfo.Note = fixture.Create<string>();
 
-            _purchaseFirstVersionFacade.PurchaseItem("Saturn V", "happybirthday", 3, "355.00€", purchaseInfo);
+            _purchaseFirstVersionFacade.PurchaseItem("Saturn V", "happybirthday", 3, "355.00ˆ", purchaseInfo);
         }
 
         // .NET Core does not support the DataSource attribute. If you try to access test data in this way in a .NET Core or UWP unit test project, 

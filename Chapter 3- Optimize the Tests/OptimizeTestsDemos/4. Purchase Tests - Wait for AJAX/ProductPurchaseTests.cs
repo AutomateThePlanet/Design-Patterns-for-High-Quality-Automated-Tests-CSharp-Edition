@@ -121,7 +121,7 @@ namespace StabilizeTestsDemos.FourthVersion
             _driver.WaitForAjax();
             var totalSpan = _driver.FindElement(By.XPath("//*[@class='order-total']//span"));
 
-            Assert.AreEqual("114.00€", totalSpan.Text);
+            Assert.AreEqual("114.00ˆ", totalSpan.Text);
         }
 
         private void ApplyCoupon()

@@ -31,7 +31,7 @@ namespace AssessmentSystemDemos.Tenth
             cartPage.ApplyCoupon("happybirthday")
                 .AssertMessageNotification("Coupon code applied successfully.")
                 .IncreaseProductQuantity(2)
-                .AssertTotal("114.00€")
+                .AssertTotal("114.00ˆ")
                 .ProceedToCheckout();
         }
     }
