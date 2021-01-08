@@ -10,9 +10,9 @@ using OpenQA.Selenium.Opera;
 using OpenQA.Selenium.Safari;
 using OpenQA.Selenium.Support.UI;
 
-namespace StabilizeTestsDemos.ThirdVersion
+namespace StabilizeTestsDemos.FourthVersion
 {
-    public class WebDriver : Driver
+    public class WebCoreDriver : Driver
     {
         private IWebDriver _webDriver;
         private WebDriverWait _webDriverWait;
@@ -80,6 +80,18 @@ namespace StabilizeTestsDemos.ThirdVersion
             }
 
             return elements;
+        }
+
+        public override void WaitForAjax()
+        {
+            var js = (IJavaScriptExecutor)_webDriver;
+            _webDriverWait.Until(wd => js.ExecuteScript("return jQuery.active").ToString() == "0");
+        }
+
+        public override void WaitUntilPageLoadsCompletely()
+        {
+            var js = (IJavaScriptExecutor)_webDriver;
+            _webDriverWait.Until(wd => js.ExecuteScript("return document.readyState").ToString() == "complete");
         }
     }
 }

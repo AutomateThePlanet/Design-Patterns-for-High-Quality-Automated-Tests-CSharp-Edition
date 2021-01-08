@@ -1,4 +1,14 @@
-﻿using System;
+﻿// Copyright 2021 Automate The Planet Ltd.
+// Author: Anton Angelov
+// Licensed under the Apache License, Version 2.0 (the "License");
+// You may not use this file except in compliance with the License.
+// You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using OpenQA.Selenium;
@@ -10,9 +20,9 @@ using OpenQA.Selenium.Opera;
 using OpenQA.Selenium.Safari;
 using OpenQA.Selenium.Support.UI;
 
-namespace StabilizeTestsDemos.FourthVersion
+namespace StabilizeTestsDemos.ThirdVersion
 {
-    public class WebDriver : Driver
+    public class WebCoreDriver : Driver
     {
         private IWebDriver _webDriver;
         private WebDriverWait _webDriverWait;
@@ -80,18 +90,6 @@ namespace StabilizeTestsDemos.FourthVersion
             }
 
             return elements;
-        }
-
-        public override void WaitForAjax()
-        {
-            var js = (IJavaScriptExecutor)_webDriver;
-            _webDriverWait.Until(wd => js.ExecuteScript("return jQuery.active").ToString() == "0");
-        }
-
-        public override void WaitUntilPageLoadsCompletely()
-        {
-            var js = (IJavaScriptExecutor)_webDriver;
-            _webDriverWait.Until(wd => js.ExecuteScript("return document.readyState").ToString() == "complete");
         }
     }
 }

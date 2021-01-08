@@ -22,7 +22,7 @@ namespace StabilizeTestsDemos.FourthVersion
         [TestInitialize]
         public void TestInitialize()
         {
-            _driver = new LoggingDriver(new WebDriver());
+            _driver = new LoggingDriver(new WebCoreDriver());
             _driver.Start(Browser.Chrome);
         }
 

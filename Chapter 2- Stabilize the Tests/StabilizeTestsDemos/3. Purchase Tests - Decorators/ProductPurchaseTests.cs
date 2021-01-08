@@ -24,7 +24,7 @@ namespace StabilizeTestsDemos.ThirdVersion
         [ClassInitialize]
         public static void ClassInitialize(TestContext testContext)
         {
-            _driver = new LoggingDriver(new WebDriver());
+            _driver = new LoggingDriver(new WebCoreDriver());
             _driver.Start(Browser.Chrome);
         }
 
