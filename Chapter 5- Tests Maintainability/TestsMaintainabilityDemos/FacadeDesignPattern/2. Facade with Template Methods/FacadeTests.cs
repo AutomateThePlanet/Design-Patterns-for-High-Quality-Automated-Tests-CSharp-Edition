@@ -1,4 +1,4 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+ï»¿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestsMaintainabilityDemos.Facades.Second
 {
@@ -39,13 +39,13 @@ namespace TestsMaintainabilityDemos.Facades.Second
                                    Company = "Space Flowers",
                                    Country = "Germany",
                                    Address1 = "1 Willi Brandt Avenue Tiergarten",
-                                   Address2 = "Lützowplatz 17",
+                                   Address2 = "LÃ¼tzowplatz 17",
                                    City = "Berlin",
                                    Zip = "10115",
                                    Phone = "+00498888999281",
                                };
 
-            _newPurchaseFacade.PurchaseItem("Falcon 9", "happybirthday", 2, "114.00ˆ", purchaseInfo);
+            _newPurchaseFacade.PurchaseItem("Falcon 9", "happybirthday", 2, "114.00â‚¬", purchaseInfo);
         }
 
         [TestMethod]
@@ -59,13 +59,13 @@ namespace TestsMaintainabilityDemos.Facades.Second
                                    Company = "Space Flowers",
                                    Country = "Germany",
                                    Address1 = "1 Willi Brandt Avenue Tiergarten",
-                                   Address2 = "Lützowplatz 17",
+                                   Address2 = "LÃ¼tzowplatz 17",
                                    City = "Berlin",
                                    Zip = "10115",
                                    Phone = "+00498888999281",
                                };
 
-            _newPurchaseFacade.PurchaseItem("Saturn V", "happybirthday", 3, "355.00ˆ", purchaseInfo);
+            _newPurchaseFacade.PurchaseItem("Saturn V", "happybirthday", 3, "355.00â‚¬", purchaseInfo);
         }
     }
 }
