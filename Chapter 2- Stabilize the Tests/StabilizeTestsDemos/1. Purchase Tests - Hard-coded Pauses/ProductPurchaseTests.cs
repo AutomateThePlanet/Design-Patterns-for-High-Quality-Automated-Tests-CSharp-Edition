@@ -1,4 +1,4 @@
-// Copyright 2021 Automate The Planet Ltd.
+ï»¿// Copyright 2021 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -74,7 +74,7 @@ namespace StabilizeTestsDemos.FirstVersion
             updateCart.Click();
             Thread.Sleep(5000);
             var totalSpan = _driver.FindElement(By.XPath("//*[@class='order-total']//span"));
-            Assert.AreEqual("114.00ˆ", totalSpan.Text);
+            Assert.AreEqual("114.00â‚¬", totalSpan.Text);
 
             var proceedToCheckout = _driver.FindElement(By.CssSelector("[class*='checkout-button button alt wc-forward']"));
             proceedToCheckout.Click();
@@ -94,7 +94,7 @@ namespace StabilizeTestsDemos.FirstVersion
             var billingAddress1 = _driver.FindElement(By.Id("billing_address_1"));
             billingAddress1.SendKeys("1 Willi Brandt Avenue Tiergarten");
             var billingAddress2 = _driver.FindElement(By.Id("billing_address_2"));
-            billingAddress2.SendKeys("Lützowplatz 17");
+            billingAddress2.SendKeys("LÃ¼tzowplatz 17");
             var billingCity = _driver.FindElement(By.Id("billing_city"));
             billingCity.SendKeys("Berlin");
             var billingZip = _driver.FindElement(By.Id("billing_postcode"));
@@ -143,7 +143,7 @@ namespace StabilizeTestsDemos.FirstVersion
             updateCart.Click();
             Thread.Sleep(5000);
             var totalSpan = _driver.FindElement(By.XPath("//*[@class='order-total']//span"));
-            Assert.AreEqual("114.00ˆ", totalSpan.Text);
+            Assert.AreEqual("114.00â‚¬", totalSpan.Text);
 
             var proceedToCheckout = _driver.FindElement(By.CssSelector("[class*='checkout-button button alt wc-forward']"));
             proceedToCheckout.Click();
