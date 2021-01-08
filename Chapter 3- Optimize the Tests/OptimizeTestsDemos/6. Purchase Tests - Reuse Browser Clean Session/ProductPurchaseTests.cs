@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 
@@ -43,7 +43,7 @@ namespace StabilizeTestsDemos.SixthVersion
             var billingAddress1 = Driver.FindElement(By.Id("billing_address_1"));
             billingAddress1.TypeText("1 Willi Brandt Avenue Tiergarten");
             var billingAddress2 = Driver.FindElement(By.Id("billing_address_2"));
-            billingAddress2.TypeText("Lützowplatz 17");
+            billingAddress2.TypeText("LÃ¼tzowplatz 17");
             var billingCity = Driver.FindElement(By.Id("billing_city"));
             billingCity.TypeText("Berlin");
             var billingZip = Driver.FindElement(By.Id("billing_postcode"));
@@ -110,7 +110,7 @@ namespace StabilizeTestsDemos.SixthVersion
             Driver.WaitForAjax();
 
             var totalSpan = Driver.FindElement(By.XPath("//*[@class='order-total']//span"));
-            Assert.AreEqual("114.00ˆ", totalSpan.Text);
+            Assert.AreEqual("114.00Ë†", totalSpan.Text);
         }
 
         private void ApplyCoupon()

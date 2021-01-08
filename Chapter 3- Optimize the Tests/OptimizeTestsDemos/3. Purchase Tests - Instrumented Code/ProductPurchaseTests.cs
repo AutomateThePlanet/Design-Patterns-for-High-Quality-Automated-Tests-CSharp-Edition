@@ -1,3 +1,13 @@
+ï»¿// Copyright 2021 Automate The Planet Ltd.
+// Author: Anton Angelov
+// Licensed under the Apache License, Version 2.0 (the "License");
+// You may not use this file except in compliance with the License.
+// You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 using System;
 using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -66,7 +76,7 @@ namespace StabilizeTestsDemos.ThirdVersion
             var billingAddress1 = _driver.FindElement(By.Id("billing_address_1"));
             billingAddress1.TypeText("1 Willi Brandt Avenue Tiergarten");
             var billingAddress2 = _driver.FindElement(By.Id("billing_address_2"));
-            billingAddress2.TypeText("Lützowplatz 17");
+            billingAddress2.TypeText("LÃ¼tzowplatz 17");
             var billingCity = _driver.FindElement(By.Id("billing_city"));
             billingCity.TypeText("Berlin");
             var billingZip = _driver.FindElement(By.Id("billing_postcode"));
@@ -142,7 +152,7 @@ namespace StabilizeTestsDemos.ThirdVersion
             Thread.Sleep(4000);
 
             var totalSpan = _driver.FindElement(By.XPath("//*[@class='order-total']//span"));
-            Assert.AreEqual("114.00ˆ", totalSpan.Text);
+            Assert.AreEqual("114.00Ë†", totalSpan.Text);
         }
 
         private void ApplyCoupon()
