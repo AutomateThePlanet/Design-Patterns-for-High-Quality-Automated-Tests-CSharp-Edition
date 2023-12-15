@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -8,17 +8,16 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-namespace BenchmarkingDemos
+namespace BenchmarkingDemos;
+
+public enum DialogButton
 {
-    public enum DialogButton
-    {
-        Ok = 0,
-        Cancel = 1,
-        Open = 2,
-        Yes = 3,
-        No = 4,
-        Close = 5,
-        Run = 6,
-        Save = 7,
-    }
+    Ok = 0,
+    Cancel = 1,
+    Open = 2,
+    Yes = 3,
+    No = 4,
+    Close = 5,
+    Run = 6,
+    Save = 7,
 }

@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,11 +10,10 @@
 // limitations under the License.
 using System;
 
-namespace BenchmarkingDemos
+namespace BenchmarkingDemos;
+
+public interface INavigationService
 {
-    public interface INavigationService
-    {
-        void GoToUrl(string url);
-        Uri Url { get; }
-    }
+    void GoToUrl(string url);
+    Uri Url { get; }
 }

@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,21 +10,20 @@
 // limitations under the License.
 using OpenQA.Selenium;
 
-namespace BenchmarkingDemos.Facades.Second
-{
-    public class BreadcrumbSection
-    {
-        private readonly Driver _driver;
-        
-        public BreadcrumbSection(Driver driver)
-        {
-            _driver = driver;
-        }
-        private Element Breadcrumb => _driver.FindElement(By.ClassName("woocommerce-breadcrumb"));
+namespace BenchmarkingDemos.Facades.Second;
 
-        public void OpenBreadcrumbItem(string itemToOpen)
-        {
-            Breadcrumb.FindElement(By.LinkText(itemToOpen)).Click();
-        }        
+public class BreadcrumbSection
+{
+    private readonly Driver _driver;
+    
+    public BreadcrumbSection(Driver driver)
+    {
+        _driver = driver;
     }
+    private Element Breadcrumb => _driver.FindElement(By.ClassName("woocommerce-breadcrumb"));
+
+    public void OpenBreadcrumbItem(string itemToOpen)
+    {
+        Breadcrumb.FindElement(By.LinkText(itemToOpen)).Click();
+    }        
 }

@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -8,23 +8,22 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-namespace BenchmarkingDemos
+namespace BenchmarkingDemos;
+
+public class BrowserConfiguration
 {
-    public class BrowserConfiguration
+    public BrowserConfiguration()
     {
-        public BrowserConfiguration()
-        {
-            Browser = Browser.NotSet;
-            BrowserBehavior = BrowserBehavior.RestartEveryTime;
-        }
-
-        public BrowserConfiguration(Browser browser, BrowserBehavior browserBehavior)
-        {
-            Browser = browser;
-            BrowserBehavior = browserBehavior;
-        }
-
-        public Browser Browser { get; set; }
-        public BrowserBehavior BrowserBehavior { get; set; }
+        Browser = Browser.NotSet;
+        BrowserBehavior = BrowserBehavior.RestartEveryTime;
     }
+
+    public BrowserConfiguration(Browser browser, BrowserBehavior browserBehavior)
+    {
+        Browser = browser;
+        BrowserBehavior = browserBehavior;
+    }
+
+    public Browser Browser { get; set; }
+    public BrowserBehavior BrowserBehavior { get; set; }
 }

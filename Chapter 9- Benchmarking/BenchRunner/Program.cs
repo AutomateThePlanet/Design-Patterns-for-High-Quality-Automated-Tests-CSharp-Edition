@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -19,22 +19,21 @@ using StackExchange.Profiling;
 using System;
 using BenchRunner.First;
 
-namespace BenchRunner
-{
-    // [InProcess]
+namespace BenchRunner;
 
-    [CsvExporter]
-    [HtmlExporter]
-    ////[DisassemblyDiagnoser(printAsm: true, printSource: true)]
-    ////[EtwProfiler]
-    public class Program
+// [InProcess]
+
+[CsvExporter]
+[HtmlExporter]
+////[DisassemblyDiagnoser(printAsm: true, printSource: true)]
+////[EtwProfiler]
+public class Program
+{
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            ////_driver = new ChromeDriver(AssemblyFolder);
-            ////var config = DefaultConfig.Instance.With(ConfigOptions.DisableOptimizationsValidator);
-            var summary = BenchmarkRunner.Run<ButtonClickBenchmark>();
-            Console.WriteLine(summary);
-        }
+        ////_driver = new ChromeDriver(AssemblyFolder);
+        ////var config = DefaultConfig.Instance.With(ConfigOptions.DisableOptimizationsValidator);
+        var summary = BenchmarkRunner.Run<ButtonClickBenchmark>();
+        Console.WriteLine(summary);
     }
 }

@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,18 +10,17 @@
 // limitations under the License.
 using System.Reflection;
 
-namespace BenchmarkingDemos
+namespace BenchmarkingDemos;
+
+public interface ITestBehaviorObserver
 {
-    public interface ITestBehaviorObserver
-    {
-        void PreInitialize(MemberInfo memberInfo);
+    void PreInitialize(MemberInfo memberInfo);
 
-        void PostInitialize(MemberInfo memberInfo);
+    void PostInitialize(MemberInfo memberInfo);
 
-        void PreCleanup(MemberInfo memberInfo);
+    void PreCleanup(MemberInfo memberInfo);
 
-        void PostCleanup(MemberInfo memberInfo);
+    void PostCleanup(MemberInfo memberInfo);
 
-        void MemberInstantiated(MemberInfo memberInfo);
-    }
+    void MemberInstantiated(MemberInfo memberInfo);
 }

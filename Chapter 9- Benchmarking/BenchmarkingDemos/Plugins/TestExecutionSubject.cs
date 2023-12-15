@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -11,64 +11,63 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace BenchmarkingDemos
+namespace BenchmarkingDemos;
+
+public class TestExecutionSubject : ITestExecutionSubject
 {
-    public class TestExecutionSubject : ITestExecutionSubject
+    private readonly List<ITestBehaviorObserver> _testBehaviorObservers;
+
+    public TestExecutionSubject()
     {
-        private readonly List<ITestBehaviorObserver> _testBehaviorObservers;
+        _testBehaviorObservers = new List<ITestBehaviorObserver>();
+    }
 
-        public TestExecutionSubject()
-        {
-            _testBehaviorObservers = new List<ITestBehaviorObserver>();
-        }
+    public void Attach(ITestBehaviorObserver observer)
+    {
+        _testBehaviorObservers.Add(observer);
+    }
 
-        public void Attach(ITestBehaviorObserver observer)
-        {
-            _testBehaviorObservers.Add(observer);
-        }
+    public void Detach(ITestBehaviorObserver observer)
+    {
+        _testBehaviorObservers.Remove(observer);
+    }
 
-        public void Detach(ITestBehaviorObserver observer)
+    public void PreInitialize(MemberInfo memberInfo)
+    {
+        foreach (var currentObserver in _testBehaviorObservers)
         {
-            _testBehaviorObservers.Remove(observer);
+            currentObserver.PreInitialize(memberInfo);
         }
+    }
+    public void PostInitialize(MemberInfo memberInfo)
+    {
+        foreach (var currentObserver in _testBehaviorObservers)
+        {
+            currentObserver.PostInitialize(memberInfo);
+        }
+    }
 
-        public void PreInitialize(MemberInfo memberInfo)
+    public void PreCleanup(MemberInfo memberInfo)
+    {
+        foreach (var currentObserver in _testBehaviorObservers)
         {
-            foreach (var currentObserver in _testBehaviorObservers)
-            {
-                currentObserver.PreInitialize(memberInfo);
-            }
+            currentObserver.PreCleanup(memberInfo);
         }
-        public void PostInitialize(MemberInfo memberInfo)
-        {
-            foreach (var currentObserver in _testBehaviorObservers)
-            {
-                currentObserver.PostInitialize(memberInfo);
-            }
-        }
+    }
 
-        public void PreCleanup(MemberInfo memberInfo)
+    public void PostCleanup(MemberInfo memberInfo)
+    {
+        foreach (var currentObserver in _testBehaviorObservers)
         {
-            foreach (var currentObserver in _testBehaviorObservers)
-            {
-                currentObserver.PreCleanup(memberInfo);
-            }
+            currentObserver.PostCleanup(memberInfo);
         }
+    }
 
-        public void PostCleanup(MemberInfo memberInfo)
+    public void MemberInstantiated(MemberInfo memberInfo)
+    {
+        foreach (var currentObserver in _testBehaviorObservers)
         {
-            foreach (var currentObserver in _testBehaviorObservers)
-            {
-                currentObserver.PostCleanup(memberInfo);
-            }
-        }
-
-        public void MemberInstantiated(MemberInfo memberInfo)
-        {
-            foreach (var currentObserver in _testBehaviorObservers)
-            {
-                currentObserver.MemberInstantiated(memberInfo);
-            }
+            currentObserver.MemberInstantiated(memberInfo);
         }
     }
 }

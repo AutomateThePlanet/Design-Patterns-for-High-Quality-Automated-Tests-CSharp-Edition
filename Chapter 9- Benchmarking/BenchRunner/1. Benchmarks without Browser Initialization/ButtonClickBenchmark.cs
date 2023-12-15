@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -12,47 +12,48 @@ using BenchmarkDotNet.Attributes;
 using BenchmarkingDemos.BenchmarkCore;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using WebDriverManager.DriverConfigs.Impl;
 
-namespace BenchRunner.First
+namespace BenchRunner.First;
+
+public class ButtonClickBenchmark
 {
-    public class ButtonClickBenchmark
+    private const string TestPage = "http://htmlpreview.github.io/?https://github.com/angelovstanton/AutomateThePlanet/blob/master/WebDriver-Series/TestPage.html";
+    private static IWebDriver _driver;
+    private static IJavaScriptExecutor _javaScriptExecutor;
+
+    [GlobalSetup]
+    public void GlobalSetup()
     {
-        private const string TestPage = "http://htmlpreview.github.io/?https://github.com/angelovstanton/AutomateThePlanet/blob/master/WebDriver-Series/TestPage.html";
-        private static IWebDriver _driver;
-        private static IJavaScriptExecutor _javaScriptExecutor;
+        new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
+        _driver = new ChromeDriver(DriverExecutablePathResolver.GetDriverExecutablePath());
+        _javaScriptExecutor = (IJavaScriptExecutor)_driver;
+        _driver.Navigate().GoToUrl(TestPage);
+    }
 
-        [GlobalSetup]
-        public void GlobalSetup()
+    [GlobalCleanup]
+    public void GlobalCleanup()
+    {
+        _driver?.Dispose();
+    }
+
+    [Benchmark(Baseline = true)]
+    public void BenchmarkWebDriverClick()
+    {
+        var buttons = _driver.FindElements(By.XPath("//input[@value='Submit']"));
+        foreach (var button in buttons)
         {
-            _driver = new ChromeDriver(DriverExecutablePathResolver.GetDriverExecutablePath());
-            _javaScriptExecutor = (IJavaScriptExecutor)_driver;
-            _driver.Navigate().GoToUrl(TestPage);
+            button.Click();
         }
+    }
 
-        [GlobalCleanup]
-        public void GlobalCleanup()
+    [Benchmark]
+    public void BenchmarkJavaScriptClick()
+    {
+        var buttons = _driver.FindElements(By.XPath("//input[@value='Submit']"));
+        foreach (var button in buttons)
         {
-            _driver?.Dispose();
-        }
-
-        [Benchmark(Baseline = true)]
-        public void BenchmarkWebDriverClick()
-        {
-            var buttons = _driver.FindElements(By.XPath("//input[@value='Submit']"));
-            foreach (var button in buttons)
-            {
-                button.Click();
-            }
-        }
-
-        [Benchmark]
-        public void BenchmarkJavaScriptClick()
-        {
-            var buttons = _driver.FindElements(By.XPath("//input[@value='Submit']"));
-            foreach (var button in buttons)
-            {
-                _javaScriptExecutor.ExecuteScript("arguments[0].click();", button);
-            }
+            _javaScriptExecutor.ExecuteScript("arguments[0].click();", button);
         }
     }
 }

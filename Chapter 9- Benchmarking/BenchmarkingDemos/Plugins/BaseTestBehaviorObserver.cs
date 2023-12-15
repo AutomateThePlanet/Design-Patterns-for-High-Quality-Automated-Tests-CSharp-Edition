@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,36 +10,35 @@
 // limitations under the License.
 using System.Reflection;
 
-namespace BenchmarkingDemos
+namespace BenchmarkingDemos;
+
+public class BaseTestBehaviorObserver : ITestBehaviorObserver
 {
-    public class BaseTestBehaviorObserver : ITestBehaviorObserver
+    private readonly ITestExecutionSubject _testExecutionSubject;
+
+    public BaseTestBehaviorObserver(ITestExecutionSubject testExecutionSubject)
     {
-        private readonly ITestExecutionSubject _testExecutionSubject;
+        _testExecutionSubject = testExecutionSubject;
+        testExecutionSubject.Attach(this);
+    }
 
-        public BaseTestBehaviorObserver(ITestExecutionSubject testExecutionSubject)
-        {
-            _testExecutionSubject = testExecutionSubject;
-            testExecutionSubject.Attach(this);
-        }
+    public virtual void PreInitialize(MemberInfo memberInfo)
+    {
+    }
 
-        public virtual void PreInitialize(MemberInfo memberInfo)
-        {
-        }
+    public virtual void PostInitialize(MemberInfo memberInfo)
+    {
+    }
 
-        public virtual void PostInitialize(MemberInfo memberInfo)
-        {
-        }
+    public virtual void PreCleanup(MemberInfo memberInfo)
+    {
+    }
 
-        public virtual void PreCleanup(MemberInfo memberInfo)
-        {
-        }
+    public virtual void PostCleanup(MemberInfo memberInfo)
+    {
+    }
 
-        public virtual void PostCleanup(MemberInfo memberInfo)
-        {
-        }
-
-        public virtual void MemberInstantiated(MemberInfo memberInfo)
-        {
-        }
+    public virtual void MemberInstantiated(MemberInfo memberInfo)
+    {
     }
 }

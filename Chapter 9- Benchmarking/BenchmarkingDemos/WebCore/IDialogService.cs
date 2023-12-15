@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -11,10 +11,9 @@
 using System;
 using OpenQA.Selenium;
 
-namespace BenchmarkingDemos
+namespace BenchmarkingDemos;
+
+public interface IDialogService
 {
-    public interface IDialogService
-    {
-        ////void Handle(Action<IAlert> action = null, DialogButton dialogButton = DialogButton.Ok);
-    }
+    ////void Handle(Action<IAlert> action = null, DialogButton dialogButton = DialogButton.Ok);
 }
