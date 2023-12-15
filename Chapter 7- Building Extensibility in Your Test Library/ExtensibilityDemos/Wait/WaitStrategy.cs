@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -12,38 +12,37 @@ using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace ExtensibilityDemos
+namespace ExtensibilityDemos;
+
+public abstract class WaitStrategy
 {
-    public abstract class WaitStrategy
+    protected WaitStrategy(int? timeoutIntervalInSeconds = null, int? sleepIntervalInSeconds = null)
     {
-        protected WaitStrategy(int? timeoutIntervalInSeconds = null, int? sleepIntervalInSeconds = null)
-        {
-            TimeoutInterval = TimeSpan.FromSeconds(timeoutIntervalInSeconds ?? 30);
-            SleepInterval = TimeSpan.FromSeconds(sleepIntervalInSeconds ?? 2);
-        }
+        TimeoutInterval = TimeSpan.FromSeconds(timeoutIntervalInSeconds ?? 30);
+        SleepInterval = TimeSpan.FromSeconds(sleepIntervalInSeconds ?? 2);
+    }
 
-        protected TimeSpan TimeoutInterval { get; }
+    protected TimeSpan TimeoutInterval { get; }
 
-        protected TimeSpan SleepInterval { get; }
+    protected TimeSpan SleepInterval { get; }
 
-        public abstract void WaitUntil(ISearchContext searchContext, IWebDriver driver, By by);
+    public abstract void WaitUntil(ISearchContext searchContext, IWebDriver driver, By by);
 
-        protected void WaitUntil(Func<ISearchContext, bool> waitCondition, IWebDriver driver)
-        {
-            var webDriverWait = new WebDriverWait(new SystemClock(), driver, TimeoutInterval, SleepInterval);
-            webDriverWait.Until(waitCondition);
-        }
+    protected void WaitUntil(Func<ISearchContext, bool> waitCondition, IWebDriver driver)
+    {
+        var webDriverWait = new WebDriverWait(new SystemClock(), driver, TimeoutInterval, SleepInterval);
+        webDriverWait.Until(waitCondition);
+    }
 
-        protected void WaitUntil(Func<ISearchContext, IWebElement> waitCondition, IWebDriver driver)
-        {
-            var webDriverWait = new WebDriverWait(new SystemClock(), driver, TimeoutInterval, SleepInterval);
-            webDriverWait.Until(waitCondition);
-        }
+    protected void WaitUntil(Func<ISearchContext, IWebElement> waitCondition, IWebDriver driver)
+    {
+        var webDriverWait = new WebDriverWait(new SystemClock(), driver, TimeoutInterval, SleepInterval);
+        webDriverWait.Until(waitCondition);
+    }
 
-        protected IWebElement FindElement(ISearchContext searchContext, By by)
-        {
-            var element = searchContext.FindElement(by);
-            return element;
-        }
+    protected IWebElement FindElement(ISearchContext searchContext, By by)
+    {
+        var element = searchContext.FindElement(by);
+        return element;
     }
 }

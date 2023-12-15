@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -11,38 +11,37 @@
 using ExtensibilityDemos.Pages.Tenth;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExtensibilityDemos.Tenth
+namespace ExtensibilityDemos.Tenth;
+
+[TestClass]
+public class SectionsTests
 {
-    [TestClass]
-    public class SectionsTests
+    private static App _app;
+
+    [ClassInitialize]
+    public static void ClassInitialize(TestContext testContext)
     {
-        private static App _app;
+        _app = new App();
+    }
 
-        [ClassInitialize]
-        public static void ClassInitialize(TestContext testContext)
-        {
-            _app = new App();
-        }
+    [ClassCleanup]
+    public static void ClassCleanup()
+    {
+        _app.Dispose();
+    }
 
-        [ClassCleanup]
-        public static void ClassCleanup()
-        {
-            _app.Dispose();
-        }
+    [TestMethod]
+    public void CompletePurchaseSuccessfully_WhenNewClient()
+    {
+        var mainPage = _app.GoTo<MainPage>();
 
-        [TestMethod]
-        public void CompletePurchaseSuccessfully_WhenNewClient()
-        {
-            var mainPage = _app.GoTo<MainPage>();
+        mainPage.AddRocketToShoppingCart();
 
-            mainPage.AddRocketToShoppingCart();
-
-            var cartPage = _app.GoTo<CartPage>();
-            cartPage.ApplyCoupon("happybirthday")
-                .AssertMessageNotification("Coupon code applied successfully.")
-                .IncreaseProductQuantity(2)
-                .AssertTotal("114.00€")
-                .ClickProceedToCheckout();
-        }
+        var cartPage = _app.GoTo<CartPage>();
+        cartPage.ApplyCoupon("happybirthday")
+            .AssertMessageNotification("Coupon code applied successfully.")
+            .IncreaseProductQuantity(2)
+            .AssertTotal("114.00€")
+            .ClickProceedToCheckout();
     }
 }

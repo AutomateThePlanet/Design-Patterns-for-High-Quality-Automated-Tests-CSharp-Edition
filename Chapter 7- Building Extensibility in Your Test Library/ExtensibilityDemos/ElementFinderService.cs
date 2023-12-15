@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -12,31 +12,30 @@ using System.Collections.Generic;
 using ExtensibilityDemos.Locators;
 using OpenQA.Selenium;
 
-namespace ExtensibilityDemos
+namespace ExtensibilityDemos;
+
+public class ElementFinderService
 {
-    public class ElementFinderService
+    private readonly ISearchContext _searchContext;
+    private readonly IWebDriver _driver;
+
+    public ElementFinderService(ISearchContext searchContext, IWebDriver driver)
     {
-        private readonly ISearchContext _searchContext;
-        private readonly IWebDriver _driver;
+        _searchContext = searchContext;
+        _driver = driver;
+    }
 
-        public ElementFinderService(ISearchContext searchContext, IWebDriver driver)
-        {
-            _searchContext = searchContext;
-            _driver = driver;
-        }
+    public IWebElement Find(FindStrategy findStrategy)
+    {
+        Wait.To.Exists().WaitUntil(_searchContext, _driver, findStrategy.Convert());
+        var element = _searchContext.FindElement(findStrategy.Convert());
+        return element;
+    }
 
-        public IWebElement Find(FindStrategy findStrategy)
-        {
-            Wait.To.Exists().WaitUntil(_searchContext, _driver, findStrategy.Convert());
-            var element = _searchContext.FindElement(findStrategy.Convert());
-            return element;
-        }
-
-        public IEnumerable<IWebElement> FindAll(FindStrategy findStrategy)
-        {
-            Wait.To.Exists().WaitUntil(_searchContext, _driver, findStrategy.Convert());
-            IEnumerable<IWebElement> result = _searchContext.FindElements(findStrategy.Convert());
-            return result;
-        }
+    public IEnumerable<IWebElement> FindAll(FindStrategy findStrategy)
+    {
+        Wait.To.Exists().WaitUntil(_searchContext, _driver, findStrategy.Convert());
+        IEnumerable<IWebElement> result = _searchContext.FindElements(findStrategy.Convert());
+        return result;
     }
 }

@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,13 +10,12 @@
 // limitations under the License.
 using ExtensibilityDemos.Locators;
 
-namespace ExtensibilityDemos.Pages
+namespace ExtensibilityDemos.Pages;
+
+public static class DriverFindExtensions
 {
-    public static class DriverFindExtensions
+    public static Element FindByIdContaining(this Driver driver, string idContaining)
     {
-        public static Element FindByIdContaining(this Driver driver, string idContaining)
-        {
-            return driver.Find(new IdContainingFindStrategy(idContaining));
-        }
+        return driver.Find(new IdContainingFindStrategy(idContaining));
     }
 }

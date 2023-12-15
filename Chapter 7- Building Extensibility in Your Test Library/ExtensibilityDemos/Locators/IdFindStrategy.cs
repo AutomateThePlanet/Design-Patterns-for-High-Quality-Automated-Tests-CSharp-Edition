@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,18 +10,17 @@
 // limitations under the License.
 using OpenQA.Selenium;
 
-namespace ExtensibilityDemos.Locators
-{
-    public class IdFindStrategy : FindStrategy
-    {
-        public IdFindStrategy(string value)
-            : base(value)
-        {
-        }
+namespace ExtensibilityDemos.Locators;
 
-        public override By Convert()
-        {
-            return By.Id(Value);
-        }
+public class IdFindStrategy : FindStrategy
+{
+    public IdFindStrategy(string value)
+        : base(value)
+    {
+    }
+
+    public override By Convert()
+    {
+        return By.Id(Value);
     }
 }

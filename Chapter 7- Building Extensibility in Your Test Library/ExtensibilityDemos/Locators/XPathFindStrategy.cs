@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,17 +10,16 @@
 // limitations under the License.
 using OpenQA.Selenium;
 
-namespace ExtensibilityDemos.Locators
+namespace ExtensibilityDemos.Locators;
+
+public class XPathFindStrategy : FindStrategy
 {
-    public class XPathFindStrategy : FindStrategy
+    public XPathFindStrategy(string value)
+        : base(value)
     {
-        public XPathFindStrategy(string value)
-            : base(value)
-        {
-        }
-
-        public override By Convert() => By.XPath(Value);
-
-        public override string ToString() => $"XPath = {Value}";
     }
+
+    public override By Convert() => By.XPath(Value);
+
+    public override string ToString() => $"XPath = {Value}";
 }

@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -11,34 +11,33 @@
 using System;
 using OpenQA.Selenium;
 
-namespace ExtensibilityDemos
+namespace ExtensibilityDemos;
+
+public class ToExistsWaitStrategy : WaitStrategy
 {
-    public class ToExistsWaitStrategy : WaitStrategy
+    public ToExistsWaitStrategy(int? timeoutIntervalInSeconds = null, int? sleepIntervalInSeconds = null)
+        : base(timeoutIntervalInSeconds, sleepIntervalInSeconds)
     {
-        public ToExistsWaitStrategy(int? timeoutIntervalInSeconds = null, int? sleepIntervalInSeconds = null)
-            : base(timeoutIntervalInSeconds, sleepIntervalInSeconds)
-        {
-        }
+    }
 
-        public override void WaitUntil(ISearchContext searchContext, IWebDriver driver, By by)
-        {
-            WaitUntil(ElementExists(searchContext, by), driver);
-        }
+    public override void WaitUntil(ISearchContext searchContext, IWebDriver driver, By by)
+    {
+        WaitUntil(ElementExists(searchContext, by), driver);
+    }
 
-        private Func<ISearchContext, bool> ElementExists(ISearchContext searchContext, By by)
+    private Func<ISearchContext, bool> ElementExists(ISearchContext searchContext, By by)
+    {
+        return _ =>
         {
-            return _ =>
+            try
             {
-                try
-                {
-                    var element = FindElement(searchContext, by);
-                    return element != null;
-                }
-                catch (NoSuchElementException)
-                {
-                    return false;
-                }
-            };
-        }
+                var element = FindElement(searchContext, by);
+                return element != null;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        };
     }
 }

@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -11,38 +11,37 @@
 using System;
 using OpenQA.Selenium;
 
-namespace ExtensibilityDemos
+namespace ExtensibilityDemos;
+
+public class ToBeVisibleWaitStrategy : WaitStrategy
 {
-    public class ToBeVisibleWaitStrategy : WaitStrategy
+    public ToBeVisibleWaitStrategy(int? timeoutIntervalInSeconds = null, int? sleepIntervalInSeconds = null)
+        : base(timeoutIntervalInSeconds, sleepIntervalInSeconds)
     {
-        public ToBeVisibleWaitStrategy(int? timeoutIntervalInSeconds = null, int? sleepIntervalInSeconds = null)
-            : base(timeoutIntervalInSeconds, sleepIntervalInSeconds)
-        {
-        }
+    }
 
-        public override void WaitUntil(ISearchContext searchContext, IWebDriver driver, By by)
-        {
-            WaitUntil(ElementIsVisible(searchContext, by), driver);
-        }
+    public override void WaitUntil(ISearchContext searchContext, IWebDriver driver, By by)
+    {
+        WaitUntil(ElementIsVisible(searchContext, by), driver);
+    }
 
-        private Func<ISearchContext, bool> ElementIsVisible(ISearchContext searchContext, By by)
+    private Func<ISearchContext, bool> ElementIsVisible(ISearchContext searchContext, By by)
+    {
+        return _ =>
         {
-            return _ =>
+            try
             {
-                try
-                {
-                    var element = FindElement(searchContext, by);
-                    return element != null && element.Displayed;
-                }
-                catch (StaleElementReferenceException)
-                {
-                    return false;
-                }
-                catch (NoSuchElementException)
-                {
-                    return false;
-                }
-            };
-        }
+                var element = FindElement(searchContext, by);
+                return element != null && element.Displayed;
+            }
+            catch (StaleElementReferenceException)
+            {
+                return false;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        };
     }
 }

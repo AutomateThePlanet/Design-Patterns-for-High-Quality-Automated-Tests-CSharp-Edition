@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -11,18 +11,17 @@
 using System;
 using OpenQA.Selenium.Support.Events;
 
-namespace ExtensibilityDemos
-{
-    public class LoggingFiringWebDriverEventHandlers : FiringWebDriverEventHandlers
-    {
-        public override void OnElementClicked(object sender, WebElementEventArgs e)
-        {
-            Console.WriteLine($"Clicking on element with tag name: {e.Element.TagName}");
-        }
+namespace ExtensibilityDemos;
 
-        public override void OnExceptionThrown(object sender, WebDriverExceptionEventArgs e)
-        {
-            Console.WriteLine($"Exception thrown= {e.ThrownException}");
-        }
+public class LoggingFiringWebDriverEventHandlers : FiringWebDriverEventHandlers
+{
+    public override void OnElementClicked(object sender, WebElementEventArgs e)
+    {
+        Console.WriteLine($"Clicking on element with tag name: {e.Element.TagName}");
+    }
+
+    public override void OnExceptionThrown(object sender, WebDriverExceptionEventArgs e)
+    {
+        Console.WriteLine($"Exception thrown= {e.ThrownException}");
     }
 }

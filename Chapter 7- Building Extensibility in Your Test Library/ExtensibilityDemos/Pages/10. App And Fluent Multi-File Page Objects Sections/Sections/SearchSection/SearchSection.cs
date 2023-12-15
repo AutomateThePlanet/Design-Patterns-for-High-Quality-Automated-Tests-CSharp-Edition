@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -8,21 +8,20 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-namespace ExtensibilityDemos.Tenth
-{
-    public class SearchSection
-    {
-        private readonly Driver _driver;
-        
-        public SearchSection(Driver driver)
-        {
-            _driver = driver;
-        }
-        private Element SearchField => _driver.FindById("woocommerce-product-search-field-0");
+namespace ExtensibilityDemos.Tenth;
 
-        public void SearchForItem(string searchText)
-        {
-            SearchField.TypeText(searchText);
-        }
+public class SearchSection
+{
+    private readonly Driver _driver;
+    
+    public SearchSection(Driver driver)
+    {
+        _driver = driver;
+    }
+    private Element SearchField => _driver.FindById("woocommerce-product-search-field-0");
+
+    public void SearchForItem(string searchText)
+    {
+        SearchField.TypeText(searchText);
     }
 }

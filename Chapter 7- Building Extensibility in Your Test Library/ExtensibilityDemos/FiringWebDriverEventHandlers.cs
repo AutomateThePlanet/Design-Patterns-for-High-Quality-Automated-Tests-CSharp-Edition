@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,20 +10,19 @@
 // limitations under the License.
 using OpenQA.Selenium.Support.Events;
 
-namespace ExtensibilityDemos
+namespace ExtensibilityDemos;
+
+public abstract class FiringWebDriverEventHandlers
 {
-    public abstract class FiringWebDriverEventHandlers
+    public virtual void OnExceptionThrown(object sender, WebDriverExceptionEventArgs e)
     {
-        public virtual void OnExceptionThrown(object sender, WebDriverExceptionEventArgs e)
-        {
-        }
+    }
 
-        public virtual void OnNavigated(object sender, WebDriverNavigationEventArgs e)
-        {
-        }
+    public virtual void OnNavigated(object sender, WebDriverNavigationEventArgs e)
+    {
+    }
 
-        public virtual void OnElementClicked(object sender, WebElementEventArgs e)
-        {
-        }
+    public virtual void OnElementClicked(object sender, WebElementEventArgs e)
+    {
     }
 }

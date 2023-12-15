@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -12,34 +12,33 @@ using System.Collections.Generic;
 using ExtensibilityDemos.Locators;
 using OpenQA.Selenium;
 
-namespace ExtensibilityDemos
+namespace ExtensibilityDemos;
+
+public abstract class Element 
 {
-    public abstract class Element 
-    {
-        public abstract By By { get; }
-        public abstract string Text { get; }
-        public abstract bool? Enabled { get; }
-        public abstract bool? Displayed { get; }
-        public abstract void TypeText(string text);
-        public abstract void Click();
-        public abstract string GetAttribute(string attributeName);
-        public abstract void WaitToExists();
-        ////public abstract Element FindElement(By locator);
+    public abstract By By { get; }
+    public abstract string Text { get; }
+    public abstract bool? Enabled { get; }
+    public abstract bool? Displayed { get; }
+    public abstract void TypeText(string text);
+    public abstract void Click();
+    public abstract string GetAttribute(string attributeName);
+    public abstract void WaitToExists();
+    ////public abstract Element FindElement(By locator);
 
-        public abstract Element FindById(string id);
-        public abstract Element FindByXPath(string xpath);
-        public abstract Element FindByTag(string tag);
-        public abstract Element FindByClass(string cssClass);
-        public abstract Element FindByCss(string css);
-        public abstract Element FindByLinkText(string linkText);
-        public abstract List<Element> FindAllById(string id);
-        public abstract List<Element> FindAllByXPath(string xpath);
-        public abstract List<Element> FindAllByTag(string tag);
-        public abstract List<Element> FindAllByClass(string cssClass);
-        public abstract List<Element> FindAllByCss(string css);
-        public abstract List<Element> FindAllByLinkText(string linkText);
+    public abstract Element FindById(string id);
+    public abstract Element FindByXPath(string xpath);
+    public abstract Element FindByTag(string tag);
+    public abstract Element FindByClass(string cssClass);
+    public abstract Element FindByCss(string css);
+    public abstract Element FindByLinkText(string linkText);
+    public abstract List<Element> FindAllById(string id);
+    public abstract List<Element> FindAllByXPath(string xpath);
+    public abstract List<Element> FindAllByTag(string tag);
+    public abstract List<Element> FindAllByClass(string cssClass);
+    public abstract List<Element> FindAllByCss(string css);
+    public abstract List<Element> FindAllByLinkText(string linkText);
 
-        public abstract List<Element> FindAll(FindStrategy findStrategy);
-        public abstract Element Find(FindStrategy findStrategy);
-    }
+    public abstract List<Element> FindAll(FindStrategy findStrategy);
+    public abstract Element Find(FindStrategy findStrategy);
 }

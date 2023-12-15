@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -8,42 +8,41 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-namespace ExtensibilityDemos.Tenth
+namespace ExtensibilityDemos.Tenth;
+
+public class MainMenuSection
 {
-    public class MainMenuSection
+    private readonly Driver _driver;
+
+    public MainMenuSection(Driver driver)
     {
-        private readonly Driver _driver;
+        _driver = driver;
+    }
 
-        public MainMenuSection(Driver driver)
-        {
-            _driver = driver;
-        }
+    private Element HomeLink => _driver.FindByLinkText("Home");
+    private Element BlogLink => _driver.FindByLinkText("Blog");
+    private Element CartLink => _driver.FindByLinkText("Cart");
+    private Element CheckoutLink => _driver.FindByLinkText("Checkout");
+    private Element MyAccountLink => _driver.FindByLinkText("My Account");
+    private Element PromotionsLink => _driver.FindByLinkText("Promotions");
+    
+    public void OpenHomePage()
+    {
+        HomeLink.Click();
+    }
 
-        private Element HomeLink => _driver.FindByLinkText("Home");
-        private Element BlogLink => _driver.FindByLinkText("Blog");
-        private Element CartLink => _driver.FindByLinkText("Cart");
-        private Element CheckoutLink => _driver.FindByLinkText("Checkout");
-        private Element MyAccountLink => _driver.FindByLinkText("My Account");
-        private Element PromotionsLink => _driver.FindByLinkText("Promotions");
-        
-        public void OpenHomePage()
-        {
-            HomeLink.Click();
-        }
+    public void OpenBlogPage()
+    {
+        BlogLink.Click();
+    }
 
-        public void OpenBlogPage()
-        {
-            BlogLink.Click();
-        }
+    public void OpenMyAccountPage()
+    {
+        MyAccountLink.Click();
+    }
 
-        public void OpenMyAccountPage()
-        {
-            MyAccountLink.Click();
-        }
-
-        public void OpenPromotionsPage()
-        {
-            PromotionsLink.Click();
-        }
+    public void OpenPromotionsPage()
+    {
+        PromotionsLink.Click();
     }
 }
