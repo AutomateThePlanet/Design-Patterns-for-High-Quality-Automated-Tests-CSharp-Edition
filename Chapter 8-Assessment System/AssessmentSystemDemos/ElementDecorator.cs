@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,62 +10,61 @@
 // limitations under the License.
 using OpenQA.Selenium;
 
-namespace AssessmentSystemDemos
+namespace AssessmentSystemDemos;
+
+public abstract class ElementDecorator : Element
 {
-    public abstract class ElementDecorator : Element
+    protected Element Element;
+
+    protected ElementDecorator(Element element)
     {
-        protected Element Element;
+        this.Element = element;
+    }
 
-        protected ElementDecorator(Element element)
+    public override By By
+    {
+        get
         {
-            this.Element = element;
+            return Element?.By;
         }
+    }
 
-        public override By By
+    public override string Text
+    {
+        get
         {
-            get
-            {
-                return Element?.By;
-            }
+            return Element?.Text;
         }
+    }
 
-        public override string Text
+    public override bool? Enabled
+    {
+        get
         {
-            get
-            {
-                return Element?.Text;
-            }
+            return Element?.Enabled;
         }
+    }
 
-        public override bool? Enabled
+    public override bool? Displayed
+    {
+        get
         {
-            get
-            {
-                return Element?.Enabled;
-            }
+            return Element?.Displayed;
         }
+    }
 
-        public override bool? Displayed
-        {
-            get
-            {
-                return Element?.Displayed;
-            }
-        }
+    public override void Click()
+    {
+        Element?.Click();
+    }
 
-        public override void Click()
-        {
-            Element?.Click();
-        }
+    public override string GetAttribute(string attributeName)
+    {
+        return Element?.GetAttribute(attributeName);
+    }
 
-        public override string GetAttribute(string attributeName)
-        {
-            return Element?.GetAttribute(attributeName);
-        }
-
-        public override void TypeText(string text)
-        {
-            Element?.TypeText(text);
-        }
+    public override void TypeText(string text)
+    {
+        Element?.TypeText(text);
     }
 }

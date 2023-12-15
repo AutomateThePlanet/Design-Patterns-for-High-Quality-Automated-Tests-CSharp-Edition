@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,25 +10,24 @@
 // limitations under the License.
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace AssessmentSystemDemos.Facades.First
+namespace AssessmentSystemDemos.Facades.First;
+
+public class CartPageAssertions
 {
-    public class CartPageAssertions
+    private readonly CartPageElements _elements;
+
+    public CartPageAssertions(CartPageElements elements)
     {
-        private readonly CartPageElements _elements;
+        _elements = elements;
+    }
 
-        public CartPageAssertions(CartPageElements elements)
-        {
-            _elements = elements;
-        }
+    public void AssertCouponAppliedSuccessfully()
+    {
+        Assert.AreEqual("Coupon code applied successfully.", _elements.MessageAlert.Text);
+    }
 
-        public void AssertCouponAppliedSuccessfully()
-        {
-            Assert.AreEqual("Coupon code applied successfully.", _elements.MessageAlert.Text);
-        }
-
-        public void AssertTotalPrice(string expectedPrice)
-        {
-            Assert.AreEqual(expectedPrice, _elements.TotalSpan.Text);
-        }
+    public void AssertTotalPrice(string expectedPrice)
+    {
+        Assert.AreEqual(expectedPrice, _elements.TotalSpan.Text);
     }
 }

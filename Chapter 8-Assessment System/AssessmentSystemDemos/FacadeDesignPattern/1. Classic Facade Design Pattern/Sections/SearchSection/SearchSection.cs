@@ -1,21 +1,20 @@
 ﻿using OpenQA.Selenium;
 
-namespace AssessmentSystemDemos.Facades.First
+namespace AssessmentSystemDemos.Facades.First;
+
+public class SearchSection
 {
-    public class SearchSection
+    private readonly Driver _driver;
+    
+    public SearchSection(Driver driver)
     {
-        private readonly Driver _driver;
-        
-        public SearchSection(Driver driver)
-        {
-            _driver = driver;
-        }
+        _driver = driver;
+    }
 
-        private Element SearchField => _driver.FindElement(By.Id("woocommerce-product-search-field-0"));
+    private Element SearchField => _driver.FindElement(By.Id("woocommerce-product-search-field-0"));
 
-        public void SearchForItem(string searchText)
-        {
-            SearchField.TypeText(searchText);
-        }
+    public void SearchForItem(string searchText)
+    {
+        SearchField.TypeText(searchText);
     }
 }

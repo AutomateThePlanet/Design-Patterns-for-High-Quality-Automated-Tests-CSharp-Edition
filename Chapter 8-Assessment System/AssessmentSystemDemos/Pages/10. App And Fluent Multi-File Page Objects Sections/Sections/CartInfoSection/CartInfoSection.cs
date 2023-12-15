@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,27 +10,26 @@
 // limitations under the License.
 using OpenQA.Selenium;
 
-namespace AssessmentSystemDemos.Tenth
+namespace AssessmentSystemDemos.Tenth;
+
+public class CartInfoSection
 {
-    public class CartInfoSection
+    private readonly Driver _driver;
+    
+    public CartInfoSection(Driver driver)
     {
-        private readonly Driver _driver;
-        
-        public CartInfoSection(Driver driver)
-        {
-            _driver = driver;
-        }
-        private Element CartIcon => _driver.FindElement(By.ClassName("cart-contents"));
-        private Element CartAmount => _driver.FindElement(By.ClassName("amount"));
+        _driver = driver;
+    }
+    private Element CartIcon => _driver.FindElement(By.ClassName("cart-contents"));
+    private Element CartAmount => _driver.FindElement(By.ClassName("amount"));
 
-        public string GetCurrentAmount()
-        {
-            return CartAmount.Text;
-        }
+    public string GetCurrentAmount()
+    {
+        return CartAmount.Text;
+    }
 
-        public void OpenCart()
-        {
-            CartIcon.Click();
-        }
+    public void OpenCart()
+    {
+        CartIcon.Click();
     }
 }
