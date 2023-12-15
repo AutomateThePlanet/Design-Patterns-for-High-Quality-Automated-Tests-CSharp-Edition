@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,18 +10,17 @@
 // limitations under the License.
 using Flurl;
 
-namespace TestDataPreparationDemos.Configuration
-{
-    public static class UrlDeterminer
-    {
-        public static string GetShopUrl(string urlPart)
-        {
-            return Url.Combine(ConfigurationService.GetTestEnvironmentSettings().ShopUrl, urlPart);
-        }
+namespace TestDataPreparationDemos.Configuration;
 
-        public static string GetAccountUrl(string urlPart)
-        {
-            return Url.Combine(ConfigurationService.GetTestEnvironmentSettings().AccountUrl, urlPart);
-        }
+public static class UrlDeterminer
+{
+    public static string GetShopUrl(string urlPart)
+    {
+        return Url.Combine(ConfigurationService.GetTestEnvironmentSettings().ShopUrl, urlPart);
+    }
+
+    public static string GetAccountUrl(string urlPart)
+    {
+        return Url.Combine(ConfigurationService.GetTestEnvironmentSettings().AccountUrl, urlPart);
     }
 }

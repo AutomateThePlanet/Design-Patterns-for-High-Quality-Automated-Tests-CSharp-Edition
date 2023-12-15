@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -8,17 +8,16 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-namespace TestDataPreparationDemos.Configuration
+namespace TestDataPreparationDemos.Configuration;
+
+public sealed class WebSettings
 {
-    public sealed class WebSettings
-    {
-        public string BaseUrl { get; set; }
-        public BrowserSettings Chrome { get; set; }
-        public BrowserSettings Firefox { get; set; }
-        public BrowserSettings Edge { get; set; }
-        public BrowserSettings Opera { get; set; }
-        public BrowserSettings InternetExplorer { get; set; }
-        public BrowserSettings Safari { get; set; }
-        public int ElementWaitTimeout { get; set; }
-    }
+    public string BaseUrl { get; set; }
+    public BrowserSettings Chrome { get; set; }
+    public BrowserSettings Firefox { get; set; }
+    public BrowserSettings Edge { get; set; }
+    public BrowserSettings Opera { get; set; }
+    public BrowserSettings InternetExplorer { get; set; }
+    public BrowserSettings Safari { get; set; }
+    public int ElementWaitTimeout { get; set; }
 }

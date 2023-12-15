@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,39 +10,38 @@
 // limitations under the License.
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TestDataPreparationDemos.Tenth
+namespace TestDataPreparationDemos.Tenth;
+
+public class MainPage : NavigatableEShopPage
 {
-    public class MainPage : NavigatableEShopPage
+    private readonly MainPageElements _elements;
+
+    private MainPage(Driver driver) 
+        : base(driver)
     {
-        private readonly MainPageElements _elements;
+        _elements = new MainPageElements(driver);
+    }
 
-        private MainPage(Driver driver) 
-            : base(driver)
-        {
-            _elements = new MainPageElements(driver);
-        }
+    protected override string Url => ConfigurationService.GetWebSettings().BaseUrl;
 
-        protected override string Url => ConfigurationService.GetWebSettings().BaseUrl;
+    public MainPage AddRocketToShoppingCart()
+    {
+        Open();
+        _elements.AddToCartFalcon9.Click();
+        _elements.ViewCartButton.Click();
 
-        public MainPage AddRocketToShoppingCart()
-        {
-            Open();
-            _elements.AddToCartFalcon9.Click();
-            _elements.ViewCartButton.Click();
+        return this;
+    }
 
-            return this;
-        }
+    public MainPage AssertProductBoxLink(string name, string expectedLink)
+    {
+        string actualLink = _elements.GetProductBoxByName(name).GetAttribute("href");
+        Assert.AreEqual(expectedLink, actualLink);
+        return this;
+    }
 
-        public MainPage AssertProductBoxLink(string name, string expectedLink)
-        {
-            string actualLink = _elements.GetProductBoxByName(name).GetAttribute("href");
-            Assert.AreEqual(expectedLink, actualLink);
-            return this;
-        }
-
-        protected override void WaitForPageLoad()
-        {
-            _elements.AddToCartFalcon9.WaitToExists();
-        }
+    protected override void WaitForPageLoad()
+    {
+        _elements.AddToCartFalcon9.WaitToExists();
     }
 }

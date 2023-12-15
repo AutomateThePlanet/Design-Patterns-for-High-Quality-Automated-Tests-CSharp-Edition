@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -11,18 +11,17 @@
 using System.Collections.Generic;
 using OpenQA.Selenium;
 
-namespace TestDataPreparationDemos
+namespace TestDataPreparationDemos;
+
+public interface ICookiesService
 {
-    public interface ICookiesService
-    {
-        ////void AddCookie(string cookieName, string cookieValue, string path = "/");
+    ////void AddCookie(string cookieName, string cookieValue, string path = "/");
 
-        ////void DeleteAllCookies();
+    ////void DeleteAllCookies();
 
-        ////void DeleteCookie(string cookieName);
+    ////void DeleteCookie(string cookieName);
 
-        ////List<Cookie> GetAllCookies();
+    ////List<Cookie> GetAllCookies();
 
-        ////string GetCookie(string cookieName);
-    }
+    ////string GetCookie(string cookieName);
 }

@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,21 +10,20 @@
 // limitations under the License.
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TestDataPreparationDemos.Facades.Second
+namespace TestDataPreparationDemos.Facades.Second;
+
+public class MainPageAssertions
 {
-    public class MainPageAssertions
+    private readonly MainPageElements _elements;
+
+    public MainPageAssertions(MainPageElements elements)
     {
-        private readonly MainPageElements _elements;
+        _elements = elements;
+    }
 
-        public MainPageAssertions(MainPageElements elements)
-        {
-            _elements = elements;
-        }
-
-        public void AssertProductBoxLink(string name, string expectedLink)
-        {
-            string actualLink = _elements.GetProductBoxByName(name).GetAttribute("href");
-            Assert.AreEqual(expectedLink, actualLink);
-        }
+    public void AssertProductBoxLink(string name, string expectedLink)
+    {
+        string actualLink = _elements.GetProductBoxByName(name).GetAttribute("href");
+        Assert.AreEqual(expectedLink, actualLink);
     }
 }

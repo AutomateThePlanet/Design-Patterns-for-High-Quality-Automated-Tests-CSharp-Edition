@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -14,47 +14,46 @@ using System.Linq;
 using System.Reflection;
 using TestDataPreparationDemos.Configuration;
 
-namespace TestDataPreparationDemos
+namespace TestDataPreparationDemos;
+
+public static class ConfigurationService
 {
-    public static class ConfigurationService
+    private static readonly IConfigurationRoot Root = InitializeConfiguration();
+
+    public static UrlSettings GetTestEnvironmentSettings()
     {
-        private static readonly IConfigurationRoot Root = InitializeConfiguration();
+        var result = Root.GetSection("urlSettings").Get<UrlSettings>();
 
-        public static UrlSettings GetTestEnvironmentSettings()
+        if (result == null)
         {
-            var result = Root.GetSection("urlSettings").Get<UrlSettings>();
-
-            if (result == null)
-            {
-                throw new ConfigurationNotFoundException(typeof(UrlSettings).ToString());
-            }
-
-            return result;
+            throw new ConfigurationNotFoundException(typeof(UrlSettings).ToString());
         }
 
-        public static BillingInfoDefaultValues GetBillingInfoDefaultValues()
+        return result;
+    }
+
+    public static BillingInfoDefaultValues GetBillingInfoDefaultValues()
+    {
+        var result = Root.GetSection("billingInfoDefaultValues").Get<BillingInfoDefaultValues>();
+        return result;
+    }
+
+
+    public static WebSettings GetWebSettings()
+    {
+        return Root.GetSection("webSettings").Get<WebSettings>();
+    }
+
+    private static IConfigurationRoot InitializeConfiguration()
+    {
+        var filesInExecutionDir = Directory.GetFiles(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+        var settingsFile = filesInExecutionDir.FirstOrDefault(x => x.Contains("testFrameworkSettings") && x.EndsWith(".json"));
+        var builder = new ConfigurationBuilder();
+        if (settingsFile != null)
         {
-            var result = Root.GetSection("billingInfoDefaultValues").Get<BillingInfoDefaultValues>();
-            return result;
+            builder.AddJsonFile(settingsFile, optional: true, reloadOnChange: true);
         }
 
-
-        public static WebSettings GetWebSettings()
-        {
-            return Root.GetSection("webSettings").Get<WebSettings>();
-        }
-
-        private static IConfigurationRoot InitializeConfiguration()
-        {
-            var filesInExecutionDir = Directory.GetFiles(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
-            var settingsFile = filesInExecutionDir.FirstOrDefault(x => x.Contains("testFrameworkSettings") && x.EndsWith(".json"));
-            var builder = new ConfigurationBuilder();
-            if (settingsFile != null)
-            {
-                builder.AddJsonFile(settingsFile, optional: true, reloadOnChange: true);
-            }
-
-            return builder.Build();
-        }
+        return builder.Build();
     }
 }

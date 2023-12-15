@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -13,63 +13,62 @@ using System.Linq;
 using System.Reflection;
 using TestDataPreparationDemos.Tenth;
 
-namespace TestDataPreparationDemos.Pages.Tenth
+namespace TestDataPreparationDemos.Pages.Tenth;
+
+public class App : IDisposable
 {
-    public class App : IDisposable
+    private readonly Driver _driver;
+    private bool _disposed = false;
+
+    public App(Browser browserType = Browser.Chrome)
     {
-        private readonly Driver _driver;
-        private bool _disposed = false;
+        _driver = new LoggingDriver(new WebDriver());
+        _driver.Start(browserType);
+        BrowserService = _driver;
+        CookiesService = _driver;
+        DialogService = _driver;
+    }
 
-        public App(Browser browserType = Browser.Chrome)
+    public IBrowserService BrowserService { get; }
+    public ICookiesService CookiesService { get; }
+    public IDialogService DialogService { get; }
+
+    public TPage Create<TPage>()
+        where TPage : EShopPage
+    {
+        var constructor = typeof(TPage).GetTypeInfo().GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault();
+        var page = constructor?.Invoke(new object[] { _driver }) as TPage;
+        return page;
+    }
+
+    public TPage GoTo<TPage>()
+        where TPage : NavigatableEShopPage
+    {
+        var constructor = typeof(TPage).GetTypeInfo().GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault();
+        var page = constructor?.Invoke(new object[] { _driver }) as TPage;
+        page?.Open();
+
+        return page;
+    }
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (_disposed)
         {
-            _driver = new LoggingDriver(new WebDriver());
-            _driver.Start(browserType);
-            BrowserService = _driver;
-            CookiesService = _driver;
-            DialogService = _driver;
+            return;
         }
 
-        public IBrowserService BrowserService { get; }
-        public ICookiesService CookiesService { get; }
-        public IDialogService DialogService { get; }
-
-        public TPage Create<TPage>()
-            where TPage : EShopPage
+        if (disposing)
         {
-            var constructor = typeof(TPage).GetTypeInfo().GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault();
-            var page = constructor?.Invoke(new object[] { _driver }) as TPage;
-            return page;
+            _driver.Quit();
         }
-
-        public TPage GoTo<TPage>()
-            where TPage : NavigatableEShopPage
-        {
-            var constructor = typeof(TPage).GetTypeInfo().GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault();
-            var page = constructor?.Invoke(new object[] { _driver }) as TPage;
-            page?.Open();
-
-            return page;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (_disposed)
-            {
-                return;
-            }
-
-            if (disposing)
-            {
-                _driver.Quit();
-            }
-      
-            _disposed = true;
-        }
+  
+        _disposed = true;
     }
 }

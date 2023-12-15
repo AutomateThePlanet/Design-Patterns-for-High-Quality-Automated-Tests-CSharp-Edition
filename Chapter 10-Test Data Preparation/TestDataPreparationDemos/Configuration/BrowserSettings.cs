@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -8,11 +8,10 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-namespace TestDataPreparationDemos.Configuration
+namespace TestDataPreparationDemos.Configuration;
+
+public class BrowserSettings
 {
-    public class BrowserSettings
-    {
-        public int PageLoadTimeout { get; set; } = 30000;
-        public int ScriptTimeout { get; set; } = 1000;
-    }
+    public int PageLoadTimeout { get; set; } = 30000;
+    public int ScriptTimeout { get; set; } = 1000;
 }

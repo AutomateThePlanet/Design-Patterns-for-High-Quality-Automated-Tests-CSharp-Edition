@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -8,21 +8,20 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-namespace TestDataPreparationDemos.Facades.First
+namespace TestDataPreparationDemos.Facades.First;
+
+public class PurchaseInfo
 {
-    public class PurchaseInfo
-    {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Company { get; set; }
-        public string Country { get; set; }
-        public string Address1 { get; set; }
-        public string Address2 { get; set; }
-        public string City { get; set; }
-        public string Zip { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
-        public bool ShouldCreateAccount { get; set; } = false;
-        public bool ShouldCheckPayment { get; set; } = false;
-    }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Company { get; set; }
+    public string Country { get; set; }
+    public string Address1 { get; set; }
+    public string Address2 { get; set; }
+    public string City { get; set; }
+    public string Zip { get; set; }
+    public string Phone { get; set; }
+    public string Email { get; set; }
+    public bool ShouldCreateAccount { get; set; } = false;
+    public bool ShouldCheckPayment { get; set; } = false;
 }

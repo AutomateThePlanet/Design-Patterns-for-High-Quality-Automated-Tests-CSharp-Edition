@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,20 +10,19 @@
 // limitations under the License.
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TestDataPreparationDemos.Facades.First
+namespace TestDataPreparationDemos.Facades.First;
+
+public class CheckoutPageAssertions
 {
-    public class CheckoutPageAssertions
+    private readonly CheckoutPageElements _elements;
+
+    public CheckoutPageAssertions(CheckoutPageElements elements)
     {
-        private readonly CheckoutPageElements _elements;
+        _elements = elements;
+    }
 
-        public CheckoutPageAssertions(CheckoutPageElements elements)
-        {
-            _elements = elements;
-        }
-
-        public void AssertOrderReceived()
-        {
-            Assert.AreEqual(_elements.ReceivedMessage.Text, "Order received");
-        }
+    public void AssertOrderReceived()
+    {
+        Assert.AreEqual(_elements.ReceivedMessage.Text, "Order received");
     }
 }

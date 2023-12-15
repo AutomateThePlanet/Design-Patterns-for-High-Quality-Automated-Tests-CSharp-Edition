@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -11,27 +11,26 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace TestDataPreparationDemos.Configuration
+namespace TestDataPreparationDemos.Configuration;
+
+[Serializable]
+public class ConfigurationNotFoundException : Exception
 {
-    [Serializable]
-    public class ConfigurationNotFoundException : Exception
+    public ConfigurationNotFoundException()
     {
-        public ConfigurationNotFoundException()
-        {
-        }
+    }
 
-        public ConfigurationNotFoundException(string configurationType)
-            : base($"Configuration section for {configurationType} was not found. Please add the section.")
-        {
-        }
+    public ConfigurationNotFoundException(string configurationType)
+        : base($"Configuration section for {configurationType} was not found. Please add the section.")
+    {
+    }
 
-        public ConfigurationNotFoundException(string message, Exception inner)
-            : base(message, inner)
-        {
-        }
+    public ConfigurationNotFoundException(string message, Exception inner)
+        : base(message, inner)
+    {
+    }
 
-        protected ConfigurationNotFoundException(SerializationInfo serializationInfo, StreamingContext streamingContext)
-        {
-        }
+    protected ConfigurationNotFoundException(SerializationInfo serializationInfo, StreamingContext streamingContext)
+    {
     }
 }

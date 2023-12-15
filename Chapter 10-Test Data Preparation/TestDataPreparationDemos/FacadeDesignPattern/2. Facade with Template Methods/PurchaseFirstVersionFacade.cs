@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -8,60 +8,59 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-namespace TestDataPreparationDemos.Facades.Second
+namespace TestDataPreparationDemos.Facades.Second;
+
+public class PurchaseFirstVersionFacade : PurchaseFacade
 {
-    public class PurchaseFirstVersionFacade : PurchaseFacade
+    private readonly MainPage _mainPage;
+    private readonly CartPage _cartPage;
+    private readonly CheckoutPage _checkoutPage;
+
+    public PurchaseFirstVersionFacade(MainPage mainPage, CartPage cartPage, CheckoutPage checkoutPage)
     {
-        private readonly MainPage _mainPage;
-        private readonly CartPage _cartPage;
-        private readonly CheckoutPage _checkoutPage;
+        _mainPage = mainPage;
+        _cartPage = cartPage;
+        _checkoutPage = checkoutPage;
+    }
 
-        public PurchaseFirstVersionFacade(MainPage mainPage, CartPage cartPage, CheckoutPage checkoutPage)
-        {
-            _mainPage = mainPage;
-            _cartPage = cartPage;
-            _checkoutPage = checkoutPage;
-        }
+    protected override void AddItemToShoppingCart(string itemName)
+    {
+        _mainPage.Open();
+        _mainPage.AddRocketToShoppingCart(itemName);
+    }
 
-        protected override void AddItemToShoppingCart(string itemName)
-        {
-            _mainPage.Open();
-            _mainPage.AddRocketToShoppingCart(itemName);
-        }
+    protected override void ApplyCoupon(string couponName)
+    {
+        _cartPage.ApplyCoupon(couponName);
+    }
 
-        protected override void ApplyCoupon(string couponName)
-        {
-            _cartPage.ApplyCoupon(couponName);
-        }
+    protected override void AssertCouponAppliedSuccessfully()
+    {
+        _cartPage.Assertions.AssertCouponAppliedSuccessfully();
+    }
 
-        protected override void AssertCouponAppliedSuccessfully()
-        {
-            _cartPage.Assertions.AssertCouponAppliedSuccessfully();
-        }
+    protected override void AssertOrderReceived()
+    {
+        _checkoutPage.Assertions.AssertOrderReceived();
+    }
 
-        protected override void AssertOrderReceived()
-        {
-            _checkoutPage.Assertions.AssertOrderReceived();
-        }
+    protected override void AssertTotalPrice(string expectedPrice)
+    {
+        _cartPage.Assertions.AssertTotalPrice(expectedPrice);
+    }
 
-        protected override void AssertTotalPrice(string expectedPrice)
-        {
-            _cartPage.Assertions.AssertTotalPrice(expectedPrice);
-        }
+    protected override void FillBillingInfo(PurchaseInfo purchaseInfo)
+    {
+        _checkoutPage.FillBillingInfo(purchaseInfo);
+    }
 
-        protected override void FillBillingInfo(PurchaseInfo purchaseInfo)
-        {
-            _checkoutPage.FillBillingInfo(purchaseInfo);
-        }
+    protected override void IncreaseProductQuantity(int quantity)
+    {
+        _cartPage.IncreaseProductQuantity(quantity);
+    }
 
-        protected override void IncreaseProductQuantity(int quantity)
-        {
-            _cartPage.IncreaseProductQuantity(quantity);
-        }
-
-        protected override void ProceedToCheckout()
-        {
-            _cartPage.Elements.ProceedToCheckout.Click();
-        }
+    protected override void ProceedToCheckout()
+    {
+        _cartPage.Elements.ProceedToCheckout.Click();
     }
 }

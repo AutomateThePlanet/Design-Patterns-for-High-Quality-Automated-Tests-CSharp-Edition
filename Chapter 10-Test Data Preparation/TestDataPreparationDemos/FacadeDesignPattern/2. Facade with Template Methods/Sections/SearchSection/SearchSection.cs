@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,22 +10,21 @@
 // limitations under the License.
 using OpenQA.Selenium;
 
-namespace TestDataPreparationDemos.Facades.Second
+namespace TestDataPreparationDemos.Facades.Second;
+
+public class SearchSection
 {
-    public class SearchSection
+    private readonly Driver _driver;
+    
+    public SearchSection(Driver driver)
     {
-        private readonly Driver _driver;
-        
-        public SearchSection(Driver driver)
-        {
-            _driver = driver;
-        }
+        _driver = driver;
+    }
 
-        private Element SearchField => _driver.FindElement(By.Id("woocommerce-product-search-field-0"));
+    private Element SearchField => _driver.FindElement(By.Id("woocommerce-product-search-field-0"));
 
-        public void SearchForItem(string searchText)
-        {
-            SearchField.TypeText(searchText);
-        }
+    public void SearchForItem(string searchText)
+    {
+        SearchField.TypeText(searchText);
     }
 }
