@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -21,104 +21,103 @@ using Titanium.Web.Proxy.EventArguments;
 using Titanium.Web.Proxy.Models;
 using Proxy = Titanium.Web.Proxy.Http;
 
-namespace OptimizeTestsDemos.Black_Hole_Proxy_Pattern
+namespace OptimizeTestsDemos.Black_Hole_Proxy_Pattern;
+
+[TestClass]
+public class CaptureHttpTrafficTests
 {
-    [TestClass]
-    public class CaptureHttpTrafficTests
+    private static IWebDriver _driver;
+    private static ProxyServer _proxyServer;
+    private static IDictionary<int, Proxy.Request> _requestsHistory;
+    private static IDictionary<int, Proxy.Response> _responsesHistory;
+    private static ConcurrentBag<string> _blockUrls;
+
+    [ClassInitialize]
+    public static void OnClassInitialize(TestContext context)
     {
-        private static IWebDriver _driver;
-        private static ProxyServer _proxyServer;
-        private static IDictionary<int, Proxy.Request> _requestsHistory;
-        private static IDictionary<int, Proxy.Response> _responsesHistory;
-        private static ConcurrentBag<string> _blockUrls;
+        _proxyServer = new ProxyServer();
+        _blockUrls = new ConcurrentBag<string>();
+        _responsesHistory = new ConcurrentDictionary<int, Proxy.Response>();
+        _requestsHistory = new ConcurrentDictionary<int, Proxy.Request>();
+        var explicitEndPoint = new ExplicitProxyEndPoint(System.Net.IPAddress.Any, 18882, true);
+        _proxyServer.AddEndPoint(explicitEndPoint);
+        _proxyServer.Start();
+        _proxyServer.SetAsSystemHttpProxy(explicitEndPoint);
+        _proxyServer.SetAsSystemHttpsProxy(explicitEndPoint);
+        _proxyServer.BeforeRequest += OnRequestBlockResourceEventHandler;
+        _proxyServer.BeforeRequest += OnRequestCaptureTrafficEventHandler;
+        _proxyServer.BeforeResponse += OnResponseCaptureTrafficEventHandler;
+    }
 
-        [ClassInitialize]
-        public static void OnClassInitialize(TestContext context)
-        {
-            _proxyServer = new ProxyServer();
-            _blockUrls = new ConcurrentBag<string>();
-            _responsesHistory = new ConcurrentDictionary<int, Proxy.Response>();
-            _requestsHistory = new ConcurrentDictionary<int, Proxy.Request>();
-            var explicitEndPoint = new ExplicitProxyEndPoint(System.Net.IPAddress.Any, 18882, true);
-            _proxyServer.AddEndPoint(explicitEndPoint);
-            _proxyServer.Start();
-            _proxyServer.SetAsSystemHttpProxy(explicitEndPoint);
-            _proxyServer.SetAsSystemHttpsProxy(explicitEndPoint);
-            _proxyServer.BeforeRequest += OnRequestBlockResourceEventHandler;
-            _proxyServer.BeforeRequest += OnRequestCaptureTrafficEventHandler;
-            _proxyServer.BeforeResponse += OnResponseCaptureTrafficEventHandler;
-        }
+    [ClassCleanup]
+    public static void ClassCleanup()
+    {
+        _proxyServer.Stop();
+    }
 
-        [ClassCleanup]
-        public static void ClassCleanup()
+    [TestInitialize]
+    public void TestInitialize()
+    {
+        var proxy = new OpenQA.Selenium.Proxy
         {
-            _proxyServer.Stop();
-        }
+            HttpProxy = "http://localhost:18882",
+            SslProxy = "http://localhost:18882",
+            FtpProxy = "http://localhost:18882"
+        };
+        var options = new ChromeOptions
+        {
+            Proxy = proxy
+        };
+        _driver = new ChromeDriver(Environment.CurrentDirectory, options);
+    }
 
-        [TestInitialize]
-        public void TestInitialize()
+    [TestCleanup]
+    public void TestCleanup()
+    {
+        _driver.Dispose();
+        _requestsHistory.Clear();
+        _responsesHistory.Clear();
+    }
+
+    [TestMethod]
+    public void FontRequestsNotMade_When_FontRequestSetToBeBlocked()
+    {
+        _blockUrls.Add("http://myanalytics.com");
+
+        _driver.Navigate().GoToUrl("https://automatetheplanet.com/");
+    }
+
+    private static async Task OnRequestBlockResourceEventHandler(object sender, SessionEventArgs e) => await Task.Run(
+        () =>
         {
-            var proxy = new OpenQA.Selenium.Proxy
+            if (_blockUrls.Count > 0)
             {
-                HttpProxy = "http://localhost:18882",
-                SslProxy = "http://localhost:18882",
-                FtpProxy = "http://localhost:18882"
-            };
-            var options = new ChromeOptions
-            {
-                Proxy = proxy
-            };
-            _driver = new ChromeDriver(Environment.CurrentDirectory, options);
-        }
-
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            _driver.Dispose();
-            _requestsHistory.Clear();
-            _responsesHistory.Clear();
-        }
-
-        [TestMethod]
-        public void FontRequestsNotMade_When_FontRequestSetToBeBlocked()
-        {
-            _blockUrls.Add("http://myanalytics.com");
-
-            _driver.Navigate().GoToUrl("https://automatetheplanet.com/");
-        }
-
-        private static async Task OnRequestBlockResourceEventHandler(object sender, SessionEventArgs e) => await Task.Run(
-            () =>
-            {
-                if (_blockUrls.Count > 0)
+                foreach (var urlToBeBlocked in _blockUrls)
                 {
-                    foreach (var urlToBeBlocked in _blockUrls)
+                    if (e.HttpClient.Request.RequestUri.ToString().Contains(urlToBeBlocked))
                     {
-                        if (e.HttpClient.Request.RequestUri.ToString().Contains(urlToBeBlocked))
-                        {
-                            string customBody = string.Empty;
-                            e.Ok(Encoding.UTF8.GetBytes(customBody));
-                        }
+                        string customBody = string.Empty;
+                        e.Ok(Encoding.UTF8.GetBytes(customBody));
                     }
                 }
-            });
+            }
+        });
 
-        private static async Task OnRequestCaptureTrafficEventHandler(object sender, SessionEventArgs e) => await Task.Run(
-            () =>
+    private static async Task OnRequestCaptureTrafficEventHandler(object sender, SessionEventArgs e) => await Task.Run(
+        () =>
+        {
+            if (!_requestsHistory.ContainsKey(e.HttpClient.Request.GetHashCode()) && e.HttpClient.Request != null)
             {
-                if (!_requestsHistory.ContainsKey(e.HttpClient.Request.GetHashCode()) && e.HttpClient.Request != null)
-                {
-                    _requestsHistory.Add(e.HttpClient.Request.GetHashCode(), e.HttpClient.Request);
-                }
-            });
+                _requestsHistory.Add(e.HttpClient.Request.GetHashCode(), e.HttpClient.Request);
+            }
+        });
 
-        private static async Task OnResponseCaptureTrafficEventHandler(object sender, SessionEventArgs e) => await Task.Run(
-            () =>
+    private static async Task OnResponseCaptureTrafficEventHandler(object sender, SessionEventArgs e) => await Task.Run(
+        () =>
+        {
+            if (!_responsesHistory.ContainsKey(e.HttpClient.Response.GetHashCode()) && e.HttpClient.Response != null)
             {
-                if (!_responsesHistory.ContainsKey(e.HttpClient.Response.GetHashCode()) && e.HttpClient.Response != null)
-                {
-                    _responsesHistory.Add(e.HttpClient.Response.GetHashCode(), e.HttpClient.Response);
-                }
-            });
-    }
+                _responsesHistory.Add(e.HttpClient.Response.GetHashCode(), e.HttpClient.Response);
+            }
+        });
 }

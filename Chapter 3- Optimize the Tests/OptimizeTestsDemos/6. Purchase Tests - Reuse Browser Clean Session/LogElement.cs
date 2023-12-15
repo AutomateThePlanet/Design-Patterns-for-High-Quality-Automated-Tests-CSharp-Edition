@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -11,60 +11,59 @@
 using System;
 using OpenQA.Selenium;
 
-namespace StabilizeTestsDemos.SixthVersion
+namespace StabilizeTestsDemos.SixthVersion;
+
+public class LogElement : ElementDecorator
 {
-    public class LogElement : ElementDecorator
+    public LogElement(Element element)
+        : base(element)
     {
-        public LogElement(Element element)
-            : base(element)
-        {
-        }
+    }
 
-        public override By By => Element?.By;
+    public override By By => Element?.By;
 
-        public override string Text
+    public override string Text
+    {
+        get
         {
-            get
-            {
-                Console.WriteLine($"Element Text = {Element?.Text}");
-                return Element?.Text;
-            }
+            Console.WriteLine($"Element Text = {Element?.Text}");
+            return Element?.Text;
         }
+    }
 
-        public override bool? Enabled
+    public override bool? Enabled
+    {
+        get
         {
-            get
-            {
-                Console.WriteLine($"Element Enabled = {Element?.Enabled}");
-                return Element?.Enabled;
-            }
+            Console.WriteLine($"Element Enabled = {Element?.Enabled}");
+            return Element?.Enabled;
         }
+    }
 
-        public override bool? Displayed
+    public override bool? Displayed
+    {
+        get
         {
-            get
-            {
-                Console.WriteLine($"Element Displayed = {Element?.Displayed}");
-                return Element?.Displayed;
-            }
+            Console.WriteLine($"Element Displayed = {Element?.Displayed}");
+            return Element?.Displayed;
         }
+    }
 
-        public override void Click()
-        {
-            Console.WriteLine($"Element Clicked");
-            Element?.Click();
-        }
+    public override void Click()
+    {
+        Console.WriteLine($"Element Clicked");
+        Element?.Click();
+    }
 
-        public override string GetAttribute(string attributeName)
-        {
-            Console.WriteLine($"Get Element's Attribute = {attributeName}");
-            return Element?.GetAttribute(attributeName);
-        }
+    public override string GetAttribute(string attributeName)
+    {
+        Console.WriteLine($"Get Element's Attribute = {attributeName}");
+        return Element?.GetAttribute(attributeName);
+    }
 
-        public override void TypeText(string text)
-        {
-            Console.WriteLine($"Type Text = {text}");
-            Element?.TypeText(text);
-        }
+    public override void TypeText(string text)
+    {
+        Console.WriteLine($"Type Text = {text}");
+        Element?.TypeText(text);
     }
 }

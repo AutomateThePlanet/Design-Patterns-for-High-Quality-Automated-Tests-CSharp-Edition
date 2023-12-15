@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,16 +10,15 @@
 // limitations under the License.
 using OpenQA.Selenium;
 
-namespace StabilizeTestsDemos.ThirdVersion
+namespace StabilizeTestsDemos.ThirdVersion;
+
+public abstract class Element 
 {
-    public abstract class Element 
-    {
-        public abstract By By { get; }
-        public abstract string Text { get; }
-        public abstract bool? Enabled { get; }
-        public abstract bool? Displayed { get; }
-        public abstract void TypeText(string text);
-        public abstract void Click();
-        public abstract string GetAttribute(string attributeName);
-    }
+    public abstract By By { get; }
+    public abstract string Text { get; }
+    public abstract bool? Enabled { get; }
+    public abstract bool? Displayed { get; }
+    public abstract void TypeText(string text);
+    public abstract void Click();
+    public abstract string GetAttribute(string attributeName);
 }

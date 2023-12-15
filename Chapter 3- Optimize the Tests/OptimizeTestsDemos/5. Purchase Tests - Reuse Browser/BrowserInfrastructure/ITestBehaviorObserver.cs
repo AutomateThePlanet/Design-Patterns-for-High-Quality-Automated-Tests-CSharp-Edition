@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -11,18 +11,17 @@
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace StabilizeTestsDemos.FifthVersion
+namespace StabilizeTestsDemos.FifthVersion;
+
+public interface ITestBehaviorObserver
 {
-    public interface ITestBehaviorObserver
-    {
-        void PreTestInit(TestContext context, MemberInfo memberInfo);
+    void PreTestInit(TestContext context, MemberInfo memberInfo);
 
-        void PostTestInit(TestContext context, MemberInfo memberInfo);
+    void PostTestInit(TestContext context, MemberInfo memberInfo);
 
-        void PreTestCleanup(TestContext context, MemberInfo memberInfo);
+    void PreTestCleanup(TestContext context, MemberInfo memberInfo);
 
-        void PostTestCleanup(TestContext context, MemberInfo memberInfo);
+    void PostTestCleanup(TestContext context, MemberInfo memberInfo);
 
-        void TestInstantiated(MemberInfo memberInfo);
-    }
+    void TestInstantiated(MemberInfo memberInfo);
 }

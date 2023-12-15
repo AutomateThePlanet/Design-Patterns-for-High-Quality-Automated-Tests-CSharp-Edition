@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,16 +10,15 @@
 // limitations under the License.
 using System;
 
-namespace StabilizeTestsDemos.SixthVersion
-{
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
-    public class ExecutionBrowserAttribute : Attribute
-    {
-        public ExecutionBrowserAttribute(Browser browser, BrowserBehavior browserBehavior)
-        {
-            BrowserConfiguration = new BrowserConfiguration(browser, browserBehavior);
-        }
+namespace StabilizeTestsDemos.SixthVersion;
 
-        public BrowserConfiguration BrowserConfiguration { get; set; }
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
+public class ExecutionBrowserAttribute : Attribute
+{
+    public ExecutionBrowserAttribute(Browser browser, BrowserBehavior browserBehavior)
+    {
+        BrowserConfiguration = new BrowserConfiguration(browser, browserBehavior);
     }
+
+    public BrowserConfiguration BrowserConfiguration { get; set; }
 }
