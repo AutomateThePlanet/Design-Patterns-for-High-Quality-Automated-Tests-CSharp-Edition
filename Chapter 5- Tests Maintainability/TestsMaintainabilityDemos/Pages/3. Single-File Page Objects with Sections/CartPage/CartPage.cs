@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,62 +10,61 @@
 // limitations under the License.
 using OpenQA.Selenium;
 
-namespace TestsMaintainabilityDemos.Third
+namespace TestsMaintainabilityDemos.Third;
+
+public class CartPage
 {
-    public class CartPage
+    private readonly Driver _driver;
+
+    public CartPage(Driver driver)
     {
-        private readonly Driver _driver;
+        _driver = driver;
+        SearchSection = new SearchSection(_driver);
+        MainMenuSection = new MainMenuSection(_driver);
+        CartInfoSection = new CartInfoSection(_driver);
+        BreadcrumbSection = new BreadcrumbSection(_driver);
+    }
 
-        public CartPage(Driver driver)
-        {
-            _driver = driver;
-            SearchSection = new SearchSection(_driver);
-            MainMenuSection = new MainMenuSection(_driver);
-            CartInfoSection = new CartInfoSection(_driver);
-            BreadcrumbSection = new BreadcrumbSection(_driver);
-        }
+    public SearchSection SearchSection { get;  }
+    public MainMenuSection MainMenuSection { get; }
+    public CartInfoSection CartInfoSection { get; }
+    public BreadcrumbSection BreadcrumbSection { get; }
 
-        public SearchSection SearchSection { get;  }
-        public MainMenuSection MainMenuSection { get; }
-        public CartInfoSection CartInfoSection { get; }
-        public BreadcrumbSection BreadcrumbSection { get; }
+    private Element CouponCodeTextField => _driver.FindElement(By.Id("coupon_code"));
+    private Element ApplyCouponButton => _driver.FindElement(By.CssSelector("[value*='Apply coupon']"));
+    private Element QuantityBox => _driver.FindElement(By.CssSelector("[class*='input-text qty text']"));
+    private Element UpdateCart => _driver.FindElement(By.CssSelector("[value*='Update cart']"));
+    private Element MessageAlert => _driver.FindElement(By.CssSelector("[class*='woocommerce-message']"));
+    private Element TotalSpan => _driver.FindElement(By.XPath("//*[@class='order-total']//span"));
+    private Element ProceedToCheckout => _driver.FindElement(By.CssSelector("[class*='checkout-button button alt wc-forward']"));
 
-        private Element CouponCodeTextField => _driver.FindElement(By.Id("coupon_code"));
-        private Element ApplyCouponButton => _driver.FindElement(By.CssSelector("[value*='Apply coupon']"));
-        private Element QuantityBox => _driver.FindElement(By.CssSelector("[class*='input-text qty text']"));
-        private Element UpdateCart => _driver.FindElement(By.CssSelector("[value*='Update cart']"));
-        private Element MessageAlert => _driver.FindElement(By.CssSelector("[class*='woocommerce-message']"));
-        private Element TotalSpan => _driver.FindElement(By.XPath("//*[@class='order-total']//span"));
-        private Element ProceedToCheckout => _driver.FindElement(By.CssSelector("[class*='checkout-button button alt wc-forward']"));
+    public void ApplyCoupon(string coupon)
+    {
+        CouponCodeTextField.TypeText(coupon);
+        ApplyCouponButton.Click();
+        _driver.WaitForAjax();
+    }
 
-        public void ApplyCoupon(string coupon)
-        {
-            CouponCodeTextField.TypeText(coupon);
-            ApplyCouponButton.Click();
-            _driver.WaitForAjax();
-        }
+    public void IncreaseProductQuantity(int newQuantity)
+    {
+        QuantityBox.TypeText(newQuantity.ToString());
+        UpdateCart.Click();
+        _driver.WaitForAjax();
+    }
 
-        public void IncreaseProductQuantity(int newQuantity)
-        {
-            QuantityBox.TypeText(newQuantity.ToString());
-            UpdateCart.Click();
-            _driver.WaitForAjax();
-        }
+    public void ClickProceedToCheckout()
+    {
+        ProceedToCheckout.Click();
+        _driver.WaitUntilPageLoadsCompletely();
+    }
 
-        public void ClickProceedToCheckout()
-        {
-            ProceedToCheckout.Click();
-            _driver.WaitUntilPageLoadsCompletely();
-        }
+    public string GetTotal()
+    {
+        return TotalSpan.Text;
+    }
 
-        public string GetTotal()
-        {
-            return TotalSpan.Text;
-        }
-
-        public string GetMessageNotification()
-        {
-            return MessageAlert.Text;
-        }
+    public string GetMessageNotification()
+    {
+        return MessageAlert.Text;
     }
 }

@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,25 +10,24 @@
 // limitations under the License.
 using OpenQA.Selenium;
 
-namespace TestsMaintainabilityDemos.Second
+namespace TestsMaintainabilityDemos.Second;
+
+public class MainPage : BaseEShopPage
 {
-    public class MainPage : BaseEShopPage
+    public MainPage(Driver driver) 
+        : base(driver)
     {
-        public MainPage(Driver driver) 
-            : base(driver)
-        {
-        }
-        protected override string Url => "http://demos.bellatrix.solutions/";
+    }
+    protected override string Url => "http://demos.bellatrix.solutions/";
 
-        private Element AddToCartFalcon9 => Driver.FindElement(By.CssSelector("[data-product_id*='28']"));
-        private Element ViewCartButton => Driver.FindElement(By.CssSelector("[class*='added_to_cart wc-forward']"));
+    private Element AddToCartFalcon9 => Driver.FindElement(By.CssSelector("[data-product_id*='28']"));
+    private Element ViewCartButton => Driver.FindElement(By.CssSelector("[class*='added_to_cart wc-forward']"));
 
 
-        public void AddRocketToShoppingCart()
-        {
-            Open();
-            AddToCartFalcon9.Click();
-            ViewCartButton.Click();
-        }
+    public void AddRocketToShoppingCart()
+    {
+        Open();
+        AddToCartFalcon9.Click();
+        ViewCartButton.Click();
     }
 }

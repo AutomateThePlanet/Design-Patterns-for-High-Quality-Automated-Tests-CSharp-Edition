@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,33 +10,32 @@
 // limitations under the License.
 using OpenQA.Selenium;
 
-namespace TestsMaintainabilityDemos.Third
+namespace TestsMaintainabilityDemos.Third;
+
+public class MainPage
 {
-    public class MainPage
+    private readonly Driver _driver;
+    private readonly string _url = "http://demos.bellatrix.solutions/";
+
+    public MainPage(Driver driver)
     {
-        private readonly Driver _driver;
-        private readonly string _url = "http://demos.bellatrix.solutions/";
+        _driver = driver;
+        SearchSection = new SearchSection(_driver);
+        MainMenuSection = new MainMenuSection(_driver);
+        CartInfoSection = new CartInfoSection(_driver);
+    }
 
-        public MainPage(Driver driver)
-        {
-            _driver = driver;
-            SearchSection = new SearchSection(_driver);
-            MainMenuSection = new MainMenuSection(_driver);
-            CartInfoSection = new CartInfoSection(_driver);
-        }
+    public SearchSection SearchSection { get; }
+    public MainMenuSection MainMenuSection { get; }
+    public CartInfoSection CartInfoSection { get; }
 
-        public SearchSection SearchSection { get; }
-        public MainMenuSection MainMenuSection { get; }
-        public CartInfoSection CartInfoSection { get; }
-
-        private Element AddToCartFalcon9 => _driver.FindElement(By.CssSelector("[data-product_id*='28']"));
-        private Element ViewCartButton => _driver.FindElement(By.CssSelector("[class*='added_to_cart wc-forward']"));
-       
-        public void AddRocketToShoppingCart()
-        {
-            _driver.GoToUrl(_url);
-            AddToCartFalcon9.Click();
-            ViewCartButton.Click();
-        }
+    private Element AddToCartFalcon9 => _driver.FindElement(By.CssSelector("[data-product_id*='28']"));
+    private Element ViewCartButton => _driver.FindElement(By.CssSelector("[class*='added_to_cart wc-forward']"));
+   
+    public void AddRocketToShoppingCart()
+    {
+        _driver.GoToUrl(_url);
+        AddToCartFalcon9.Click();
+        ViewCartButton.Click();
     }
 }

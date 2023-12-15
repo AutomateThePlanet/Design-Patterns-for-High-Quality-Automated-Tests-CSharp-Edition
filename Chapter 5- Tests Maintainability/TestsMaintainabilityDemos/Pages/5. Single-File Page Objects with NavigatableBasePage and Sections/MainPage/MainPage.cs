@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -11,41 +11,40 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 
-namespace TestsMaintainabilityDemos.Fifth
+namespace TestsMaintainabilityDemos.Fifth;
+
+public class MainPage : NavigatableEShopPage
 {
-    public class MainPage : NavigatableEShopPage
+    public MainPage(Driver driver) 
+        : base(driver)
     {
-        public MainPage(Driver driver) 
-            : base(driver)
-        {
-        }
+    }
 
-        protected override string Url => "http://demos.bellatrix.solutions/";
+    protected override string Url => "http://demos.bellatrix.solutions/";
 
-        private Element AddToCartFalcon9 => Driver.FindElement(By.CssSelector("[data-product_id*='28']"));
-        private Element ViewCartButton => Driver.FindElement(By.CssSelector("[class*='added_to_cart wc-forward']"));
+    private Element AddToCartFalcon9 => Driver.FindElement(By.CssSelector("[data-product_id*='28']"));
+    private Element ViewCartButton => Driver.FindElement(By.CssSelector("[class*='added_to_cart wc-forward']"));
 
-        public void AddRocketToShoppingCart()
-        {
-            Open();
-            AddToCartFalcon9.Click();
-            ViewCartButton.Click();
-        }
+    public void AddRocketToShoppingCart()
+    {
+        Open();
+        AddToCartFalcon9.Click();
+        ViewCartButton.Click();
+    }
 
-        public void AssertProductBoxLink(string name, string expectedLink)
-        {
-            string actualLink = GetProductBoxByName(name).GetAttribute("href");
-            Assert.AreEqual(expectedLink, actualLink);
-        }
+    public void AssertProductBoxLink(string name, string expectedLink)
+    {
+        string actualLink = GetProductBoxByName(name).GetAttribute("href");
+        Assert.AreEqual(expectedLink, actualLink);
+    }
 
-        protected override void WaitForPageLoad()
-        {
-            AddToCartFalcon9.WaitToExists();
-        }
+    protected override void WaitForPageLoad()
+    {
+        AddToCartFalcon9.WaitToExists();
+    }
 
-        private Element GetProductBoxByName(string name)
-        {
-            return Driver.FindElement(By.XPath($"//h2[text()='{name}']/parent::a[1]"));
-        }
+    private Element GetProductBoxByName(string name)
+    {
+        return Driver.FindElement(By.XPath($"//h2[text()='{name}']/parent::a[1]"));
     }
 }
