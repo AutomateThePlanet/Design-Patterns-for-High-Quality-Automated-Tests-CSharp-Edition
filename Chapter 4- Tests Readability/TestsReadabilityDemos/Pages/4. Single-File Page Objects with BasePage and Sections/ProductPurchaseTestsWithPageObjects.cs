@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,55 +10,54 @@
 // limitations under the License.
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TestsReadabilityDemos.Fourth
+namespace TestsReadabilityDemos.Fourth;
+
+[TestClass]
+public class SectionsTests
 {
-    [TestClass]
-    public class SectionsTests
+    private static Driver _driver;
+    private static MainPage _mainPage;
+    private static CartPage _cartPage;
+
+    [ClassInitialize]
+    public static void ClassInitialize(TestContext testContext)
     {
-        private static Driver _driver;
-        private static MainPage _mainPage;
-        private static CartPage _cartPage;
+        _driver = new LoggingDriver(new WebDriver());
+        _driver.Start(Browser.Chrome);
+        _mainPage = new MainPage(_driver);
+        _cartPage = new CartPage(_driver);
+    }
 
-        [ClassInitialize]
-        public static void ClassInitialize(TestContext testContext)
-        {
-            _driver = new LoggingDriver(new WebDriver());
-            _driver.Start(Browser.Chrome);
-            _mainPage = new MainPage(_driver);
-            _cartPage = new CartPage(_driver);
-        }
+    [ClassCleanup]
+    public static void ClassCleanup()
+    {
+        _driver.Quit();
+    }
 
-        [ClassCleanup]
-        public static void ClassCleanup()
-        {
-            _driver.Quit();
-        }
+    [TestInitialize]
+    public void TestInitialize()
+    {
+        _mainPage.Open();
+    }
 
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            _mainPage.Open();
-        }
+    [TestMethod]
+    public void OpenBlogPage()
+    {
+        _mainPage.MainMenuSection.OpenBlogPage();
+        // verify page title
+    }
 
-        [TestMethod]
-        public void OpenBlogPage()
-        {
-            _mainPage.MainMenuSection.OpenBlogPage();
-            // verify page title
-        }
+    [TestMethod]
+    public void SearchForItem()
+    {
+        _mainPage.SearchSection.SearchForItem("Falcon 9");
+        // add the item to cart
+    }
 
-        [TestMethod]
-        public void SearchForItem()
-        {
-            _mainPage.SearchSection.SearchForItem("Falcon 9");
-            // add the item to cart
-        }
-
-        [TestMethod]
-        public void OpenCart()
-        {
-            _mainPage.CartInfoSection.OpenCart();
-            // verify items in the cart
-        }
+    [TestMethod]
+    public void OpenCart()
+    {
+        _mainPage.CartInfoSection.OpenCart();
+        // verify items in the cart
     }
 }
