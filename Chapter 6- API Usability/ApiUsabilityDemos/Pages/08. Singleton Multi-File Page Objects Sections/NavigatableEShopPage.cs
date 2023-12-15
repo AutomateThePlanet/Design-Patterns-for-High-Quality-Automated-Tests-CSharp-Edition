@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -8,26 +8,25 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-namespace ApiUsabilityDemos.Eight
+namespace ApiUsabilityDemos.Eight;
+
+public abstract class NavigatableEShopPage<TPage> : EShopPage<TPage>
+    where TPage : NavigatableEShopPage<TPage>, new()
 {
-    public abstract class NavigatableEShopPage<TPage> : EShopPage<TPage>
-        where TPage : NavigatableEShopPage<TPage>, new()
+    protected readonly INavigationService NavigationService;
+
+    protected NavigatableEShopPage()
     {
-        protected readonly INavigationService NavigationService;
-
-        protected NavigatableEShopPage()
-        {
-            NavigationService = LoggingSingletonDriver.Instance;
-        }
-
-        protected abstract string Url { get; }
-
-        public void Open()
-        {
-            NavigationService.GoToUrl(Url);
-            WaitForPageLoad();
-        }
-
-        protected abstract void WaitForPageLoad();
+        NavigationService = LoggingSingletonDriver.Instance;
     }
+
+    protected abstract string Url { get; }
+
+    public void Open()
+    {
+        NavigationService.GoToUrl(Url);
+        WaitForPageLoad();
+    }
+
+    protected abstract void WaitForPageLoad();
 }

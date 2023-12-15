@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -8,57 +8,56 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-namespace ApiUsabilityDemos.Ninth
+namespace ApiUsabilityDemos.Ninth;
+
+public class CartPage : NavigatableEShopPage
 {
-    public class CartPage : NavigatableEShopPage
+    private CartPage(Driver driver) 
+        : base(driver)
     {
-        private CartPage(Driver driver) 
-            : base(driver)
-        {
-            BreadcrumbSection = new BreadcrumbSection(Driver);
-            Elements = new CartPageElements(driver);
-        }
+        BreadcrumbSection = new BreadcrumbSection(Driver);
+        Elements = new CartPageElements(driver);
+    }
 
-        protected override string Url => "http://demos.bellatrix.solutions/cart/";
+    protected override string Url => "http://demos.bellatrix.solutions/cart/";
 
-        public BreadcrumbSection BreadcrumbSection { get; }
-        public CartPageElements Elements { get; }
+    public BreadcrumbSection BreadcrumbSection { get; }
+    public CartPageElements Elements { get; }
 
 
-        public void ApplyCoupon(string coupon)
-        {
-            Elements.CouponCodeTextField.TypeText(coupon);
-            Elements.ApplyCouponButton.Click();
-            Driver.WaitForAjax();
-        }
+    public void ApplyCoupon(string coupon)
+    {
+        Elements.CouponCodeTextField.TypeText(coupon);
+        Elements.ApplyCouponButton.Click();
+        Driver.WaitForAjax();
+    }
 
-        public void IncreaseProductQuantity(int newQuantity)
-        {
-            Elements.QuantityBox.TypeText(newQuantity.ToString());
-            Elements.UpdateCart.Click();
-            Driver.WaitForAjax();
-        }
+    public void IncreaseProductQuantity(int newQuantity)
+    {
+        Elements.QuantityBox.TypeText(newQuantity.ToString());
+        Elements.UpdateCart.Click();
+        Driver.WaitForAjax();
+    }
 
-        public void ProceedToCheckout()
-        {
-            Elements.ProceedToCheckout.Click();
-            Driver.WaitUntilPageLoadsCompletely();
-        }
+    public void ProceedToCheckout()
+    {
+        Elements.ProceedToCheckout.Click();
+        Driver.WaitUntilPageLoadsCompletely();
+    }
 
-        public string GetTotal()
-        {
-            return Elements.TotalSpan.Text;
-        }
+    public string GetTotal()
+    {
+        return Elements.TotalSpan.Text;
+    }
 
 
-        public string GetMessageNotification()
-        {
-            return Elements.MessageAlert.Text;
-        }
+    public string GetMessageNotification()
+    {
+        return Elements.MessageAlert.Text;
+    }
 
-        protected override void WaitForPageLoad()
-        {
-            Elements.CouponCodeTextField.WaitToExists();
-        }
+    protected override void WaitForPageLoad()
+    {
+        Elements.CouponCodeTextField.WaitToExists();
     }
 }

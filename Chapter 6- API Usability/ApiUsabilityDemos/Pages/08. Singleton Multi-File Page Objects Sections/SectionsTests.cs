@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,37 +10,36 @@
 // limitations under the License.
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ApiUsabilityDemos.Eight
+namespace ApiUsabilityDemos.Eight;
+
+[TestClass]
+public class SectionsTests
 {
-    [TestClass]
-    public class SectionsTests
+    [ClassInitialize]
+    public static void ClassInitialize(TestContext testContext)
     {
-        [ClassInitialize]
-        public static void ClassInitialize(TestContext testContext)
-        {
-            LoggingSingletonDriver.Instance.Start(Browser.Chrome);
-        }
+        LoggingSingletonDriver.Instance.Start(Browser.Chrome);
+    }
 
-        [ClassCleanup]
-        public static void ClassCleanup()
-        {
-            LoggingSingletonDriver.Instance.Quit();
-        }
+    [ClassCleanup]
+    public static void ClassCleanup()
+    {
+        LoggingSingletonDriver.Instance.Quit();
+    }
 
-        [TestMethod]
-        public void Falcon9LinkAddsCorrectProduct()
-        {
-            MainPage.Instance.Open();
+    [TestMethod]
+    public void Falcon9LinkAddsCorrectProduct()
+    {
+        MainPage.Instance.Open();
 
-            MainPage.Instance.Assertions.AssertProductBoxLink("Falcon 9", "http://demos.bellatrix.solutions/product/falcon-9/");
-        }
+        MainPage.Instance.Assertions.AssertProductBoxLink("Falcon 9", "http://demos.bellatrix.solutions/product/falcon-9/");
+    }
 
-        [TestMethod]
-        public void SaturnVLinkAddsCorrectProduct()
-        {
-            MainPage.Instance.Open();
+    [TestMethod]
+    public void SaturnVLinkAddsCorrectProduct()
+    {
+        MainPage.Instance.Open();
 
-            MainPage.Instance.Assertions.AssertProductBoxLink("Saturn V", "http://demos.bellatrix.solutions/product/saturn-v/");
-        }
+        MainPage.Instance.Assertions.AssertProductBoxLink("Saturn V", "http://demos.bellatrix.solutions/product/saturn-v/");
     }
 }

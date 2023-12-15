@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,23 +10,22 @@
 // limitations under the License.
 using OpenQA.Selenium;
 
-namespace ApiUsabilityDemos.Seventh
+namespace ApiUsabilityDemos.Seventh;
+
+public class MainPageElements
 {
-    public class MainPageElements
+    private readonly IElementFindService _driver;
+
+    public MainPageElements(IElementFindService driver)
     {
-        private readonly IElementFindService _driver;
+        _driver = driver;
+    }
 
-        public MainPageElements(IElementFindService driver)
-        {
-            _driver = driver;
-        }
+    public Element AddToCartFalcon9 => _driver.FindElement(By.CssSelector("[data-product_id*='28']"));
+    public Element ViewCartButton => _driver.FindElement(By.CssSelector("[class*='added_to_cart wc-forward']"));
 
-        public Element AddToCartFalcon9 => _driver.FindElement(By.CssSelector("[data-product_id*='28']"));
-        public Element ViewCartButton => _driver.FindElement(By.CssSelector("[class*='added_to_cart wc-forward']"));
-
-        public Element GetProductBoxByName(string name)
-        {
-            return _driver.FindElement(By.XPath($"//h2[text()='{name}']/parent::a[1]"));
-        }
+    public Element GetProductBoxByName(string name)
+    {
+        return _driver.FindElement(By.XPath($"//h2[text()='{name}']/parent::a[1]"));
     }
 }

@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -10,20 +10,19 @@
 // limitations under the License.
 using OpenQA.Selenium;
 
-namespace ApiUsabilityDemos.Eight
+namespace ApiUsabilityDemos.Eight;
+
+public class CartPageElements
 {
-    public class CartPageElements
-    {
-        private readonly IElementFindService _driver;
+    private readonly IElementFindService _driver;
 
-        public CartPageElements(IElementFindService driver) => _driver = driver;
+    public CartPageElements(IElementFindService driver) => _driver = driver;
 
-        public Element CouponCodeTextField => _driver.FindElement(By.Id("coupon_code"));
-        public Element ApplyCouponButton => _driver.FindElement(By.CssSelector("[value*='Apply coupon']"));
-        public Element QuantityBox => _driver.FindElement(By.CssSelector("[class*='input-text qty text']"));
-        public Element UpdateCart => _driver.FindElement(By.CssSelector("[value*='Update cart']"));
-        public Element MessageAlert => _driver.FindElement(By.CssSelector("[class*='woocommerce-message']"));
-        public Element TotalSpan => _driver.FindElement(By.XPath("//*[@class='order-total']//span"));
-        public Element ProceedToCheckout => _driver.FindElement(By.CssSelector("[class*='checkout-button button alt wc-forward']"));
-    }
+    public Element CouponCodeTextField => _driver.FindElement(By.Id("coupon_code"));
+    public Element ApplyCouponButton => _driver.FindElement(By.CssSelector("[value*='Apply coupon']"));
+    public Element QuantityBox => _driver.FindElement(By.CssSelector("[class*='input-text qty text']"));
+    public Element UpdateCart => _driver.FindElement(By.CssSelector("[value*='Update cart']"));
+    public Element MessageAlert => _driver.FindElement(By.CssSelector("[class*='woocommerce-message']"));
+    public Element TotalSpan => _driver.FindElement(By.XPath("//*[@class='order-total']//span"));
+    public Element ProceedToCheckout => _driver.FindElement(By.CssSelector("[class*='checkout-button button alt wc-forward']"));
 }

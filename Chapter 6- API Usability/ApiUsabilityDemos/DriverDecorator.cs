@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -12,52 +12,51 @@ using System;
 using System.Collections.Generic;
 using OpenQA.Selenium;
 
-namespace ApiUsabilityDemos
+namespace ApiUsabilityDemos;
+
+public abstract class DriverDecorator : Driver
 {
-    public abstract class DriverDecorator : Driver
+    protected Driver Driver;
+
+    protected DriverDecorator(Driver driver)
     {
-        protected Driver Driver;
+        Driver = driver;
+    }
 
-        protected DriverDecorator(Driver driver)
-        {
-            Driver = driver;
-        }
+    public override Uri Url => Driver?.Url;
 
-        public override Uri Url => Driver?.Url;
+    public override void Start(Browser browser)
+    {
+        Driver?.Start(browser);
+    }
 
-        public override void Start(Browser browser)
-        {
-            Driver?.Start(browser);
-        }
+    public override void Quit()
+    {
+        Driver?.Quit();
+    }
 
-        public override void Quit()
-        {
-            Driver?.Quit();
-        }
+    public override void GoToUrl(string url)
+    {
+        Driver?.GoToUrl(url);
+    }
 
-        public override void GoToUrl(string url)
-        {
-            Driver?.GoToUrl(url);
-        }
+    public override Element FindElement(By locator)
+    {
+        return Driver?.FindElement(locator);
+    }
 
-        public override Element FindElement(By locator)
-        {
-            return Driver?.FindElement(locator);
-        }
+    public override List<Element> FindElements(By locator)
+    {
+        return Driver?.FindElements(locator);
+    }
 
-        public override List<Element> FindElements(By locator)
-        {
-            return Driver?.FindElements(locator);
-        }
+    public override void WaitForAjax()
+    {
+        Driver?.WaitForAjax();
+    }
 
-        public override void WaitForAjax()
-        {
-            Driver?.WaitForAjax();
-        }
-
-        public override void WaitUntilPageLoadsCompletely()
-        {
-            Driver?.WaitUntilPageLoadsCompletely();
-        }
+    public override void WaitUntilPageLoadsCompletely()
+    {
+        Driver?.WaitUntilPageLoadsCompletely();
     }
 }

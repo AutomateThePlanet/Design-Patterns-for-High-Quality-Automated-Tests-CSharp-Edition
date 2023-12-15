@@ -1,4 +1,4 @@
-﻿// Copyright 2021 Automate The Planet Ltd.
+﻿// Copyright 2024 Automate The Planet Ltd.
 // Author: Anton Angelov
 // Licensed under the Apache License, Version 2.0 (the "License");
 // You may not use this file except in compliance with the License.
@@ -12,58 +12,57 @@ using System;
 using System.Collections.Generic;
 using OpenQA.Selenium;
 
-namespace ApiUsabilityDemos
+namespace ApiUsabilityDemos;
+
+public class LoggingSingletonDriver : DriverDecorator
 {
-    public class LoggingSingletonDriver : DriverDecorator
+    private static LoggingSingletonDriver _instance;
+
+    public static LoggingSingletonDriver Instance
     {
-        private static LoggingSingletonDriver _instance;
-
-        public static LoggingSingletonDriver Instance
+        get
         {
-            get
+            if (_instance == null)
             {
-                if (_instance == null)
-                {
-                    _instance = new LoggingSingletonDriver(new WebDriver());
-                }
-
-                return _instance;
+                _instance = new LoggingSingletonDriver(new WebDriver());
             }
-        }
 
-        private LoggingSingletonDriver(Driver driver)
-            : base(driver)
-        {
+            return _instance;
         }
+    }
 
-        public override void Start(Browser browser)
-        {
-            Console.WriteLine($"Start browser = {Enum.GetName(typeof(Browser), browser)}");
-            Driver?.Start(browser);
-        }
+    private LoggingSingletonDriver(Driver driver)
+        : base(driver)
+    {
+    }
 
-        public override void Quit()
-        {
-            Console.WriteLine("Close browser");
-            Driver?.Quit();
-        }
+    public override void Start(Browser browser)
+    {
+        Console.WriteLine($"Start browser = {Enum.GetName(typeof(Browser), browser)}");
+        Driver?.Start(browser);
+    }
 
-        public override void GoToUrl(string url)
-        {
-            Console.WriteLine($"Go to URL = {url}");
-            Driver?.GoToUrl(url);
-        }
+    public override void Quit()
+    {
+        Console.WriteLine("Close browser");
+        Driver?.Quit();
+    }
 
-        public override Element FindElement(By locator)
-        {
-            Console.WriteLine("Find Element");
-            return Driver?.FindElement(locator);
-        }
+    public override void GoToUrl(string url)
+    {
+        Console.WriteLine($"Go to URL = {url}");
+        Driver?.GoToUrl(url);
+    }
 
-        public override List<Element> FindElements(By locator)
-        {
-            Console.WriteLine("Find elements");
-            return Driver?.FindElements(locator);
-        }
+    public override Element FindElement(By locator)
+    {
+        Console.WriteLine("Find Element");
+        return Driver?.FindElement(locator);
+    }
+
+    public override List<Element> FindElements(By locator)
+    {
+        Console.WriteLine("Find elements");
+        return Driver?.FindElements(locator);
     }
 }
